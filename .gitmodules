@@ -1,0 +1,6 @@
+[submodule "3dti_AudioToolkit"]
+	path = 3dti_AudioToolkit
+	url = https://github.com/3DTune-In/3dti_AudioToolkit.git
+[submodule "example_1/rtaudio"]
+	path = example_1/rtaudio
+	url = https://github.com/thestk/rtaudio.git
