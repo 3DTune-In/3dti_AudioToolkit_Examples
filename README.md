@@ -1,5 +1,5 @@
 # 3dti_AudioToolkit_Examples
-3D Tune-In Toolkit repository that shows a practical example of how to use the 3DTune-In Toolkit library.
+This is a repository containing an example to show how to use the 3D Tune-In Toolkit library, which is located here: (enlace). This example includes as a submodule the 3D Tune-In Toolkit as well as some 3rd party libraries which are listed below.
 
 **The structure of the repository is as follows:**
 ```
@@ -22,6 +22,9 @@ The 3D Tune-In Toolkit Resource Management Package uses:
 
 * Cereal - A C11 library for serialization (Grant, W. Shane and Voorhies, Randolph (2017) http://uscilab.github.io/cereal).  
 
+## Compilation issues
+The use of the third party library Libsofa may require the user to add to the environment variable PATH the **absolute** path of the folder containing the required files. For example, in a 64-bit Microsoft Windows, you can find that folder in 3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win\x64
+
 ## External content distributed together with this software 
 
 *	HRTF file extracted from the LISTEN database and processed to extract ITD.
@@ -39,7 +42,7 @@ The members of the development team are (in alphabetical order):
 - [Daniel Gonzalez-Toledo](https://github.com/dgonzalezt) (University of Malaga)
 - [Luis Molina-Tanco](https://github.com/lmtanco) (University of Malaga)
 - [Ernesto de la Rubia](https://github.com/ernestodelarubia) (University of Malaga)
-- [Angel Rodriguez-Rivero] (https://github.com/ardgzrivero) (University of Malaga)
+- [Angel Rodriguez-Rivero](https://github.com/ardgzrivero) (University of Malaga)
 
 ## Acknowledgements 
 
