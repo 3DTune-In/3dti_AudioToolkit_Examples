@@ -31,18 +31,20 @@
 #include <RtAudio.h>	
 
 
-shared_ptr<RtAudio>						audio;												//Pointer to RtAudio API
+shared_ptr<RtAudio>						audio;												 // Pointer to RtAudio API
 
-Binaural::CCore							myCore;												//Core interface
-shared_ptr<Binaural::CListener>			listener;											//Pointer to listener interface
-shared_ptr<Binaural::CSingleSourceDSP>	sourceSpeech, sourceSteps;							//Pointers to each audio source interface
-shared_ptr<Binaural::CEnvironment>		environment;										//Pointer to environment interface
+Binaural::CCore							myCore;												 // Core interface
+shared_ptr<Binaural::CListener>			listener;											 // Pointer to listener interface
+shared_ptr<Binaural::CSingleSourceDSP>	sourceSpeech, sourceSteps;							 // Pointers to each audio source interface
+shared_ptr<Binaural::CEnvironment>		environment;										 // Pointer to environment interface
 
-Common::CTransform						sourcePosition;										//Storages the position of the steps source
+Common::CTransform						sourcePosition;										 // Storages the position of the steps source
 
-vector<float>							samplesVectorSpeech, samplesVectorSteps;			//Storages the audio from the wav files
+Common::CEarPair<CMonoBuffer<float>>	outputBufferStereo;									 // Stereo buffer containing processed audio
 
-unsigned int							wavSamplePositionSpeech, positionEndFrameSpeech,	//Storages, respectively, the starting and ending position of the frame being rendered for each source
+vector<float>							samplesVectorSpeech, samplesVectorSteps;			 // Storages the audio from the wav files
+
+unsigned int							wavSamplePositionSpeech, positionEndFrameSpeech,	 // Storages, respectively, the starting and ending position of the frame being rendered for each source
                                         wavSamplePositionSteps,  positionEndFrameSteps ;	
 
 

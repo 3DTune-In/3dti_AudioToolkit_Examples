@@ -39,7 +39,7 @@ The members of the development team are (in alphabetical order):
 - [Daniel Gonzalez-Toledo](https://github.com/dgonzalezt) (University of Malaga)
 - [Luis Molina-Tanco](https://github.com/lmtanco) (University of Malaga)
 - [Ernesto de la Rubia](https://github.com/ernestodelarubia) (University of Malaga)
-- [Ángel Rodríguez-Rivero] (https://github.com/ardgzrivero) (University of Malaga)
+- [Angel Rodríguez-Rivero] (https://github.com/ardgzrivero) (University of Malaga)
 
 ## Acknowledgements 
 
