@@ -77,7 +77,7 @@ int main()
 
     audio = std::shared_ptr<RtAudio>(new RtAudio());  // Initialization of RtAudio
 													  // It uses the first API it founds compiled and requires of preprocessor definitions
-													  // which depends on the OS used and the audio output device (more info in https: // www.music.mcgill.ca/~gary/rtaudio/compiling.html)
+													  // which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
 
     // Setting the output parameters
     RtAudio::StreamParameters outputParameters;

@@ -25,6 +25,9 @@ The 3D Tune-In Toolkit Resource Management Package uses:
 ## Compilation issues
 The use of the third party library Libsofa may require the user to add to the environment variable PATH the **absolute** path of the folder containing the required files. For example, in a 64-bit Microsoft Windows, you can find that folder in 3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win\x64
 
+## RtAudio configuration
+Before using RtAudio, the developer needs to specify by the use of preprocessor definitions which APIs they want to use in order to RtAudio to compile them and be able to use them. By default, the Visual Studio solution provided compiles WASAPI by defining ____WINDOWS_WASAPI____. Depending on the audio output device and the OS used, this may be subject to change by the user. Further information can be found in: https://www.music.mcgill.ca/~gary/rtaudio/compiling.html
+
 ## External content distributed together with this software 
 
 *	HRTF file extracted from the LISTEN database and processed to extract ITD.
