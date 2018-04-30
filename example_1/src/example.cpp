@@ -120,6 +120,10 @@ static int rtAudioCallback(void *outputBuffer, void *inputBuffer, unsigned int b
     // Checking if there is underflow or overflow
     if (status) cout << "stream over/underflow detected";
 
+	// Initializes buffer with zeros
+	outputBufferStereo.left.Fill(bufferSize, 0.0f);
+	outputBufferStereo.right.Fill(bufferSize, 0.0f);
+
     // Getting the processed audio
     audioProcess(outputBufferStereo, bufferSize);
 
@@ -155,14 +159,15 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int buffe
     sourceSpeech->SetBuffer(speechInput);
     sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
 
-    // Setting the output as anechoic processed speech source
-    bufferOutput = bufferProcessed;
+    // Adding anechoic processed speech source to the output mix
+	bufferOutput.left += bufferProcessed.left;
+	bufferOutput.right += bufferProcessed.right;
 
     // Anechoic process of steps source
     sourceSteps->SetBuffer(stepsInput);
     sourceSteps->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
 
-    // Adding anechoic processed steps source to the output
+    // Adding anechoic processed steps source to the output mix
     bufferOutput.left += bufferProcessed.left;
     bufferOutput.right += bufferProcessed.right;
 
@@ -172,7 +177,7 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int buffe
     // Reverberation processing of all sources
     environment->ProcessVirtualAmbisonicReverb(bufferReverb.left, bufferReverb.right);
 
-    // Adding reverberated sound to the output
+    // Adding reverberated sound to the output mix
     bufferOutput.left += bufferReverb.left;
     bufferOutput.right += bufferReverb.right;
 }
