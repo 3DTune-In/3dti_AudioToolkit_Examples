@@ -49,6 +49,6 @@ The members of the development team are (in alphabetical order):
 
 ## Acknowledgements 
 
-![European Union](3dti_AudioToolkit/docs/images/EU_flag.png "European Union") This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 644051. 
+![European Union](EU_flag.png "European Union") This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 644051. 
 
 We would like to acknowledge Dr. Brian FG Katz and his team for their contributions in the field of sound spatialization, which were used as the basis for part of this software.
