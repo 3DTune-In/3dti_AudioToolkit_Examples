@@ -37,7 +37,7 @@ Before using RtAudio, the developer needs to specify by the use of preprocessor 
 ## Credits
 
 This software was developed by a team coordinated by 
--	Arcadio Reyes-Lecuona ([University of Malaga](https://www.uma.es/)). Contact: areyes@uma.es  
+-	[Arcadio Reyes-Lecuona](https://github.com/areyesl) ([University of Malaga](https://www.uma.es/)). Contact: areyes@uma.es  
 
 The members of the development team are (in alphabetical order):
 - [Maria Cuevas-Rodriguez](https://github.com/mariacuevas) (University of Malaga)
