@@ -39,8 +39,9 @@ int main()
     HRTF::CreateFromSofa("hrtf.sofa", listener);					 // Loading SOFAcoustics (more info in https://sofacoustics.org/) HRTF file and applying it to the listener
 
     // Environment setup
-    environment = myCore.CreateEnvironment();							 //  Creating environment to have reverberated sound
-    BRIR::CreateFromSofa("brir.sofa", environment);						 //  Loading SOFAcoustics BRIR file and applying it to the environment
+    environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
+	environment->SetReverberationOrder(TReverberationOrder::THREEDIMENSIONAL);	// Setting number of ambisonic channels to use in reverberation processing
+    BRIR::CreateFromSofa("brir.sofa", environment);								// Loading SOFAcoustics BRIR file and applying it to the environment
 
     // Speech source setup
     sourceSpeech = myCore.CreateSingleSourceDSP();										 // Creating audio source
@@ -69,7 +70,7 @@ int main()
     sourceSteps->EnableDistanceAttenuationAnechoic();
     sourcePosition = sourceStepsPosition;												 // Saving initial position into source position to move the steps audio source later on
 
-																						 // Declaration and initialization of stereo buffer
+	// Declaration and initialization of stereo buffer
 	outputBufferStereo.left.resize(1024);
 	outputBufferStereo.right.resize(1024);
 
@@ -92,7 +93,7 @@ int main()
 
     unsigned int frameSize = 1024;									 // Declaring and initializing frame size variable because next statement needs it
 
-     // Opening of audio stream
+    // Opening of audio stream
     audio->openStream(&outputParameters,  // Specified output parameters
                       nullptr,			  // Unspecified input parameters because there will not be input stream
                       RTAUDIO_FLOAT32,	  // Output buffer will be 32-bit float
@@ -109,7 +110,7 @@ int main()
     // Informing user by the console to press any key to end the execution
     cout << "Press ENTER to finish... ";	getchar();
 
-	//Stopping and closing the stream
+	// Stopping and closing the stream
 	audio->stopStream();
 	audio->closeStream();
 	
