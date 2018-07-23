@@ -109,6 +109,10 @@ int main()
     // Informing user by the console to press any key to end the execution
     cout << "Press ENTER to finish... ";	getchar();
 
+	//Stopping and closing the stream
+	audio->stopStream();
+	audio->closeStream();
+	
     return 0;
 }
 
