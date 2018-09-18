@@ -40,7 +40,7 @@ int main()
 
     // Environment setup
     environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
-	environment->SetReverberationOrder(TReverberationOrder::THREEDIMENSIONAL);	// Setting number of ambisonic channels to use in reverberation processing
+	environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);		// Setting number of ambisonic channels to use in reverberation processing
     BRIR::CreateFromSofa("brir.sofa", environment);								// Loading SOFAcoustics BRIR file and applying it to the environment
 
     // Speech source setup
