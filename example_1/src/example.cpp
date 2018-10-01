@@ -39,11 +39,14 @@ int main()
     listenerPosition.SetPosition(Common::CVector3(0, 0, 0));
     listener->SetListenerTransform(listenerPosition);
     listener->DisableCustomizedITD();								 // Disabling custom head radius
-    HRTF::CreateFromSofa("hrtf.sofa", listener);					 // Loading SOFAcoustics (more info in https://sofacoustics.org/) HRTF file and applying it to the listener
+	/* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
+	   These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
+	HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			 // Comment this line and uncomment next line to load the default HRTF in SOFA format instead of in 3dti-hrtf format
+    // HRTF::CreateFromSofa("hrtf.sofa", listener);				
 
     // Environment setup
     environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
-	environment->SetReverberationOrder(TReverberationOrder::THREEDIMENSIONAL);	// Setting number of ambisonic channels to use in reverberation processing
+	environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);		// Setting number of ambisonic channels to use in reverberation processing
     BRIR::CreateFromSofa("brir.sofa", environment);								// Loading SOFAcoustics BRIR file and applying it to the environment
 
     // Speech source setup
