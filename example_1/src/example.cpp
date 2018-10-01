@@ -30,6 +30,9 @@ int main()
     myCore.SetAudioState(audioState);		 // Applying configuration to core
     myCore.SetHRTFResamplingStep(15);		 // Setting 15-degree resampling step for HRTF
 
+	ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
+	ERRORHANDLER3DTI.SetErrorLogStream(&std::cout, true);
+
     // Listener setup
     listener = myCore.CreateListener();								 // First step is creating listener
     Common::CTransform listenerPosition = Common::CTransform();		 // Setting listener in (0,0,0)
