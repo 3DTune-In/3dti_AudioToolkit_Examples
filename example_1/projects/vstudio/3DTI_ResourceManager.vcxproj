@@ -19,18 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRCereal.cpp" />
-    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRFactory.cpp" />
-    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFCereal.cpp" />
-    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFFactory.cpp" />
-    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\ILD\ILDCereal.cpp" />
+    <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRCereal.cpp" />
+    <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRFactory.cpp" />
+    <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFCereal.cpp" />
+    <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFFactory.cpp" />
+    <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\ILD\ILDCereal.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRCereal.h" />
-    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRFactory.h" />
-    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFCereal.h" />
-    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFFactory.h" />
-    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_ResourceManager\ILD\ILDCereal.h" />
+    <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRCereal.h" />
+    <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\BRIR\BRIRFactory.h" />
+    <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFCereal.h" />
+    <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\HRTF\HRTFFactory.h" />
+    <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_ResourceManager\ILD\ILDCereal.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E27C6084-EEC6-4E74-8104-4D0D876D20E6}</ProjectGuid>
@@ -101,7 +101,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\include;..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -114,7 +114,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\include;..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -129,7 +129,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\include;..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\src</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
