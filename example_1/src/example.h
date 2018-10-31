@@ -23,6 +23,7 @@
 #define _EXAMPLE_H_
 
 #include <cstdio>
+#include <cstring>
 #include <HRTF/HRTFFactory.h>
 #include <HRTF/HRTFCereal.h>
 #include <BRIR/BRIRFactory.h>
