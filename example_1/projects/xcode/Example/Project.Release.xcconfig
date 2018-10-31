@@ -1,4 +1,5 @@
 // 3DTune-In Audio Toolkit flags
+OTHER_CPLUSPLUSFLAGS = $(inherited) -DNDEBUG
 _3DTI_PATH = ../../../../3dti_AudioToolkit
 _3DTI_THIRD_PARTY = $(_3DTI_PATH)/3dti_ResourceManager/third_party_libraries
 
