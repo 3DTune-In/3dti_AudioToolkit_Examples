@@ -1,3 +1,5 @@
+OTHER_CPLUSPLUSFLAGS = $(inherited) -DNDEBUG
+
 // 3DTune-In Audio Toolkit flags
 _3DTI_PATH = ../../../../3dti_AudioToolkit
 _3DTI_THIRD_PARTY = $(_3DTI_PATH)/3dti_ResourceManager/third_party_libraries
@@ -30,4 +32,4 @@ _RTAUDIO_HEADERS = ../../../rtaudio ../../../rtaudio/include
 OTHER_LDFLAGS = $(OF_CORE_LIBS) $(OF_CORE_FRAMEWORKS) $(OF_LIB) $(SOFA_3RD_PARTY_LIBS) $(SOFA_LIB)
 HEADER_SEARCH_PATHS = $(OF_HEADERS) $(_3DTI_HEADERS) $(_RTAUDIO_HEADERS)
 
-OTHER_CFLAGS = -D_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP -D_3DTI_ANGLE_CONVENTION_LISTEN -D__MACOSX_CORE__ -framework CoreAudio -framework CoreFoundation -lpthread
+OTHER_CFLAGS = $(OTHER_CPLUSPLUSFLAGS) -D_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP -D_3DTI_ANGLE_CONVENTION_LISTEN -D__MACOSX_CORE__ -framework CoreAudio -framework CoreFoundation -lpthread
