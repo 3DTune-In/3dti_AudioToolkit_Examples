@@ -11,7 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example", "example.vcxproj"
 		{E27C6084-EEC6-4E74-8104-4D0D876D20E6} = {E27C6084-EEC6-4E74-8104-4D0D876D20E6}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsofa", "..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\build\win\libsofa.vcxproj", "{2A671B3E-4019-44FF-A685-0094C9D3055C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsofa", "..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\build\win\libsofa.vcxproj", "{2A671B3E-4019-44FF-A685-0094C9D3055C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3DTI_AudioToolkit", "3DTI_AudioToolkit.vcxproj", "{DB7A1175-0116-4666-9AA1-EDD0F40A1064}"
 EndProject
