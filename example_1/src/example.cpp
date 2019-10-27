@@ -3,7 +3,7 @@
 * \brief This is the main source file of the example project 1 using 3D Tune-In Toolkit
 * \date	April 2018
 *
-* \authors A. Rodríguez-Rivero, as part of the 3DI-DIANA Research Group (University of Malaga) 
+* \authors A. Rodríguez-Rivero, as part of the 3DI-DIANA Research Group (University of Malaga)
 * \b Contact: A. Reyes-Lecuona as head of 3DI-DIANA Research Group (University of Malaga): areyes@uma.es
 *
 * \b Contributions: (additional authors/contributors can be added here)
@@ -42,7 +42,7 @@ int main()
 	/* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
 	   These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
 	HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			 // Comment this line and uncomment next line to load the default HRTF in SOFA format instead of in 3dti-hrtf format
-    // HRTF::CreateFromSofa("hrtf.sofa", listener);				
+    // HRTF::CreateFromSofa("hrtf.sofa", listener);
 
     // Environment setup
     environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
@@ -119,7 +119,7 @@ int main()
 	// Stopping and closing the stream
 	audio->stopStream();
 	audio->closeStream();
-	
+
     return 0;
 }
 
@@ -199,7 +199,7 @@ void FillBuffer(CMonoBuffer<float> &output, unsigned int& position, unsigned int
 
     if (position >= samplesVector.size())				 // If the end of the audio is met, the position variable must return to the beginning
         position = 0;
-    
+
     endFrame = position + output.size() - 1;			 // Set ending point as starting point plus frame size
 
     for (int i = 0; i < output.size(); i++) {
@@ -228,7 +228,7 @@ void LoadWav(std::vector<float>& samplesVector, const char* stringIn)
 
     uint8_t *byteSample; byteSample = new uint8_t[2 * samplesCount];				 // Declaration and initialization of 8-bit unsigned integer pointer
     memset(byteSample, 0, sizeof(uint8_t) * 2 * samplesCount);						 // Setting its size
-    
+
     fread(byteSample, 1, 2 * samplesCount, wavFile);								 // Reading the whole file byte per byte, needed for endian-independent wav parsing
 
     for (int i = 0; i < samplesCount; i++)
@@ -236,6 +236,6 @@ void LoadWav(std::vector<float>& samplesVector, const char* stringIn)
 
     samplesVector.reserve(samplesCount);											 // Reserving memory for samples vector
 
-    for (int i = 0; i < samplesCount; i++)				
+    for (int i = 0; i < samplesCount; i++)
         samplesVector.push_back((float)sample[i] / (float)INT16_MAX);				 // Converting samples to float to push them in samples vector
 }
