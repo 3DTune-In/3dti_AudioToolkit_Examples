@@ -30,8 +30,8 @@ int main()
     myCore.SetAudioState(audioState);		 // Applying configuration to core
     myCore.SetHRTFResamplingStep(15);		 // Setting 15-degree resampling step for HRTF
 
-	ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
-	ERRORHANDLER3DTI.SetErrorLogStream(&std::cout, true);
+    ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
+    ERRORHANDLER3DTI.SetErrorLogStream(&std::cout, true);
 
     // Listener setup
     listener = myCore.CreateListener();								 // First step is creating listener
@@ -39,14 +39,14 @@ int main()
     listenerPosition.SetPosition(Common::CVector3(0, 0, 0));
     listener->SetListenerTransform(listenerPosition);
     listener->DisableCustomizedITD();								 // Disabling custom head radius
-	/* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
-	   These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
-	HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			 // Comment this line and uncomment next line to load the default HRTF in SOFA format instead of in 3dti-hrtf format
+    /* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
+       These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
+    HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			 // Comment this line and uncomment next line to load the default HRTF in SOFA format instead of in 3dti-hrtf format
     // HRTF::CreateFromSofa("hrtf.sofa", listener);
 
     // Environment setup
     environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
-	environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);		// Setting number of ambisonic channels to use in reverberation processing
+    environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);		// Setting number of ambisonic channels to use in reverberation processing
     BRIR::CreateFromSofa("brir.sofa", environment);								// Loading SOFAcoustics BRIR file and applying it to the environment
 
     // Speech source setup
@@ -76,15 +76,15 @@ int main()
     sourceSteps->EnableDistanceAttenuationAnechoic();
     sourcePosition = sourceStepsPosition;												 // Saving initial position into source position to move the steps audio source later on
 
-	// Declaration and initialization of stereo buffer
-	outputBufferStereo.left.resize(1024);
-	outputBufferStereo.right.resize(1024);
+    // Declaration and initialization of stereo buffer
+    outputBufferStereo.left.resize(1024);
+    outputBufferStereo.right.resize(1024);
 
     // Audio output configuration, using RtAudio (more info in https://www.music.mcgill.ca/~gary/rtaudio/)
 
     audio = std::shared_ptr<RtAudio>(new RtAudio());  // Initialization of RtAudio
-													  // It uses the first API it founds compiled and requires of preprocessor definitions
-													  // which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
+                                                      // It uses the first API it founds compiled and requires of preprocessor definitions
+                                                      // which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
 
     // Setting the output parameters
     RtAudio::StreamParameters outputParameters;
@@ -116,9 +116,9 @@ int main()
     // Informing user by the console to press any key to end the execution
     cout << "Press ENTER to finish... ";	getchar();
 
-	// Stopping and closing the stream
-	audio->stopStream();
-	audio->closeStream();
+    // Stopping and closing the stream
+    audio->stopStream();
+    audio->closeStream();
 
     return 0;
 }
@@ -131,9 +131,9 @@ static int rtAudioCallback(void *outputBuffer, void *inputBuffer, unsigned int b
     // Checking if there is underflow or overflow
     if (status) cout << "stream over/underflow detected";
 
-	// Initializes buffer with zeros
-	outputBufferStereo.left.Fill(bufferSize, 0.0f);
-	outputBufferStereo.right.Fill(bufferSize, 0.0f);
+    // Initializes buffer with zeros
+    outputBufferStereo.left.Fill(bufferSize, 0.0f);
+    outputBufferStereo.right.Fill(bufferSize, 0.0f);
 
     // Getting the processed audio
     audioProcess(outputBufferStereo, bufferSize);
@@ -171,8 +171,8 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int buffe
     sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
 
     // Adding anechoic processed speech source to the output mix
-	bufferOutput.left += bufferProcessed.left;
-	bufferOutput.right += bufferProcessed.right;
+    bufferOutput.left += bufferProcessed.left;
+    bufferOutput.right += bufferProcessed.right;
 
     // Anechoic process of steps source
     sourceSteps->SetBuffer(stepsInput);
