@@ -46,9 +46,9 @@ SRC_EXT = cpp
 # Path to the source directory, relative to the makefile
 SRC_PATH = ../../src
 # Space-separated pkg-config libraries used by this project
-LIBS =
+LIBS = netcdf-cxx4 libpulse libpulse-simple
 # General compiler flags
-COMPILE_FLAGS = -std=c++11 -fpermissive -lpthread -lpulse-simple -lpulse
+COMPILE_FLAGS = -std=c++11 -fpermissive -lpthread
 # Additional release-specific flags
 RCOMPILE_FLAGS = -DNDEBUG
 # Additional debug-specific flags
@@ -56,7 +56,7 @@ DCOMPILE_FLAGS = -D DEBUG
 # Add additional include paths
 INCLUDES = -I$(SRC_PATH) -I$(_3DTI_RESOURCE_MGR) -I$(_3DTI_TOOLKIT) -I$(SOFA_HEADERS) -I$(SOFA_3RD_PARTY_HEADERS) -I$(CEREAL_HEADERS) $(_RTAUDIO_HEADERS)
 # General linker settings
-LINK_FLAGS = $(OTHER_LDFLAGS) $(OTHER_CFLAGS) /usr/lib/x86_64-linux-gnu/libnetcdf_c++.so.4.2.0 /usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0 /usr/lib/x86_64-linux-gnu/libpulse-simple.so /usr/lib/x86_64-linux-gnu/libpulse.so
+LINK_FLAGS = $(OTHER_LDFLAGS) $(OTHER_CFLAGS)
 # Additional release-specific linker settings
 RLINK_FLAGS =
 # Additional debug-specific linker settings
