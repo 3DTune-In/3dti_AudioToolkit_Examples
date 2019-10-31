@@ -28,34 +28,13 @@ In this example, PulseAudio is used for realtime audio output, but OSS and ALSA 
 The frame rate can be configurated modifying the constant _"BUFFERSIZE"_ in the file _"example.cpp"_. In linux, typically, it must have a value of _2048_.
 
 ###How to install
+
 Open a terminal and go to your user folder and type this following commands:
 
-1. __Clone all the repositories when is need to__
 ~~~
-git clone https://github.com/3DTune-In/3dti_AudioToolkit_Examples.git
-cd 3dti_AudioToolkit/
-git clone https://github.com/3DTune-In/3dti_AudioToolkit.git
-cd 3dti_AudioToolkit/3dti_ResourceManager/third_party_libraries/
-git clone https://github.com/sofacoustics/API_Cpp.git
-git clone https://github.com/USCiLab/cereal.git
-git clone https://github.com/eigenteam/eigen-git-mirror.git
-~~~
-2. __Remove and rename the folders__ 
-~~~
-rm eigen/ sofacoustics/ -R
-mv API_Cpp/ sofacoustics/ 
-mv eigen-git-mirror/Eigen Eigen/ 
-rm eigen-git.mirror -R
-~~~
-3. __Clone the last one__
-~~~
-cd ../../../example_1/
-git clone https://github.com/thestk/rtaudio.git
-~~~
-4. __Go to the linux folder and compile__
-if your computer doesnt have the _make_ program type: _sudo apt-get install make_
-~~~
-cd projects/linux/
+git clone --recursive https://github.com/3DTune-In/3dti_AudioToolkit_Examples.git
+cd 3dti_AudioToolkit_Examples/example_1/projects/linux/
+sudo apt-get install cmake make
 make
 ~~~
 
