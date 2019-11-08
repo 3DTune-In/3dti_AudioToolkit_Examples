@@ -3,7 +3,7 @@
 * \brief This is the main source file of the example project 1 using 3D Tune-In Toolkit
 * \date	April 2018
 *
-* \authors A. Rodr�guez-Rivero, as part of the 3DI-DIANA Research Group (University of Malaga)
+* \authors A. Rodríguez-Rivero, as part of the 3DI-DIANA Research Group (University of Malaga)
 * \b Contact: A. Reyes-Lecuona as head of 3DI-DIANA Research Group (University of Malaga): areyes@uma.es
 *
 * \b Contributions: (additional authors/contributors can be added here)
@@ -127,7 +127,7 @@ int main()
 	       audio->openStream(&outputParameters,     // Specified output parameters
 		               nullptr,			                  // Unspecified input parameters because there will not be input stream
 		               RTAUDIO_FLOAT32,	              // Output buffer will be 32-bit float
-		               44100,			                    // Sample rate will be 44.1 kHz
+		               SAMPLERATE,			                    // Sample rate will be 44.1 kHz
 		               &frameSize,		                // Frame size will be iBufferSize samples
 		               &rtAudioCallback,	            // Pointer to the function that will be called every time RtAudio needs the buffer to be filled
 		               nullptr,			                  // Unused pointer to get feedback
