@@ -3,7 +3,9 @@
 * \brief This is the main source file of the example project 1 using 3D Tune-In Toolkit
 * \date	April 2018
 *
+
 * \authors A. Rodríguez-Rivero, as part of the 3DI-DIANA Research Group (University of Malaga)
+
 * \b Contact: A. Reyes-Lecuona as head of 3DI-DIANA Research Group (University of Malaga): areyes@uma.es
 *
 * \b Contributions: (additional authors/contributors can be added here)
@@ -44,8 +46,10 @@ int main()
     myCore.SetAudioState(audioState);		      // Applying configuration to core
     myCore.SetHRTFResamplingStep(15);		      // Setting 15-degree resampling step for HRTF
 
-  	ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
-  	ERRORHANDLER3DTI.SetErrorLogStream(&std::cout, true);
+
+    ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
+    ERRORHANDLER3DTI.SetErrorLogStream(&std::cout, true);
+
 
     // Listener setup
     listener = myCore.CreateListener();								 // First step is creating listener
@@ -53,8 +57,9 @@ int main()
     listenerPosition.SetPosition(Common::CVector3(0, 0, 0));
     listener->SetListenerTransform(listenerPosition);
     listener->DisableCustomizedITD();								 // Disabling custom head radius
+
 	   /* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
-	   These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
+	      These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
 	   HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			 // Comment this line and uncomment next lines to load the default HRTF in SOFA format instead of in 3dti-hrtf format
     /*
     bool bSpecifiedDelays;
@@ -65,6 +70,7 @@ int main()
     	environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
       environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);		// Setting number of ambisonic channels to use in reverberation processing
       BRIR::CreateFromSofa("brir.sofa", environment);								// Loading SOFAcoustics BRIR file and applying it to the environment
+
 
     // Speech source setup
     sourceSpeech = myCore.CreateSingleSourceDSP();										 // Creating audio source
@@ -89,14 +95,16 @@ int main()
     sourceSteps->EnableDistanceAttenuationAnechoic();
     sourcePosition = sourceStepsPosition;												 // Saving initial position into source position to move the steps audio source later on
 
-  	// Declaration and initialization of stereo buffer
+
+    // Declaration and initialization of stereo buffer
   	outputBufferStereo.left.resize(iBufferSize);
   	outputBufferStereo.right.resize(iBufferSize);
 
+
     // Audio output configuration, using RtAudio (more info in https://www.music.mcgill.ca/~gary/rtaudio/)
     audio = std::shared_ptr<RtAudio>(new RtAudio());  // Initialization of RtAudio
-													  // It uses the first API it founds compiled and requires of preprocessor definitions
-													  // which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
+                                                      // It uses the first API it founds compiled and requires of preprocessor definitions
+                                                      // which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
 
     // Setting the output parameters
     RtAudio::StreamParameters outputParameters;
@@ -146,9 +154,11 @@ int main()
     cin.ignore();
     getchar();
 
-	// Stopping and closing the stream
-	audio->stopStream();
-	audio->closeStream();
+
+    // Stopping and closing the stream
+    audio->stopStream();
+    audio->closeStream();
+
 
     return 0;
 }
@@ -162,8 +172,9 @@ static int rtAudioCallback(void *outputBuffer, void *inputBuffer, unsigned int u
     if (status) cout << "stream over/underflow detected";
 
   	// Initializes buffer with zeros
-	 outputBufferStereo.left.Fill(uiBufferSize, 0.0f);
-	 outputBufferStereo.right.Fill(uiBufferSize, 0.0f);
+	  outputBufferStereo.left.Fill(uiBufferSize, 0.0f);
+	  outputBufferStereo.right.Fill(uiBufferSize, 0.0f);
+
 
     // Getting the processed audio
     audioProcess(outputBufferStereo, uiBufferSize);
@@ -201,8 +212,9 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
     sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
 
     // Adding anechoic processed speech source to the output mix
-   	bufferOutput.left += bufferProcessed.left;
-  	bufferOutput.right += bufferProcessed.right;
+
+    bufferOutput.left += bufferProcessed.left;
+    bufferOutput.right += bufferProcessed.right;
 
     // Anechoic process of steps source
     sourceSteps->SetBuffer(stepsInput);
@@ -229,6 +241,7 @@ void FillBuffer(CMonoBuffer<float> &output, unsigned int& position, unsigned int
     position = endFrame + 1;							 // Set starting point as next sample of the end of last frame
     if (position >= samplesVector.size())				 // If the end of the audio is met, the position variable must return to the beginning
         position = 0;
+
     endFrame = position + output.size() - 1;			 // Set ending point as starting point plus frame size
     for (int i = 0; i < output.size(); i++) {
         if ((position + i) < samplesVector.size())

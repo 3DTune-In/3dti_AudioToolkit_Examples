@@ -1,5 +1,5 @@
 # 3dti_AudioToolkit_Examples
-This is a repository containing an example to show how to use the 3D Tune-In Toolkit library, which is located here: (enlace). This example includes as a submodule the 3D Tune-In Toolkit as well as some 3rd party libraries which are listed below.
+This is a repository containing an example to show how to use the 3D Tune-In Toolkit library, which is located here: https://github.com/3DTune-In/3dti_AudioToolkit. This example includes as a submodule the 3D Tune-In Toolkit as well as some 3rd party libraries which are listed below.
 
 **The structure of the repository is as follows:**
 ```

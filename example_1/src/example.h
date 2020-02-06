@@ -29,7 +29,7 @@
 #include <BRIR/BRIRFactory.h>
 #include <BRIR/BRIRCereal.h>
 #include <BinauralSpatializer/3DTI_BinauralSpatializer.h>
-#include <RtAudio.h>	
+#include <RtAudio.h>
 
 
 shared_ptr<RtAudio>						audio;												 // Pointer to RtAudio API
@@ -46,13 +46,13 @@ Common::CEarPair<CMonoBuffer<float>>	outputBufferStereo;									 // Stereo buff
 vector<float>							samplesVectorSpeech, samplesVectorSteps;			 // Storages the audio from the wav files
 
 unsigned int							wavSamplePositionSpeech, positionEndFrameSpeech,	 // Storages, respectively, the starting and ending position of the frame being rendered for each source
-                                        wavSamplePositionSteps,  positionEndFrameSteps ;	
+                                        wavSamplePositionSteps,  positionEndFrameSteps ;
 
 
 
 /** \brief This method gathers all audio processing (spatialization and reverberation)
 *	\param [out] bufferOutput output buffer processed
-*	\param [in] bufferSize size of buffer in samples 
+*	\param [in] bufferSize size of buffer in samples
 */
 void audioProcess(Common::CEarPair<CMonoBuffer<float>>& bufferOutput, int bufferSize);
 
