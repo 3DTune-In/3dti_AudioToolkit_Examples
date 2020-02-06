@@ -27,7 +27,9 @@ In this example, PulseAudio is used for realtime audio output, but OSS and ALSA 
 
 The frame rate can be configurated modifying the constant _"BUFFERSIZE"_ in the file _"example.cpp"_. In linux, typically, it must have a value of _2048_.
 
+
 ### How to install
+
 
 Open a terminal and go to your user folder and type this following commands:
 
@@ -47,3 +49,10 @@ cd ./bin/release/
 cp ../../../../resources/* ./
 ./example
 ~~~
+
+If in your console appears that issue: 
+~~~
+_NOT_ running realtime scheduling
+~~~
+You can run it like admin to solve it using sudo writing: _sudo ./example_
+
