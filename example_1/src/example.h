@@ -56,6 +56,9 @@ unsigned int							wavSamplePositionSpeech, positionEndFrameSpeech,	 // Storages
 */
 void audioProcess(Common::CEarPair<CMonoBuffer<float>>& bufferOutput, int bufferSize);
 
+
+int SelectAudioDevice();
+
 /** \brief Fills a buffer with the correct audio frame from the input float vector
 *	\param [out] output output buffer
 *	\param [in,out] position starting position of the frame to be processed

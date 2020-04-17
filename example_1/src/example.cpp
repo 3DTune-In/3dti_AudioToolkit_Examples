@@ -108,8 +108,12 @@ int main()
 
     // Setting the output parameters
     RtAudio::StreamParameters outputParameters;
-    outputParameters.nChannels = 2;									 // Setting output as stereo
-    outputParameters.deviceId = audio->getDefaultOutputDevice();	 // Choosing default output device
+    outputParameters.nChannels = 2;									 // Setting output as stereo 
+		
+	//outputParameters.deviceId = audio->getDefaultOutputDevice();	 // Choosing default output device
+	outputParameters.deviceId = SelectAudioDevice();								// Give user the option to choose the output device	
+
+
 
     // Setting the audio stream options flags.
     RtAudio::StreamOptions options;
@@ -161,6 +165,26 @@ int main()
 
 
     return 0;
+}
+
+int SelectAudioDevice() {
+	int connectedAudioDevices = audio->getDeviceCount();
+	cout << "     List of available audio outputs" << endl;
+	cout << "----------------------------------------" << endl;
+	for (int i = 0; i < connectedAudioDevices; i++) {
+		cout << "ID: " << i << "-" << audio->getDeviceInfo(i).name << endl;
+	}
+	int selectAudioDevice;
+	//cout << "Please choose which audio output you wish to use: ";
+	//cin >> selectAudioDevice; cin.ignore();	
+	do {		
+		cout << "Please choose which audio output you wish to use: ";
+		cin >> selectAudioDevice;
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	} while (!(selectAudioDevice > -1 && selectAudioDevice <= connectedAudioDevices));
+
+	return selectAudioDevice;
 }
 
 static int rtAudioCallback(void *outputBuffer, void *inputBuffer, unsigned int uiBufferSize, double streamTime, RtAudioStreamStatus status, void *data)
