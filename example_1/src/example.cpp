@@ -183,7 +183,7 @@ int SelectAudioDevice() {
 		cin.clear();
 		cin.ignore(INT_MAX, '\n');
 	} while (!(selectAudioDevice > -1 && selectAudioDevice <= connectedAudioDevices));
-
+	
 	return selectAudioDevice;
 }
 

@@ -56,7 +56,9 @@ unsigned int							wavSamplePositionSpeech, positionEndFrameSpeech,	 // Storages
 */
 void audioProcess(Common::CEarPair<CMonoBuffer<float>>& bufferOutput, int bufferSize);
 
-
+/** \brief This method shows the user a very simple menu that allows him to choose the audio interface to be used.
+*	\param [out] int AudioDeviceID
+*/
 int SelectAudioDevice();
 
 /** \brief Fills a buffer with the correct audio frame from the input float vector
