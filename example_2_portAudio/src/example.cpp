@@ -38,7 +38,7 @@ int main()
 		cout << "\nDo you want reverb? (Y/n) : "; cInput = getchar();
 	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
 	if (cInput == 'y' || cInput == '\n') bEnableReverb = true;
-	else                              bEnableReverb = false;
+	else                                 bEnableReverb = false;
 
 	// Core setup
 	Common::TAudioStateStruct audioState;		  // Audio State struct declaration
@@ -48,6 +48,7 @@ int main()
 	myCore.SetHRTFResamplingStep(15);		      // Setting 15-degree resampling step for HRTF
 	ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
 	ERRORHANDLER3DTI.SetErrorLogStream(&std::cout, true);
+	
 	// Listener setup
 	listener = myCore.CreateListener();								 // First step is creating listener
 	Common::CTransform listenerPosition = Common::CTransform();		 // Setting listener in (0,0,0)
@@ -55,13 +56,11 @@ int main()
 	listener->SetListenerTransform(listenerPosition);
 	listener->DisableCustomizedITD();								 // Disabling custom head radius
 
-// HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
-// These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF 
+	// HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
+	// These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF 
 	HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			 // Comment this line and uncomment next lines to load the default HRTF in SOFA format instead of in 3dti-hrtf format
-	/*
-	bool bSpecifiedDelays;
-	HRTF::CreateFromSofa("hrtf.sofa", listener, bSpecifiedDelays);
-	*/
+		//bool bSpecifiedDelays;
+		//HRTF::CreateFromSofa("hrtf.sofa", listener, bSpecifiedDelays);
 
 	// Environment setup
 	environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
@@ -69,13 +68,13 @@ int main()
 	BRIR::CreateFromSofa("brir.sofa", environment);								// Loading SOFAcoustics BRIR file and applying it to the environment
 
 
- // Speech source setup
+	// Speech source setup
 	sourceSpeech = myCore.CreateSingleSourceDSP();										 // Creating audio source
 	LoadWav(samplesVectorSpeech, "speech.wav");											 // Loading .wav file
 	Common::CTransform sourceSpeechPosition = Common::CTransform();
 	sourceSpeechPosition.SetPosition(Common::CVector3(0, 2, 0));						 // Setting source in x=0,y=2,z=0 (on the left)
 	sourceSpeech->SetSourceTransform(sourceSpeechPosition);
-	sourceSpeech->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);	//HighPerformance vs HighQuality // Choosing high quality mode for anechoic processing
+	sourceSpeech->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);	 //HighPerformance vs HighQuality // Choosing high quality mode for anechoic processing
 	sourceSpeech->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
 	sourceSpeech->EnableAnechoicProcess();												 // Setting anechoic and reverb processing for this source
 	sourceSpeech->EnableDistanceAttenuationAnechoic();
@@ -101,9 +100,10 @@ int main()
 	// Audio output configuration, using PortAudio (more info in http://www.portaudio.com/docs.html)
 	// Initialization of RtAudio
 													  // It uses the first API it founds compiled and requires of preprocessor definitions
-	PaError err;											  // which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
-	err=Pa_Initialize();
-	if (err != paNoError) std::cout<<"ERROR";
+	PaError err;// which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
+	ScopedPaHandler paInit;
+	if (paInit.result() != paNoError) cout << "ERROR";
+	//if (err != paNoError) std::cout<<"ERROR";
 
 	// Setting the output parameters
 	PaStreamParameters outputParameters;
@@ -119,7 +119,7 @@ int main()
 	unsigned int frameSize = iBufferSize;       // Declaring and initializing frame size variable because next statement needs it
 
 	// Opening of audio stream
-
+	
 	err = Pa_OpenStream(
 		&audio,
 		NULL,					// Unspecified input parameters because there will not be input stream
@@ -130,25 +130,29 @@ int main()
 		&paCallback,	            // Pointer to the function that will be called every time RtAudio needs the buffer to be filled
 		nullptr		                  // Unused pointer to get feedback
 		);
-	/*if (err != paNoError) {
+	if (err != paNoError) {
 		std::cout << "\nERROR:\t" << std::endl;
 		exit(0);
-	}*/
+	}
 
 	// Starting the stream
-	//audio->startStream();
-
+	// audio->startStream();
+	cout << audio;
+	cout << "Press ENTER to start... \n";
+	cin.ignore();
+	getchar();
+	Pa_StartStream(audio);
 	// Informing user by the console to press any key to end the execution
-	cout << "Press ENTER to finish... \n";
+	cout << "Press ENTER to stop... \n";
 	cin.ignore();
 	getchar();
 
-
-	// Stopping and closing the stream
-	//audio->stopStream();
-	//audio->closeStream();
-
-
+	// Stopping and closing the stream;
+	Pa_StopStream(audio);
+	cout << "Press ENTER again to finish... \n";
+	cin.ignore();
+	getchar();
+	Pa_CloseStream(audio);
 	return 0;
 }
 
@@ -168,45 +172,9 @@ int SelectAudioDevice() {
 		cin.clear();
 		cin.ignore(INT_MAX, '\n');
 	} while (!(selectAudioDevice > -1 && selectAudioDevice <= connectedAudioDevices));
-	*/
-	//return selectAudioDevice;
+	return selectAudioDevice;*/
 	return 0;
 }
-
-/*static int paAudioCallback(void *outputBuffer, void *inputBuffer, unsigned int uiBufferSize, double streamTime, RtAudioStreamStatus status, void *data)
-{
-	// Setting the output buffer as float
-	float * floatOutputBuffer = (float *)outputBuffer;
-
-	// Checking if there is underflow or overflow
-	if (status) cout << "stream over/underflow detected";
-
-	// Initializes buffer with zeros
-	outputBufferStereo.left.Fill(uiBufferSize, 0.0f);
-	outputBufferStereo.right.Fill(uiBufferSize, 0.0f);
-
-
-	// Getting the processed audio
-	audioProcess(outputBufferStereo, uiBufferSize);
-
-	// Declaration and initialization of interlaced audio vector for correct stereo output
-	CStereoBuffer<float> iOutput;
-	iOutput.Interlace(outputBufferStereo.left, outputBufferStereo.right);
-
-	// Buffer filling loop
-	for (auto it = iOutput.begin(); it != iOutput.end(); it++)
-	{
-		floatOutputBuffer[0] = *it;						 // Setting of value in actual buffer position
-		floatOutputBuffer = &floatOutputBuffer[1];				 // Updating pointer to next buffer position
-	}
-
-	// Moving the steps source
-	sourcePosition.SetPosition(Common::CVector3(sourcePosition.GetPosition().x,
-		sourcePosition.GetPosition().y - streamTime / 110.0f,
-		sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + streamTime / 110.0f));
-	sourceSteps->SetSourceTransform(sourcePosition);
-	return 0;
-}*/
 
 void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
 {
@@ -222,7 +190,6 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 	sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
 
 	// Adding anechoic processed speech source to the output mix
-
 	bufferOutput.left += bufferProcessed.left;
 	bufferOutput.right += bufferProcessed.right;
 
@@ -291,47 +258,49 @@ void LoadWav(std::vector<float>& samplesVector, const char* stringIn)
 		samplesVector.push_back((float)sample[i] / (float)INT16_MAX);				 // Converting samples to float to push them in samples vector
 }
 
-
-
 int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 	unsigned long framesPerBuffer,
 	const PaStreamCallbackTimeInfo* timeInfo,
 	PaStreamCallbackFlags statusFlags)
 {
+	// Initializes buffer with zeros
+	outputBufferStereo.left.Fill(framesPerBuffer, 0.0f);
+	outputBufferStereo.right.Fill(framesPerBuffer, 0.0f);
 	float *out = (float*)outputBuffer;
-	unsigned long i;
+	//unsigned long i;
 	audioProcess(outputBufferStereo, framesPerBuffer);
-	(void)timeInfo; /* Prevent unused variable warnings. */
+	(void)timeInfo; // Prevent unused variable warnings.
 	(void)statusFlags;
 	(void)inputBuffer;
 	CStereoBuffer<float> iOutput;
 	iOutput.Interlace(outputBufferStereo.left, outputBufferStereo.right);
 	for (auto it = iOutput.begin(); it != iOutput.end(); it++)
 	{
-		*out++ = *it;						 // Setting of value in actual buffer position
+		*out++ = *it;
+		// Setting of value in actual buffer position
 		//floatOutputBuffer = &floatOutputBuffer[1];				 // Updating pointer to next buffer position
 	}
 	// Moving the steps source
 	float tiempo = float((*timeInfo).currentTime);
 	sourcePosition.SetPosition(Common::CVector3(sourcePosition.GetPosition().x,
-		sourcePosition.GetPosition().y - tiempo / 110.0f,
-		sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + tiempo / 110.0f));
-		sourceSteps->SetSourceTransform(sourcePosition);
+	sourcePosition.GetPosition().y - tiempo / 110.0f,
+	sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + tiempo / 110.0f));
+	sourceSteps->SetSourceTransform(sourcePosition);
 	return paContinue;
 }
 
-/* This routine will be called by the PortAudio engine when audio is needed.
-** It may called at interrupt level on some machines so don't do anything
-** that could mess up the system like calling malloc() or free().
-*/
-static int paCallback(const void *inputBuffer, void *outputBuffer,
-	unsigned long framesPerBuffer,
-	const PaStreamCallbackTimeInfo* timeInfo,
-	PaStreamCallbackFlags statusFlags,
-	void *userData)
-{
-	return paCallbackMethod(inputBuffer, outputBuffer,
-		framesPerBuffer,
-		timeInfo,
-		statusFlags);
+// This routine will be called by the PortAudio engine when audio is needed.
+// It may called at interrupt level on some machines so don't do anything
+// that could mess up the system like calling malloc() or free().
+static int paCallback(const void						*inputBuffer, 
+					  void								*outputBuffer,
+					  unsigned long						framesPerBuffer,
+					  const PaStreamCallbackTimeInfo*	timeInfo,
+					  PaStreamCallbackFlags				statusFlags,
+					  void								*userData){
+	return paCallbackMethod(inputBuffer,
+						outputBuffer,
+						framesPerBuffer,
+						timeInfo,
+						statusFlags);
 }

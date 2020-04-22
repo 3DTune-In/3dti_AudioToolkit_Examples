@@ -1,3 +1,42 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1216,5): warning MSB8012: TargetPath(C:\Users\Gonzupi\source\repos\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio.dll) no coincide con el valor de la propiedad OutputFile de Linker (C:\Users\Gonzupi\source\repos\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio_x64.dll). Esto puede hacer que el proyecto no se compile correctamente. Para solucionar este problema, asegúrese de que los valores de propiedad $(OutDir), $(TargetName) y $(TargetExt) coinciden con el valor especificado en %(Link.OutputFile).
+﻿  pa_allocation.c
+  pa_converters.c
+  pa_cpuload.c
+  pa_debugprint.c
+  pa_dither.c
+  pa_front.c
+  pa_process.c
+  pa_ringbuffer.c
+  pa_stream.c
+  pa_trace.c
+  pa_win_ds.c
+  pa_win_ds_dynlink.c
+  pa_hostapi_skeleton.c
+  pa_win_wasapi.c
+  pa_win_wdmks.c
+  pa_win_wmme.c
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\wmme\pa_win_wmme.c(676): warning C4312: 'conversión de tipo': conversión de 'int' a 'HWAVEIN' de mayor tamaño
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\wmme\pa_win_wmme.c(685): warning C4312: 'conversión de tipo': conversión de 'int' a 'HWAVEIN' de mayor tamaño
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\wmme\pa_win_wmme.c(806): warning C4312: 'conversión de tipo': conversión de 'int' a 'HWAVEOUT' de mayor tamaño
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\wmme\pa_win_wmme.c(815): warning C4312: 'conversión de tipo': conversión de 'int' a 'HWAVEOUT' de mayor tamaño
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\wmme\pa_win_wmme.c(1020): warning C4312: 'conversión de tipo': conversión de 'UINT' a 'HWAVEIN' de mayor tamaño
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\wmme\pa_win_wmme.c(1024): warning C4312: 'conversión de tipo': conversión de 'UINT' a 'HWAVEOUT' de mayor tamaño
+  pa_win_coinitialize.c
+  pa_win_hostapis.c
+  pa_win_util.c
+  pa_win_waveformat.c
+  Generando código...
+  Compilando...
+  pa_win_wdmks_utils.c
+  pa_x86_plain_converters.c
+  Generando código...
+  asio.cpp
+  asiodrivers.cpp
+  asiolist.cpp
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\asio\asiosdk\host\pc\asiolist.cpp(24): warning C4267: 'argumento': conversión de 'size_t' a 'DWORD'; posible pérdida de datos
+c:\users\gonzupi\source\repos\3dti_audiotoolkit_examples\third_party_libraries\portaudio\src\hostapi\asio\asiosdk\host\pc\asiolist.cpp(31): warning C4267: 'argumento': conversión de 'size_t' a 'DWORD'; posible pérdida de datos
+  pa_asio.cpp
+  Generando código...
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1216,5): warning MSB8012: TargetPath(C:\Users\Gonzupi\source\repos\3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio.dll) no coincide con el valor de la propiedad OutputFile de Linker (C:\Users\Gonzupi\source\repos\3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio_x64.dll). Esto puede hacer que el proyecto no se compile correctamente. Para solucionar este problema, asegúrese de que los valores de propiedad $(OutDir), $(TargetName) y $(TargetExt) coinciden con el valor especificado en %(Link.OutputFile).
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1218,5): warning MSB8012: TargetName(portaudio) no coincide con el valor de la propiedad OutputFile de Linker (portaudio_x64). Esto puede hacer que el proyecto no se compile correctamente. Para solucionar este problema, asegúrese de que los valores de propiedad $(OutDir), $(TargetName) y $(TargetExt) coinciden con el valor especificado en %(Link.OutputFile).
-  portaudio.vcxproj -> C:\Users\Gonzupi\source\repos\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio.dll
+     Creando biblioteca x64\Release/portaudio_x64.lib y objeto x64\Release/portaudio_x64.exp
+  portaudio.vcxproj -> C:\Users\Gonzupi\source\repos\3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio.dll

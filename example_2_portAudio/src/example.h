@@ -92,4 +92,26 @@ int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 	unsigned long framesPerBuffer,
 	const PaStreamCallbackTimeInfo* timeInfo,
 	PaStreamCallbackFlags statusFlags);
+
+class ScopedPaHandler
+{
+public:
+	ScopedPaHandler()
+		: _result(Pa_Initialize())
+	{
+	}
+	~ScopedPaHandler()
+	{
+		if (_result == paNoError)
+		{
+			Pa_Terminate();
+		}
+	}
+
+	PaError result() const { return _result; }
+
+private:
+	PaError _result;
+};
+
 #endif
