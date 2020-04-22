@@ -1,0 +1,2 @@
+C:\Users\Gonzupi\Desktop\asiosdk_2.3.3_2019-06-14\driver\asiosample\asiosample\Debug\asiosample.dll
+C:\Users\Gonzupi\Desktop\asiosdk_2.3.3_2019-06-14\driver\asiosample\asiosample\Debug\asiosample.pdb
