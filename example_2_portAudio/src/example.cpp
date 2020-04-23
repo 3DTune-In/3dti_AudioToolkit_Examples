@@ -23,15 +23,64 @@
 
 #include "example.h"
 
-#define SAMPLERATE (44100)
+static double iSampleRate;
 int iBufferSize;
 bool bEnableReverb;
 int main()
 {
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	//	Audio output configuration, using PortAudio (more info in http://www.portaudio.com/docs.html)
+	//	It requires the PortAudio .dll and .lib to be generated compiling "portaudio" proyect. 
+	//	They will be in \3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio_x64.lib and portaudio_x64.dll
+	//	If any other configuration for portaudio is needed, the project can be compilled again adding the files copying them.
+	//	
+	//	This project needs the portaudio.dll file to be copied into the aplication/solution folder
+	//
+	//  To add PortAdio verbose mode add PA_ENABLE_DEBUG_OUTPUT flag into the portaudio project properties -> C/C++ -> preprocessor -> preprocessor definitions
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	// Initialization of PortAudio	 
+	PaError err;
+	ScopedPaHandler paInit;
+	err = paInit.result();
+	if (err != paNoError) {
+		cout << "\nERROR WITH PORTAUDIO INIT\t";
+		exit(1);
+	}
+	// Setting the output parameters
+	PaStreamParameters outputParameters;
+	outputParameters.channelCount = 2;											// Setting output as stereo 
+	outputParameters.sampleFormat = paFloat32;
+	outputParameters.suggestedLatency = 0.050;									// Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
+	// Choose output device
+	char cInput;
+	int iDeviceIndex;
+	do {
+		cout << "Do you want to use the default (" << Pa_GetDeviceInfo(Pa_GetDefaultOutputDevice())->name;
+		cout << ") output device? (Y/n)\t"; fflush(stdin); cInput = getchar();
+	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
+	if (cInput == 'y' || cInput == '\n')  iDeviceIndex = Pa_GetDefaultOutputDevice();			// Give user no option for choose the output device, choose default	one
+	else                                  iDeviceIndex = (PaDeviceIndex)SelectAudioDevice();  // Give user the option to choose the output device					
+	outputParameters.device = iDeviceIndex;
+	cout << "Selected audio device :\t" << Pa_GetDeviceInfo(iDeviceIndex)->name << endl;
+	// Input sample rate
+	do {
+		cout << "\nDo you want to use the default sample rate (" << Pa_GetDeviceInfo(iDeviceIndex)->defaultSampleRate;
+		cout << ") for your device ? (Y/n) \t";
+		fflush(stdin); cInput = getchar();
+	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
+	if (cInput == 'y' || cInput == '\n') {
+		iSampleRate = (Pa_GetDeviceInfo(iDeviceIndex)->defaultSampleRate);
+	}else if(cInput == 'n'){
+		do {
+			cout << endl << "Please, insert sample rate (44100, 48000, 88200...) :\t";
+			cin >> iSampleRate; cin.clear();
+		} while (iSampleRate < 0);//Add default sample rate conditions
+	}
+	cout << "Setting sample rate to value : " << iSampleRate << endl;
 	// Input buffer size and reverb enable
 	cout << "\nInsert wished buffer size (256, 512, 1024, 2048, 4096...):\t";
-	cin >> iBufferSize; cin.ignore();
-	char cInput;
+	cin >> iBufferSize; cin.clear();
+	cin.ignore(INT_MAX, '\n');
 	do {
 		cout << "\nDo you want reverb? (Y/n) : "; cInput = getchar();
 	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
@@ -40,7 +89,7 @@ int main()
 	// Core setup
 	Common::TAudioStateStruct audioState;											// Audio State struct declaration
 	audioState.bufferSize = iBufferSize;											// Setting buffer size and sample rate
-	audioState.sampleRate = SAMPLERATE;
+	audioState.sampleRate = iSampleRate;
 	myCore.SetAudioState(audioState);												// Applying configuration to core
 	myCore.SetHRTFResamplingStep(15);												// Setting 15-degree resampling step for HRTF
 	ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
@@ -87,44 +136,13 @@ int main()
 	// Declaration and initialization of stereo buffer
 	outputBufferStereo.left.resize(iBufferSize);
 	outputBufferStereo.right.resize(iBufferSize);
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	//	Audio output configuration, using PortAudio (more info in http://www.portaudio.com/docs.html)
-	//	It requires the PortAudio .dll and .lib to be generated compiling "portaudio" proyect. 
-	//	They will be in \3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio_x64.lib and portaudio_x64.dll
-	//	If any other configuration for portaudio is needed, the project can be compilled again adding the files copying them.
-	//	
-	//	This project needs the portaudio.dll file to be copied into the aplication/solution folder
-	//
-	//  To add PortAdio verbose mode add PA_ENABLE_DEBUG_OUTPUT flag into the portaudio project properties -> C/C++ -> preprocessor -> preprocessor definitions
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	// Initialization of PortAudio	 
-	PaError err;					
-	ScopedPaHandler paInit;
-	err = paInit.result();
-	if(err != paNoError) {
-		cout << "\nERROR WITH PORTAUDIO INIT\t";
-		exit(1);
-	} 
-
-	// Setting the output parameters
-	PaStreamParameters outputParameters;
-	outputParameters.channelCount = 2;											// Setting output as stereo 
-	outputParameters.sampleFormat = paFloat32;
-	outputParameters.suggestedLatency = 0.050;									// Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
-	// Choose output device
-	do {
-		cout << "Do you want to use the default output device? (Y/n)\t"; cInput = getchar();
-	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
-	if (cInput == 'y' || cInput == '\n') outputParameters.device = Pa_GetDefaultOutputDevice();			// Give user no option for choose the output device, choose default	one
-	else                                 outputParameters.device = (PaDeviceIndex)SelectAudioDevice();  // Give user the option to choose the output device					
-						
 	// Opening of audio stream
 	unsigned int frameSize = iBufferSize;       // Declaring and initializing frame size variable because next statement needs it
 	err = Pa_OpenStream(
 		&stream,						// stream to be open
 		NULL,							// Unspecified input parameters because there will not be input stream
 		&outputParameters,				// Specified output parameters			                  
-		SAMPLERATE,			            // Sample rate will be 44.1 kHz
+		iSampleRate,			        // Sample rate will be 44.1 kHz, 48kHz...
 		frameSize,		                // Frame size will be iBufferSize samples
 		paClipOff,						// we won't output out of range samples so don't bother clipping them
 		&paCallback,					// Pointer to the function that will be called every time RtAudio needs the buffer to be filled
@@ -135,7 +153,7 @@ int main()
 		exit(1);
 	}
 	// Informing user by the console to press any key to start the execution
-	cout << "\nPress ENTER to start";
+	cout << "\nPress ENTER to start\n";
 	cin.ignore();
 	Pa_StartStream(stream);
 	// Informing user by the console to press any key to end the execution
@@ -145,13 +163,14 @@ int main()
 	Pa_StopStream(stream);
 	Pa_CloseStream(stream);
 	return 0;
-}
+}// main() code ends
 
 int SelectAudioDevice() {
 	PaStreamParameters inputParameters, outputParameters;
 	PaError err;
 	int     i, numDevices, defaultDisplayed, audioApiSelected;
 	const   PaDeviceInfo *deviceInfo;
+	//Get information of audio devices
 	numDevices = Pa_GetDeviceCount();
 	if (numDevices <= 0)
 	{
@@ -166,10 +185,10 @@ int SelectAudioDevice() {
 	do {
 		cout << "\nPlease choose which audio API you wish to use:\t";
 		cin >> audioApiSelected;
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
+		cin.clear();cin.ignore(INT_MAX, '\n');
 	} while (!(audioApiSelected > -1 && audioApiSelected <= Pa_GetHostApiCount()));
 	cout << endl;
+	//Go arround each audio device, there are inputs and outputs souces so we must filter that.
 	for (i = 0; i < numDevices; i++)
 	{
 		deviceInfo = Pa_GetDeviceInfo(i);
@@ -178,37 +197,35 @@ int SelectAudioDevice() {
 			printf("----------------------------------------\n");
 			printf(" INFORMATION OF AUDIO DEVICE NUMBER #%d\n", i);
 			printf("----------------------------------------\n");
+			//Shows whats the default output device of the system and of each API
 			if (i == Pa_GetDefaultOutputDevice())
 			{
-				printf("Default Output\n");
+				printf("DEFAULT OUTPUT\n");
 			}
-			else if (i == Pa_GetHostApiInfo(deviceInfo->hostApi)->defaultOutputDevice)
+			else if (i == Pa_GetHostApiInfo(deviceInfo->hostApi)->defaultOutputDevice) 
 			{
 				const PaHostApiInfo *hostInfo = Pa_GetHostApiInfo(deviceInfo->hostApi);
-				printf("Default %s Output\n", hostInfo->name);
-			}
-
+				printf("DEFAULT %s OUTPUT\n", hostInfo->name);
+			}//end if else default output detection
 			// print device info fields
-			printf("Name                      \t=  %s\n", deviceInfo->name);
-			printf("Host API                  \t=  %s\n", Pa_GetHostApiInfo(deviceInfo->hostApi)->name);
-			//printf("Max inputs = %d", deviceInfo->maxInputChannels);
-			printf("Max outputs\t\t\t= %d\n", deviceInfo->maxOutputChannels);
-			//printf("Default low input latency   = %8.4f\n", deviceInfo->defaultLowInputLatency);
-			printf("Default low output latency\t= %8.4f\n", deviceInfo->defaultLowOutputLatency);
-			//printf("Default high input latency  = %8.4f\n", deviceInfo->defaultHighInputLatency);
-			printf("Default high output latency\t= %8.4f\n", deviceInfo->defaultHighOutputLatency);
+			printf("Name                      \t=  %s\n",		deviceInfo->name);
+			printf("Host API                  \t=  %s\n",		Pa_GetHostApiInfo(deviceInfo->hostApi)->name);
+			printf("Max outputs\t\t\t= %d\n",					deviceInfo->maxOutputChannels);
+			printf("Default low output latency\t= %8.4f\n",		deviceInfo->defaultLowOutputLatency);
+			printf("Default high output latency\t= %8.4f\n",	deviceInfo->defaultHighOutputLatency);
+			printf("Default frame rate\t\t= %d\n",				deviceInfo->defaultSampleRate);
 		}//if ends
 	}//for ends
+	//Select the desired audio device
 	int selectAudioDevice;
 	do {
 		cout << "\nPlease choose which audio output device you wish to use:";
-		cin >> selectAudioDevice;
-		cin.clear();
+		cin >> selectAudioDevice;cin.clear();
 		cin.ignore(INT_MAX, '\n');
 		cout << endl;
 	} while (!(selectAudioDevice > -1 && selectAudioDevice <= numDevices));
 	return selectAudioDevice;
-}
+}//SelectAudioDevice() ends
 
 void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
 {
@@ -216,7 +233,6 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 	CMonoBuffer<float> speechInput(uiBufferSize);	FillBuffer(speechInput, wavSamplePositionSpeech, positionEndFrameSpeech, samplesVectorSpeech);
 	CMonoBuffer<float> stepsInput(uiBufferSize);	FillBuffer(stepsInput, wavSamplePositionSteps, positionEndFrameSteps, samplesVectorSteps);
 
-	
 	Common::CEarPair<CMonoBuffer<float>> bufferProcessed;		// Declaration of stereo buffer
 	sourceSpeech->SetBuffer(speechInput);						// Anechoic process of speech source
 	sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
@@ -233,7 +249,7 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 		bufferOutput.left += bufferReverb.left;					// Adding reverberated sound to the output mix
 		bufferOutput.right += bufferReverb.right;
 	}
-}
+}//audioProcess() ends
 
 void FillBuffer(CMonoBuffer<float> &output, unsigned int& position, unsigned int& endFrame, std::vector<float>& samplesVector)
 {
@@ -248,7 +264,7 @@ void FillBuffer(CMonoBuffer<float> &output, unsigned int& position, unsigned int
 		else
 			output[i] = 0.0f;							 // Fill with zeros if the end of the audio is met
 	}
-}
+}//FillBuffer() ends
 
 void LoadWav(std::vector<float>& samplesVector, const char* stringIn)
 {
@@ -278,7 +294,7 @@ void LoadWav(std::vector<float>& samplesVector, const char* stringIn)
 
 	for (int i = 0; i < samplesCount; i++)
 		samplesVector.push_back((float)sample[i] / (float)INT16_MAX);				 // Converting samples to float to push them in samples vector
-}
+}//LoadWav() ends
 
 int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 	unsigned long framesPerBuffer,
@@ -307,7 +323,7 @@ int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 	sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + tiempo / 110.0f));
 	sourceSteps->SetSourceTransform(sourcePosition);
 	return paContinue;
-}
+}//paCallbackMethod() ends
 
 // This routine will be called by the PortAudio engine when audio is needed.
 // It may called at interrupt level on some machines so don't do anything
@@ -323,4 +339,4 @@ static int paCallback(const void						*inputBuffer,
 						framesPerBuffer,
 						timeInfo,
 						statusFlags);
-}
+}//paCallback() ends

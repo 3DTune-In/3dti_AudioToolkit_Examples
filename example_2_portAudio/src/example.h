@@ -29,7 +29,6 @@
 #include <BRIR/BRIRFactory.h>
 #include <BRIR/BRIRCereal.h>
 #include <BinauralSpatializer/3DTI_BinauralSpatializer.h>
-//#include "./../../third_party_libraries/portaudio/include/portaudio.h"
 #include "../../third_party_libraries/portaudio/include/portaudio.h"
 
 PaStream *								stream;					
