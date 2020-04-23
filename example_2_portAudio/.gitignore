@@ -333,3 +333,5 @@ ASALocalRun/
 /projects/vstudio/*.wav
 /projects/vstudio/*.sofa
 /projects/vstudio/*.3dti-hrtf
+/projects/vstudio/x64
+/projects/vstudio/Win32

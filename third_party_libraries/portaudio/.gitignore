@@ -45,3 +45,7 @@ portaudio-2.0.pc
 src/hostapi/asio/ASIOSDK/asio/.vs/asio/v16/*.db
 build/msvc/.vs/portaudio/v15/*.db
 .vs/portaudio/v15/*.db
+
+build/msvc/Win32
+build/msvc/x64
+build/msvc/Backup

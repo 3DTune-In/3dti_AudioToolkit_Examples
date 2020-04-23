@@ -32,7 +32,7 @@
 //#include "./../../third_party_libraries/portaudio/include/portaudio.h"
 #include "../../third_party_libraries/portaudio/include/portaudio.h"
 
-PaStream *								audio;
+PaStream *								stream;					
 Binaural::CCore							myCore;												 // Core interface
 shared_ptr<Binaural::CListener>			listener;											 // Pointer to listener interface
 shared_ptr<Binaural::CSingleSourceDSP>	sourceSpeech, sourceSteps;							 // Pointers to each audio source interface

@@ -28,46 +28,41 @@ int iBufferSize;
 bool bEnableReverb;
 int main()
 {
-	cout << Pa_GetVersionText();
-	//Input buffer size and reverb enable
-	cout << "\nInsert wished buffer size (256, 512, 1024, 2048, 4096...)\n: ";
+	// Input buffer size and reverb enable
+	cout << "\nInsert wished buffer size (256, 512, 1024, 2048, 4096...):\t";
 	cin >> iBufferSize; cin.ignore();
-
 	char cInput;
 	do {
 		cout << "\nDo you want reverb? (Y/n) : "; cInput = getchar();
 	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
 	if (cInput == 'y' || cInput == '\n') bEnableReverb = true;
 	else                                 bEnableReverb = false;
-
 	// Core setup
-	Common::TAudioStateStruct audioState;		  // Audio State struct declaration
-	audioState.bufferSize = iBufferSize;		  // Setting buffer size and sample rate
+	Common::TAudioStateStruct audioState;											// Audio State struct declaration
+	audioState.bufferSize = iBufferSize;											// Setting buffer size and sample rate
 	audioState.sampleRate = SAMPLERATE;
-	myCore.SetAudioState(audioState);		      // Applying configuration to core
-	myCore.SetHRTFResamplingStep(15);		      // Setting 15-degree resampling step for HRTF
+	myCore.SetAudioState(audioState);												// Applying configuration to core
+	myCore.SetHRTFResamplingStep(15);												// Setting 15-degree resampling step for HRTF
 	ERRORHANDLER3DTI.SetVerbosityMode(VERBOSITYMODE_ERRORSANDWARNINGS);
 	ERRORHANDLER3DTI.SetErrorLogStream(&std::cout, true);
-	
 	// Listener setup
-	listener = myCore.CreateListener();								 // First step is creating listener
-	Common::CTransform listenerPosition = Common::CTransform();		 // Setting listener in (0,0,0)
+	listener = myCore.CreateListener();												// First step is creating listener
+	Common::CTransform listenerPosition = Common::CTransform();						// Setting listener in (0,0,0)
 	listenerPosition.SetPosition(Common::CVector3(0, 0, 0));
 	listener->SetListenerTransform(listenerPosition);
-	listener->DisableCustomizedITD();								 // Disabling custom head radius
-
-	// HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
-	// These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF 
-	HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			 // Comment this line and uncomment next lines to load the default HRTF in SOFA format instead of in 3dti-hrtf format
-		//bool bSpecifiedDelays;
-		//HRTF::CreateFromSofa("hrtf.sofa", listener, bSpecifiedDelays);
-
+	listener->DisableCustomizedITD();												// Disabling custom head radius
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	//	HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
+	//	These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF 
+	//	Comment the following line and uncomment next two lines to load the default HRTF in SOFA format instead of in 3dti-hrtf format
+	HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);							
+	//bool bSpecifiedDelays;
+	//HRTF::CreateFromSofa("hrtf.sofa", listener, bSpecifiedDelays);
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	// Environment setup
-	environment = myCore.CreateEnvironment();									// Creating environment to have reverberated sound
-	environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);		// Setting number of ambisonic channels to use in reverberation processing
-	BRIR::CreateFromSofa("brir.sofa", environment);								// Loading SOFAcoustics BRIR file and applying it to the environment
-
-
+	environment = myCore.CreateEnvironment();											// Creating environment to have reverberated sound
+	environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);				// Setting number of ambisonic channels to use in reverberation processing
+	BRIR::CreateFromSofa("brir.sofa", environment);										// Loading SOFAcoustics BRIR file and applying it to the environment
 	// Speech source setup
 	sourceSpeech = myCore.CreateSingleSourceDSP();										 // Creating audio source
 	LoadWav(samplesVectorSpeech, "speech.wav");											 // Loading .wav file
@@ -78,7 +73,6 @@ int main()
 	sourceSpeech->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
 	sourceSpeech->EnableAnechoicProcess();												 // Setting anechoic and reverb processing for this source
 	sourceSpeech->EnableDistanceAttenuationAnechoic();
-
 	// Steps source setup
 	sourceSteps = myCore.CreateSingleSourceDSP();										 // Creating audio source
 	LoadWav(samplesVectorSteps, "steps.wav");											   // Loading .wav file
@@ -90,90 +84,130 @@ int main()
 	sourceSteps->EnableAnechoicProcess();												   // Setting anechoic and reverb processing for this source
 	sourceSteps->EnableDistanceAttenuationAnechoic();
 	sourcePosition = sourceStepsPosition;												 // Saving initial position into source position to move the steps audio source later on
-
-
 	// Declaration and initialization of stereo buffer
 	outputBufferStereo.left.resize(iBufferSize);
 	outputBufferStereo.right.resize(iBufferSize);
-
-
-	// Audio output configuration, using PortAudio (more info in http://www.portaudio.com/docs.html)
-	// Initialization of RtAudio
-													  // It uses the first API it founds compiled and requires of preprocessor definitions
-	PaError err;// which depends on the OS used and the audio output device (more info in https://www.music.mcgill.ca/~gary/rtaudio/compiling.html)
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	//	Audio output configuration, using PortAudio (more info in http://www.portaudio.com/docs.html)
+	//	It requires the PortAudio .dll and .lib to be generated compiling "portaudio" proyect. 
+	//	They will be in \3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio_x64.lib and portaudio_x64.dll
+	//	If any other configuration for portaudio is needed, the project can be compilled again adding the files copying them.
+	//	
+	//	This project needs the portaudio.dll file to be copied into the aplication/solution folder
+	//
+	//  To add PortAdio verbose mode add PA_ENABLE_DEBUG_OUTPUT flag into the portaudio project properties -> C/C++ -> preprocessor -> preprocessor definitions
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	// Initialization of PortAudio	 
+	PaError err;					
 	ScopedPaHandler paInit;
-	if (paInit.result() != paNoError) cout << "ERROR";
-	//if (err != paNoError) std::cout<<"ERROR";
+	err = paInit.result();
+	if(err != paNoError) {
+		cout << "\nERROR WITH PORTAUDIO INIT\t";
+		exit(1);
+	} 
 
 	// Setting the output parameters
 	PaStreamParameters outputParameters;
-	outputParameters.channelCount = 2;									 // Setting output as stereo 
+	outputParameters.channelCount = 2;											// Setting output as stereo 
 	outputParameters.sampleFormat = paFloat32;
-	outputParameters.suggestedLatency = 0.050;							// Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
-
-	//outputParameters.deviceId = audio->getDefaultOutputDevice();	 // Choosing default output device
-	outputParameters.device = Pa_GetDefaultOutputDevice();								// Give user the option to choose the output device	
-	if (outputParameters.device == paNoDevice) {
-		fprintf(stderr, "Error: No default output device.\n");
-	}
-	unsigned int frameSize = iBufferSize;       // Declaring and initializing frame size variable because next statement needs it
-
+	outputParameters.suggestedLatency = 0.050;									// Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
+	// Choose output device
+	do {
+		cout << "Do you want to use the default output device? (Y/n)\t"; cInput = getchar();
+	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
+	if (cInput == 'y' || cInput == '\n') outputParameters.device = Pa_GetDefaultOutputDevice();			// Give user no option for choose the output device, choose default	one
+	else                                 outputParameters.device = (PaDeviceIndex)SelectAudioDevice();  // Give user the option to choose the output device					
+						
 	// Opening of audio stream
-	
+	unsigned int frameSize = iBufferSize;       // Declaring and initializing frame size variable because next statement needs it
 	err = Pa_OpenStream(
-		&audio,
-		NULL,					// Unspecified input parameters because there will not be input stream
-		&outputParameters,     // Specified output parameters			                  
-		SAMPLERATE,			                    // Sample rate will be 44.1 kHz
+		&stream,						// stream to be open
+		NULL,							// Unspecified input parameters because there will not be input stream
+		&outputParameters,				// Specified output parameters			                  
+		SAMPLERATE,			            // Sample rate will be 44.1 kHz
 		frameSize,		                // Frame size will be iBufferSize samples
-		paClipOff,
-		&paCallback,	            // Pointer to the function that will be called every time RtAudio needs the buffer to be filled
-		nullptr		                  // Unused pointer to get feedback
+		paClipOff,						// we won't output out of range samples so don't bother clipping them
+		&paCallback,					// Pointer to the function that will be called every time RtAudio needs the buffer to be filled
+		nullptr		                    // Unused pointer to get feedback
 		);
 	if (err != paNoError) {
-		std::cout << "\nERROR:\t" << std::endl;
-		exit(0);
+		cout << "\nERROR WITH PORTAUDIO WHILE STREAM IS BEING OPENED\t" << endl;
+		exit(1);
 	}
-
-	// Starting the stream
-	// audio->startStream();
-	cout << audio;
-	cout << "Press ENTER to start... \n";
+	// Informing user by the console to press any key to start the execution
+	cout << "\nPress ENTER to start";
 	cin.ignore();
-	getchar();
-	Pa_StartStream(audio);
+	Pa_StartStream(stream);
 	// Informing user by the console to press any key to end the execution
-	cout << "Press ENTER to stop... \n";
+	cout << "\nPress ENTER to stop and exit...\n";
 	cin.ignore();
-	getchar();
-
 	// Stopping and closing the stream;
-	Pa_StopStream(audio);
-	cout << "Press ENTER again to finish... \n";
-	cin.ignore();
-	getchar();
-	Pa_CloseStream(audio);
+	Pa_StopStream(stream);
+	Pa_CloseStream(stream);
 	return 0;
 }
 
 int SelectAudioDevice() {
-	/*int connectedAudioDevices = audio->getDeviceCount();
-	cout << "     List of available audio outputs" << endl;
-	cout << "----------------------------------------" << endl;
-	for (int i = 0; i < connectedAudioDevices; i++) {
-		cout << "ID: " << i << "-" << audio->getDeviceInfo(i).name << endl;
+	PaStreamParameters inputParameters, outputParameters;
+	PaError err;
+	int     i, numDevices, defaultDisplayed, audioApiSelected;
+	const   PaDeviceInfo *deviceInfo;
+	numDevices = Pa_GetDeviceCount();
+	if (numDevices <= 0)
+	{
+		printf("\nERROR: Pa_GetDeviceCount returned 0x%x\n", numDevices);
+		err = numDevices;
+		exit(1);
 	}
-	int selectAudioDevice;
-	//cout << "Please choose which audio output you wish to use: ";
-	//cin >> selectAudioDevice; cin.ignore();	
+	cout << endl << endl << "These are the audio APIs in the computer: " << endl;
+	for (i = 0; i < Pa_GetHostApiCount(); i++) {
+		cout << i << " - " << Pa_GetHostApiInfo(i)->name << endl;
+	}
 	do {
-		cout << "Please choose which audio output you wish to use: ";
+		cout << "\nPlease choose which audio API you wish to use:\t";
+		cin >> audioApiSelected;
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	} while (!(audioApiSelected > -1 && audioApiSelected <= Pa_GetHostApiCount()));
+	cout << endl;
+	for (i = 0; i < numDevices; i++)
+	{
+		deviceInfo = Pa_GetDeviceInfo(i);
+		// Mark global and API specific default devices
+		if ((deviceInfo->maxOutputChannels) > 0 && (audioApiSelected == deviceInfo->hostApi)){
+			printf("----------------------------------------\n");
+			printf(" INFORMATION OF AUDIO DEVICE NUMBER #%d\n", i);
+			printf("----------------------------------------\n");
+			if (i == Pa_GetDefaultOutputDevice())
+			{
+				printf("Default Output\n");
+			}
+			else if (i == Pa_GetHostApiInfo(deviceInfo->hostApi)->defaultOutputDevice)
+			{
+				const PaHostApiInfo *hostInfo = Pa_GetHostApiInfo(deviceInfo->hostApi);
+				printf("Default %s Output\n", hostInfo->name);
+			}
+
+			// print device info fields
+			printf("Name                      \t=  %s\n", deviceInfo->name);
+			printf("Host API                  \t=  %s\n", Pa_GetHostApiInfo(deviceInfo->hostApi)->name);
+			//printf("Max inputs = %d", deviceInfo->maxInputChannels);
+			printf("Max outputs\t\t\t= %d\n", deviceInfo->maxOutputChannels);
+			//printf("Default low input latency   = %8.4f\n", deviceInfo->defaultLowInputLatency);
+			printf("Default low output latency\t= %8.4f\n", deviceInfo->defaultLowOutputLatency);
+			//printf("Default high input latency  = %8.4f\n", deviceInfo->defaultHighInputLatency);
+			printf("Default high output latency\t= %8.4f\n", deviceInfo->defaultHighOutputLatency);
+		}//if ends
+	}//for ends
+	int selectAudioDevice;
+	do {
+		cout << "\nPlease choose which audio output device you wish to use:";
 		cin >> selectAudioDevice;
 		cin.clear();
 		cin.ignore(INT_MAX, '\n');
-	} while (!(selectAudioDevice > -1 && selectAudioDevice <= connectedAudioDevices));
-	return selectAudioDevice;*/
-	return 0;
+		cout << endl;
+	} while (!(selectAudioDevice > -1 && selectAudioDevice <= numDevices));
+	return selectAudioDevice;
 }
 
 void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
@@ -182,33 +216,21 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 	CMonoBuffer<float> speechInput(uiBufferSize);	FillBuffer(speechInput, wavSamplePositionSpeech, positionEndFrameSpeech, samplesVectorSpeech);
 	CMonoBuffer<float> stepsInput(uiBufferSize);	FillBuffer(stepsInput, wavSamplePositionSteps, positionEndFrameSteps, samplesVectorSteps);
 
-	// Declaration of stereo buffer
-	Common::CEarPair<CMonoBuffer<float>> bufferProcessed;
-
-	// Anechoic process of speech source
-	sourceSpeech->SetBuffer(speechInput);
+	
+	Common::CEarPair<CMonoBuffer<float>> bufferProcessed;		// Declaration of stereo buffer
+	sourceSpeech->SetBuffer(speechInput);						// Anechoic process of speech source
 	sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
-
-	// Adding anechoic processed speech source to the output mix
-	bufferOutput.left += bufferProcessed.left;
+	bufferOutput.left += bufferProcessed.left;					// Adding anechoic processed speech source to the output mix
 	bufferOutput.right += bufferProcessed.right;
-
-	// Anechoic process of steps source
-	sourceSteps->SetBuffer(stepsInput);
+	sourceSteps->SetBuffer(stepsInput);							// Anechoic process of steps source
 	sourceSteps->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
-
-	// Adding anechoic processed steps source to the output mix
-	bufferOutput.left += bufferProcessed.left;
+	bufferOutput.left += bufferProcessed.left;					// Adding anechoic processed steps source to the output mix
 	bufferOutput.right += bufferProcessed.right;
-
-	// Declaration and initialization of separate buffer needed for the reverb
-	Common::CEarPair<CMonoBuffer<float>> bufferReverb;
-
+	Common::CEarPair<CMonoBuffer<float>> bufferReverb;			// Declaration and initialization of separate buffer needed for the reverb
 	// Reverberation processing of all sources
 	if (bEnableReverb) {
 		environment->ProcessVirtualAmbisonicReverb(bufferReverb.left, bufferReverb.right);
-		// Adding reverberated sound to the output mix
-		bufferOutput.left += bufferReverb.left;
+		bufferOutput.left += bufferReverb.left;					// Adding reverberated sound to the output mix
 		bufferOutput.right += bufferReverb.right;
 	}
 }
@@ -263,22 +285,20 @@ int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 	const PaStreamCallbackTimeInfo* timeInfo,
 	PaStreamCallbackFlags statusFlags)
 {
-	// Initializes buffer with zeros
-	outputBufferStereo.left.Fill(framesPerBuffer, 0.0f);
+	outputBufferStereo.left.Fill(framesPerBuffer, 0.0f);	// Initializes buffer with zeros
 	outputBufferStereo.right.Fill(framesPerBuffer, 0.0f);
-	float *out = (float*)outputBuffer;
-	//unsigned long i;
-	audioProcess(outputBufferStereo, framesPerBuffer);
-	(void)timeInfo; // Prevent unused variable warnings.
+	// Prevent unused variable warnings.
+	(void)timeInfo;
 	(void)statusFlags;
 	(void)inputBuffer;
+	// Process audio data and interlace them
+	float *out = (float*)outputBuffer;
+	audioProcess(outputBufferStereo, framesPerBuffer);
 	CStereoBuffer<float> iOutput;
 	iOutput.Interlace(outputBufferStereo.left, outputBufferStereo.right);
 	for (auto it = iOutput.begin(); it != iOutput.end(); it++)
 	{
-		*out++ = *it;
-		// Setting of value in actual buffer position
-		//floatOutputBuffer = &floatOutputBuffer[1];				 // Updating pointer to next buffer position
+		*out++ = *it;										// Setting of value in actual buffer position
 	}
 	// Moving the steps source
 	float tiempo = float((*timeInfo).currentTime);
