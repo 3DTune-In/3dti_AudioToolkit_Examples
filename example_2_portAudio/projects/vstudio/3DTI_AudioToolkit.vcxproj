@@ -107,7 +107,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB7A1175-0116-4666-9AA1-EDD0F40A1064}</ProjectGuid>
     <RootNamespace>My3dti_AudioToolkit\3dti_Toolkit</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
