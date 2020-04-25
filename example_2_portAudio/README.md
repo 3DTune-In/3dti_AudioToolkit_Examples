@@ -13,14 +13,20 @@ How to Build and Run in Windows
 
 3. Download the AUDIO SDK from its creator web page. The text below is copied from the file portaudio ASIO-README.txt
 
+>----------------------
 >Obtaining the ASIO SDK
+>
 >In order to build PortAudio with ASIO support, you need to download 
 >the ASIO SDK (version 2.0 or later) from Steinberg. Steinberg makes the ASIO 
 >SDK available to anyone free of charge, however they do not permit its 
 >source code to be distributed.
+>
 >NOTE: In some cases the ASIO SDK may require patching, see below for further details.
+>
 >`http://www.steinberg.net/en/company/developer.html`
+>
 >If the above link is broken search Google for: "download steinberg ASIO SDK"
+>
 >----------------------
 
 4. Create the folder ASIOSDK as it is shown in the following path 
