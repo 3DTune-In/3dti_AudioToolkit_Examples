@@ -1,14 +1,25 @@
 # 3dti_AudioToolkit_Examples
-This is a repository containing an example to show how to use the 3D Tune-In Toolkit library, which is located here: https://github.com/3DTune-In/3dti_AudioToolkit. This example includes as a submodule the 3D Tune-In Toolkit as well as some 3rd party libraries which are listed below.
+This is a repository containing examples to show how to use the 3D Tune-In Toolkit library, which is located here: https://github.com/3DTune-In/3dti_AudioToolkit. This examples include as a submodule the 3D Tune-In Toolkit as well as some 3rd party libraries which are listed below.
 
 **The structure of the repository is as follows:**
 ```
 3dti_AudioToolkit_Examples
 ├── 3dti_AudioToolkit
+├── third_party_libraries
+|   └── portaudio
 └── example_1
     ├── rtaudio
     ├── src
-    └── vstudio
+    ├── resources
+    └── projectsv
+        └── vstudio
+        └── linux
+        └── xcode
+└── example_2:portaudio
+    ├── src
+    └── resources
+    └── projects
+        └── vstudio
 ```
 
 ## Third party libraries
@@ -36,16 +47,19 @@ Before using RtAudio, the developer needs to specify by the use of preprocessor 
 
 ## Credits
 
-This software was developed by a team coordinated by 
+This software is being developed by a team coordinated by 
 -	[Arcadio Reyes-Lecuona](https://github.com/areyesl) ([University of Malaga](https://www.uma.es/)). Contact: areyes@uma.es  
 
-The members of the development team are (in alphabetical order):
-- [Maria Cuevas-Rodriguez](https://github.com/mariacuevas) (University of Malaga)
-- [Carlos Garre](https://github.com/carlosgarre) (University of Malaga)
-- [Daniel Gonzalez-Toledo](https://github.com/dgonzalezt) (University of Malaga)
-- [Luis Molina-Tanco](https://github.com/lmtanco) (University of Malaga)
-- [Ernesto de la Rubia](https://github.com/ernestodelarubia) (University of Malaga)
-- [Angel Rodriguez-Rivero](https://github.com/ardgzrivero) (University of Malaga)
+The current members of the development team are (in alphabetical order):
+- [Gonzalo Bueno Santana](https://github.com/gonzupi)
+- [Maria Cuevas-Rodriguez](https://github.com/mariacuevas)
+- [Daniel Gonzalez-Toledo](https://github.com/dgonzalezt) 
+- [Luis Molina-Tanco](https://github.com/lmtanco) 
+
+Former members of the development team are (in alphabetical order):
+- [Carlos Garre](https://github.com/carlosgarre) 
+- [Ernesto de la Rubia](https://github.com/ernestodelarubia) 
+- [Angel Rodriguez-Rivero](https://github.com/ardgzrivero)
 
 ## Acknowledgements 
 
