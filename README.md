@@ -7,31 +7,27 @@ This is a repository containing examples to show how to use the 3D Tune-In Toolk
 ├── 3dti_AudioToolkit
 ├── third_party_libraries
 |   └── portaudio
-└── example_1
-    ├── rtaudio
-    ├── src
-    ├── resources
-    └── projectsv
-        └── vstudio
-        └── linux
-        └── xcode
-└── example_2:portaudio
+├── example_1
+|   ├── rtaudio
+|   ├── src
+|   ├── resources
+|   └── projectsv
+|       └── vstudio
+|       └── linux
+|       └── xcode
+└── example_2_portaudio
     ├── src
     └── resources
     └── projects
         └── vstudio
 ```
 
-## Third party libraries
+## List of eincluded xamples
+### Example 1. Basic spatialisation using RTAudio
+This example spatialize two static sources using RTAudio as the audio library. HRTF and BRIR for the spatialisation as well as sample clips are provided in the resource folder.
+### Example 2. Basic spatialisation using PortAudio
+This example spatialize two static sources using PortAudio as the audio library. HRTF and BRIR for the spatialisation as well as sample clips are provided in the resource folder
 
-* RtAudio - A set of C++ classes that provide a common API for realtime audio i/o (https://github.com/thestk/rtaudio)
-
-The 3D Tune-In Toolkit has partially integrated the Takuya OOURA General purpose FFT library (http://www.kurims.kyoto-u.ac.jp/~ooura/fft.html)  
-
-The 3D Tune-In Toolkit Resource Management Package uses: 
-* Libsofa (Copyright (c) 2013-2014, UMR STMS 9912-Ircam-Centre Pompidou/CNRS/UPMC. https://github.com/sofacoustics/API_Cpp). 
-
-* Cereal - A C11 library for serialization (Grant, W. Shane and Voorhies, Randolph (2017) http://uscilab.github.io/cereal).  
 
 ## Compilation issues
 The use of the third party library Libsofa may require the user to add to the environment variable PATH the **absolute** path of the folder containing the required files. For example, in a 64-bit Microsoft Windows, you can find that folder in 3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win\x64
