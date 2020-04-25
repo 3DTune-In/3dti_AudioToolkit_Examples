@@ -42,9 +42,11 @@ This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0
 6. Compile the project for the first time. 
 
 7. Run the project
+
 >**Note 1**: To run the project from VisualStudio, copy all the files from the folder 
 > localPath\3dti_AudioToolkit_Examples\example_2_portAudio\resources
 into the same folder as the project solution or the folder containing the exe file if you are going to run it directly.
+
 >**Note 2**: To run the example you also need to add the location of the portaudio_xXX.dll to your system path or copy it into the folder of the solution for runing it from Visual Studio, or the folder where the exe file is located to run it directly. This dll has been created in the previous compilation and should be located in: localPath\3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\[Platform]\Release\portaudio_xXX.dll
 >Example with a 64bits compilation: localPath\3dti_AudioToolkit_Examples\third_party_libraries\portaudio\build\msvc\x64\Release\portaudio_x64.dll
 
