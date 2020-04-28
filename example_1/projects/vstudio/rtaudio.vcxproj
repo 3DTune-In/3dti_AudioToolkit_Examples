@@ -102,7 +102,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>.\</OutDir>
-    <IntDir>.\Release\</IntDir>
+    <IntDir>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
@@ -118,8 +118,8 @@
     <TargetName>$(ProjectName)_debug</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>.\</OutDir>
-    <IntDir>.\Release\</IntDir>
+    <OutDir>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>build\rtaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
@@ -201,10 +201,10 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\..\..\third_party_libraries\rtaudio;..\..\..\third_party_libraries\rtaudio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN64;_CONSOLE;__WINDOWS_WASAPI__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\testall.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\Release\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\testall.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -224,10 +224,10 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\..\..\third_party_libraries\rtaudio;..\..\..\third_party_libraries\rtaudio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_CONSOLE;__WINDOWS_WASAPI__;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\testall.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\Release\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\testall.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)\build\rtaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
     </ClCompile>
     <Midl>
       <TypeLibraryName>.\testall.tlb</TypeLibraryName>

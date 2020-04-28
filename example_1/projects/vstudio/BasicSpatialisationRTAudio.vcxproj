@@ -173,7 +173,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>rtaudio.lib;3DTI_AudioToolkit.lib;3DTI_ResourceManager.lib;libsofa_x64.lib;libcurl_imp_x64.lib;libhdf5_hl_x64.lib;libhdf5_x64.lib;netcdf_x64.lib;zlib_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\third_party_libraries\rtaudio;..\..\..\third_party_libraries\rtaudio\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\lib;$(ProjectDir)$(PlatformTarget)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\third_party_libraries\rtaudio;..\..\..\third_party_libraries\rtaudio\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\lib;$(ProjectDir)$(PlatformTarget)\$(Configuration);$(ProjectDir)\build\rtaudio\$(PlatformTarget)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
