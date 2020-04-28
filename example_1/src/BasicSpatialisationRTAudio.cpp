@@ -21,7 +21,7 @@
 *
 */
 
-#include "example.h"
+#include "BasicSpatialisationRTAudio.h"
 
 #define SAMPLERATE 44100
 int iBufferSize;
