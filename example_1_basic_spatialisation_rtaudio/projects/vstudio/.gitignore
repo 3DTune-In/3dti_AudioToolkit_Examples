@@ -327,3 +327,8 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# 3DTI ignore files
+*.wav
+*.sofa
+*.3dti-hrtf
