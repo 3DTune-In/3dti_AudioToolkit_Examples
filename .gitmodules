@@ -4,3 +4,6 @@
 [submodule "third_party_libraries/portaudio"]
 	path = third_party_libraries/portaudio
 	url = https://git.assembla.com/portaudio.git
+[submodule "third_party_libraries/rtaudio"]
+	path = third_party_libraries/rtaudio
+	url = https://github.com/thestk/rtaudio.git
