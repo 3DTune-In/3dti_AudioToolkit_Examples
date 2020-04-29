@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\example.cpp">
+    <ClCompile Include="..\..\src\BasicSpatialisationPortAudio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\example.h">
+    <ClInclude Include="..\..\src\BasicSpatialisationPortAudio.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>

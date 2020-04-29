@@ -21,7 +21,7 @@
 *
 */
 
-#include "example.h"
+#include "BasicSpatialisationPortAudio.h"
 
 static double iSampleRate;
 int iBufferSize;

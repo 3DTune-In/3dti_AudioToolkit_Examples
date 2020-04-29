@@ -19,8 +19,8 @@
 *
 */
 
-#ifndef _EXAMPLE_H_
-#define _EXAMPLE_H_
+#ifndef _BASICSPATIALISATIONPORTAUDIO_H_
+#define _BASICSPATIALISATIONPORTAUDIO_H_
 
 #include <cstdio>
 #include <cstring>
