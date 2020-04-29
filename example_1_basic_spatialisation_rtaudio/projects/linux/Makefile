@@ -28,7 +28,7 @@ CEREAL_HEADERS = $(CEREAL)/include
 _3DTI_RESOURCE_MGR = $(_3DTI_PATH)/3dti_ResourceManager
 _3DTI_TOOLKIT = $(_3DTI_PATH)/3dti_Toolkit
 _3DTI_HEADERS = 
-_RTAUDIO_HEADERS = -I../../rtaudio -I../../rtaudio/include
+_RTAUDIO_HEADERS = -I../../../third_party_libraries/rtaudio -I../../../third_party_libraries/rtaudio/include
 
 # This accumulates all the third party libs used
 # using the Other Linker Flags setting in the project itself.
@@ -67,7 +67,7 @@ DESTDIR =
 INSTALL_PREFIX = usr/local
 
 _3DTI_TOOLKIT_PATH = $(_3DTI_PATH)/3dti_Toolkit
-DEPENDENTSOURCEFILES = $(_3DTI_TOOLKIT_PATH)/BinauralSpatializer/*.cpp $(_3DTI_TOOLKIT_PATH)/Common/*.cpp $(_3DTI_TOOLKIT_PATH)/HAHLSimulation/*.cpp $(_3DTI_RESOURCE_MGR)/HRTF/*.cpp $(_3DTI_RESOURCE_MGR)/BRIR/*.cpp $(_3DTI_RESOURCE_MGR)/ILD/*.cpp ../../rtaudio/RtAudio.cpp $(SOFA_HEADERS)/SOFA*.cpp $(SOFA)/dependencies/include/*.cpp
+DEPENDENTSOURCEFILES = $(_3DTI_TOOLKIT_PATH)/BinauralSpatializer/*.cpp $(_3DTI_TOOLKIT_PATH)/Common/*.cpp $(_3DTI_TOOLKIT_PATH)/HAHLSimulation/*.cpp $(_3DTI_RESOURCE_MGR)/HRTF/*.cpp $(_3DTI_RESOURCE_MGR)/BRIR/*.cpp $(_3DTI_RESOURCE_MGR)/ILD/*.cpp ../../../third_party_libraries/rtaudio/RtAudio.cpp $(SOFA_HEADERS)/SOFA*.cpp $(SOFA)/dependencies/include/*.cpp
 
 
 #### END PROJECT SETTINGS ####

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF5561D921875884000089DB /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF5561D721875883000089DB /* example.cpp */; };
+		AF5561D921875884000089DB /* BasicSpatialisationRTAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF5561D721875883000089DB /* BasicSpatialisationRTAudio.cpp */; };
 		AF5561E521875A8B000089DB /* Core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF5561DD21875A8A000089DB /* Core.cpp */; };
 		AF5561E621875A8B000089DB /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF5561DE21875A8A000089DB /* Environment.cpp */; };
 		AF5561E721875A8B000089DB /* UPCAnechoic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AF5561DF21875A8A000089DB /* UPCAnechoic.cpp */; };
@@ -72,11 +72,11 @@
 		AF5561A321874FBF000089DB /* Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Example; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF5561AF218750B6000089DB /* Project.Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.Release.xcconfig; sourceTree = "<group>"; };
 		AF5561B0218750B6000089DB /* Project.Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.Debug.xcconfig; sourceTree = "<group>"; };
-		AF5561D42187557D000089DB /* rtaudio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rtaudio; path = ../../../rtaudio; sourceTree = "<group>"; };
+		AF5561D42187557D000089DB /* rtaudio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rtaudio; path = ../../../third_party_libraries/rtaudio; sourceTree = "<group>"; };
 		AF5561D5218755B5000089DB /* 3dti_Toolkit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = 3dti_Toolkit; path = ../../../../3dti_AudioToolkit/3dti_Toolkit; sourceTree = "<group>"; };
 		AF5561D6218755D0000089DB /* 3dti_ResourceManager */ = {isa = PBXFileReference; lastKnownFileType = folder; name = 3dti_ResourceManager; path = ../../../../3dti_AudioToolkit/3dti_ResourceManager; sourceTree = "<group>"; };
-		AF5561D721875883000089DB /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = example.cpp; path = ../../../../src/example.cpp; sourceTree = "<group>"; };
-		AF5561D821875884000089DB /* example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = example.h; path = ../../../../src/example.h; sourceTree = "<group>"; };
+		AF5561D721875883000089DB /* BasicSpatialisationRTAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BasicSpatialisationRTAudio.cpp; path = ../../../../src/BasicSpatialisationRTAudio.cpp; sourceTree = "<group>"; };
+		AF5561D821875884000089DB /* BasicSpatialisationRTAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicSpatialisationRTAudio.h; path = ../../../../src/BasicSpatialisationRTAudio.h; sourceTree = "<group>"; };
 		AF5561DD21875A8A000089DB /* Core.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Core.cpp; path = ../../../../3dti_AudioToolkit/3dti_Toolkit/BinauralSpatializer/Core.cpp; sourceTree = "<group>"; };
 		AF5561DE21875A8A000089DB /* Environment.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Environment.cpp; path = ../../../../3dti_AudioToolkit/3dti_Toolkit/BinauralSpatializer/Environment.cpp; sourceTree = "<group>"; };
 		AF5561DF21875A8A000089DB /* UPCAnechoic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = UPCAnechoic.cpp; path = ../../../../3dti_AudioToolkit/3dti_Toolkit/BinauralSpatializer/UPCAnechoic.cpp; sourceTree = "<group>"; };
@@ -114,8 +114,8 @@
 		AF55621B21875AF5000089DB /* DynamicEqualizer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DynamicEqualizer.cpp; path = ../../../../3dti_AudioToolkit/3dti_Toolkit/HAHLSimulation/DynamicEqualizer.cpp; sourceTree = "<group>"; };
 		AF55621C21875AF5000089DB /* FrequencySmearing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FrequencySmearing.cpp; path = ../../../../3dti_AudioToolkit/3dti_Toolkit/HAHLSimulation/FrequencySmearing.cpp; sourceTree = "<group>"; };
 		AF55621D21875AF5000089DB /* HighOrderButteworthFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HighOrderButteworthFilter.cpp; path = ../../../../3dti_AudioToolkit/3dti_Toolkit/HAHLSimulation/HighOrderButteworthFilter.cpp; sourceTree = "<group>"; };
-		AF55622721875B4E000089DB /* RtAudio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RtAudio.cpp; path = ../../../rtaudio/RtAudio.cpp; sourceTree = "<group>"; };
-		AF55622821875B4E000089DB /* rtaudio_c.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = rtaudio_c.cpp; path = ../../../rtaudio/rtaudio_c.cpp; sourceTree = "<group>"; };
+		AF55622721875B4E000089DB /* RtAudio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RtAudio.cpp; path = ../../../third_party_libraries/rtaudio/RtAudio.cpp; sourceTree = "<group>"; };
+		AF55622821875B4E000089DB /* rtaudio_c.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = rtaudio_c.cpp; path = ../../../third_party_libraries/rtaudio/rtaudio_c.cpp; sourceTree = "<group>"; };
 		AF55622B21875B68000089DB /* BRIRCereal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BRIRCereal.cpp; path = ../../../../3dti_AudioToolkit/3dti_ResourceManager/BRIR/BRIRCereal.cpp; sourceTree = "<group>"; };
 		AF55622C21875B68000089DB /* BRIRFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BRIRFactory.cpp; path = ../../../../3dti_AudioToolkit/3dti_ResourceManager/BRIR/BRIRFactory.cpp; sourceTree = "<group>"; };
 		AF55622F21875BB0000089DB /* HRTFCereal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HRTFCereal.cpp; path = ../../../../3dti_AudioToolkit/3dti_ResourceManager/HRTF/HRTFCereal.cpp; sourceTree = "<group>"; };
@@ -207,8 +207,8 @@
 		AF5561A521874FBF000089DB /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				AF5561D721875883000089DB /* example.cpp */,
-				AF5561D821875884000089DB /* example.h */,
+				AF5561D721875883000089DB /* BasicSpatialisationRTAudio.cpp */,
+				AF5561D821875884000089DB /* BasicSpatialisationRTAudio.h */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF5561D921875884000089DB /* example.cpp in Sources */,
+				AF5561D921875884000089DB /* BasicSpatialisationRTAudio.cpp in Sources */,
 				AF55623221875BB1000089DB /* HRTFCereal.cpp in Sources */,
 				AF55623321875BB1000089DB /* HRTFFactory.cpp in Sources */,
 				AF55623421875BB1000089DB /* ILDCereal.cpp in Sources */,

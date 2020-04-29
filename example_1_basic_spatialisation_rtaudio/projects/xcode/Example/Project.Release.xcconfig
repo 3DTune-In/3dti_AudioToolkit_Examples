@@ -25,7 +25,7 @@ CEREAL_HEADERS = $(CEREAL)/include
 _3DTI_RESOURCE_MGR = $(_3DTI_PATH)/3dti_ResourceManager
 _3DTI_TOOLKIT = $(_3DTI_PATH)/3dti_Toolkit
 _3DTI_HEADERS = $(_3DTI_RESOURCE_MGR) $(_3DTI_TOOLKIT) $(SOFA_HEADERS) $(SOFA_3RD_PARTY_HEADERS) $(CEREAL_HEADERS)
-_RTAUDIO_HEADERS = ../../../rtaudio ../../../rtaudio/include
+_RTAUDIO_HEADERS = ../../../third_party_libraries/rtaudio ../../../third_party_libraries/rtaudio/include
 
 // This accumulates all the third party libs used
 // using the Other Linker Flags setting in the project itself.
