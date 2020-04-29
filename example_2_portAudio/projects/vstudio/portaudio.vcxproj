@@ -29,6 +29,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0A18A071-125E-442F-AFF7-A3F68ABECF99}</ProjectGuid>
     <RootNamespace>portaudio</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMinDependency|Win32'" Label="Configuration">
@@ -93,33 +94,36 @@
     <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\portaudio\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>build\portaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\portaudio\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>build\portaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+    <TargetName>$(ProjectName)_$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\portaudio\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>build\portaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\portaudio\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>build\portaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)_$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMinDependency|Win32'">
-    <OutDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\portaudio\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>build\portaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMinDependency|x64'">
-    <OutDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\portaudio\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>build\portaudio\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -141,10 +145,10 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>build\portaudio\$(Platform)\$(Configuration)/portaudio.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>build\portaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>build\portaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>build\portaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -154,16 +158,16 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>ksuser.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.dll</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>..\..\..\third_party_libraries\portaudio\build\msvc\portaudio.def</ModuleDefinitionFile>
-      <ProgramDatabaseFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.pdb</ProgramDatabaseFile>
-      <ImportLibrary>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.lib</ImportLibrary>
+      <ProgramDatabaseFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.pdb</ProgramDatabaseFile>
+      <ImportLibrary>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio.bsc</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -185,10 +189,10 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>..build\portaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>build\portaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>build\portaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -198,17 +202,24 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>ksuser.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x64.dll</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x64.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>..\..\..\third_party_libraries\portaudio\build\msvc\portaudio.def</ModuleDefinitionFile>
-      <ProgramDatabaseFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio_x64.pdb</ProgramDatabaseFile>
-      <ImportLibrary>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio_x64.lib</ImportLibrary>
+      <ProgramDatabaseFile>build\portaudio\$(Platform)\$(Configuration)/portaudio_x64.pdb</ProgramDatabaseFile>
+      <ImportLibrary>build\portaudio\$(Platform)\$(Configuration)/portaudio_x64.lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x64.bsc</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x64.bsc</OutputFile>
     </Bscmake>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)build\portaudio\$(Platform)\$(Configuration)\$(TargetName)$(TargetExt)" "build\$(Platform)\$(Configuration)" /s /i /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -226,10 +237,10 @@
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>build\portaudio\$(Platform)\$(Configuration)/portaudio.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>build\portaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>build\portaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>build\portaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -239,17 +250,17 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.dll</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>..\..\..\third_party_libraries\portaudio\build\msvc\portaudio.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.pdb</ProgramDatabaseFile>
-      <ImportLibrary>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.lib</ImportLibrary>
+      <ProgramDatabaseFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.pdb</ProgramDatabaseFile>
+      <ImportLibrary>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio.bsc</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -268,10 +279,10 @@
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>build\portaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>build\portaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>build\portaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -281,18 +292,21 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x64.dll</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x64.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>..\..\..\third_party_libraries\portaudio\build\msvc\portaudio.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio_x64.pdb</ProgramDatabaseFile>
-      <ImportLibrary>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x64.lib</ImportLibrary>
+      <ProgramDatabaseFile>build\portaudio\$(Platform)\$(Configuration)/portaudio_x64.pdb</ProgramDatabaseFile>
+      <ImportLibrary>build\portaudio\$(Platform)\$(Configuration)\portaudio_x64.lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio_x64.bsc</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)/portaudio_x64.bsc</OutputFile>
     </Bscmake>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)build\portaudio\$(Platform)\$(Configuration)\$(TargetName)$(TargetExt)" "$(SolutionDir)build\$(Platform)\$(Configuration)" /s /i /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMinDependency|Win32'">
     <Midl>
@@ -313,10 +327,10 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>build\portaudio\$(Platform)\$(Configuration)/portaudio.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>build\portaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>build\portaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>build\portaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -326,16 +340,16 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>ksuser.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.dll</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>..\..\..\third_party_libraries\portaudio\build\msvc\portaudio.def</ModuleDefinitionFile>
-      <ProgramDatabaseFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.pdb</ProgramDatabaseFile>
-      <ImportLibrary>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x86.lib</ImportLibrary>
+      <ProgramDatabaseFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.pdb</ProgramDatabaseFile>
+      <ImportLibrary>build\portaudio\$(Platform)\$(Configuration)\portaudio_x86.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio.bsc</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMinDependency|x64'">
@@ -357,10 +371,10 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>build\portaudio\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>build\portaudio\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>build\portaudio\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -370,16 +384,16 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>ksuser.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x64.dll</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x64.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>..\..\..\third_party_libraries\portaudio\build\msvc\portaudio.def</ModuleDefinitionFile>
-      <ProgramDatabaseFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio_x64.pdb</ProgramDatabaseFile>
-      <ImportLibrary>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)/portaudio_x64.lib</ImportLibrary>
+      <ProgramDatabaseFile>build\portaudio\$(Platform)\$(Configuration)/portaudio_x64.pdb</ProgramDatabaseFile>
+      <ImportLibrary>build\portaudio\$(Platform)\$(Configuration)/portaudio_x64.lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\..\..\third_party_libraries\portaudio\build\msvc\$(Platform)\$(Configuration)\portaudio_x64.bsc</OutputFile>
+      <OutputFile>build\portaudio\$(Platform)\$(Configuration)\portaudio_x64.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
