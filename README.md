@@ -6,34 +6,19 @@ This is a repository containing examples to show how to use the 3D Tune-In Toolk
 3dti_AudioToolkit_Examples
 ├── 3dti_AudioToolkit
 ├── third_party_libraries
-|   └── portaudio
-├── example_1
-|   ├── rtaudio
-|   ├── src
-|   ├── resources
-|   └── projectsv
-|       └── vstudio
-|       └── linux
-|       └── xcode
-└── example_2_portaudio
-    ├── src
-    └── resources
-    └── projects
-        └── vstudio
+|   ├── portaudio
+|   └── rtaudio
+├── example_1_basic_spatialisation_rtaudio
+└── example_2_basic_spatialisation_portAudio
 ```
 
-## List of eincluded xamples
+## List of included examples
+
+**Note:** For more information about each example, please go to README files in the example folder.
 ### Example 1. Basic spatialisation using RTAudio
 This example spatialize two static sources using RTAudio as the audio library. HRTF and BRIR for the spatialisation as well as sample clips are provided in the resource folder.
 ### Example 2. Basic spatialisation using PortAudio
-This example spatialize two static sources using PortAudio as the audio library. HRTF and BRIR for the spatialisation as well as sample clips are provided in the resource folder
-
-
-## Compilation issues
-The use of the third party library Libsofa may require the user to add to the environment variable PATH the **absolute** path of the folder containing the required files. For example, in a 64-bit Microsoft Windows, you can find that folder in 3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win\x64
-
-## RtAudio configuration
-Before using RtAudio, the developer needs to specify by the use of preprocessor definitions which APIs they want to use in order to RtAudio to compile them and be able to use them. By default, the Visual Studio solution provided compiles WASAPI by defining ____WINDOWS_WASAPI____. Depending on the audio output device and the OS used, this may be subject to change by the user. Further information can be found in: https://www.music.mcgill.ca/~gary/rtaudio/compiling.html
+This example spatialize two static sources using PortAudio as the audio library. HRTF and BRIR for the spatialisation as well as sample clips are provided in the resource folder.
 
 ## External content distributed together with this software 
 
