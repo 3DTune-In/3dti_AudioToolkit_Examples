@@ -3,7 +3,7 @@ Folder Content
 
 - projects: project files for Windows (Visual Studio).
 - resources: files needed by the example program to work (HRTF, BRIR and audio files). These files must be copied into the same folder as executable file.
-- src: source files of the BasicSpatialisationWithPortaudio example project (`example.cpp` and `example.h`).
+- src: source files of the BasicSpatialisationWithPortaudio example project (`BasicSpatialisationPortAudio.cpp` and `BasicSpatialisationPortAudio.h`).
 
 How to Build and Run in Windows
 -
@@ -33,8 +33,8 @@ How to Build and Run in Windows
 `localPath\3dti_AudioToolkit_Examples\third_party_libraries\portaudio\src\hostapi\asio\ASIOSDK`
 and copy those files and folders which are inside the main folder of the zip (asiosdk_2.3.3_2019-06-14) into the ASIOSDK folder
 
-5. Open the solution `example.sln` located at 
-`localPath\3dti_AudioToolkit_Examples\example_2_portAudio\projects\vstudio\example.sln.` 
+5. Open the solution `BasicSpatialisationPortAudio.sln` located at 
+`localPath\3dti_AudioToolkit_Examples\example_2_basic_spatialisation_portAudio\projects\vstudio` 
 This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0. 
 
 6. Compile the project for the first time. 
@@ -44,6 +44,8 @@ This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0
 **Note 1**: To run the project from VisualStudio, copy all the files from the folder 
 `localPath\3dti_AudioToolkit_Examples\example_2_portAudio\resources`
 into the same folder as the project solution or the folder containing the exe file if you are going to run it directly.
+
+**Note 2:** The use of the third party library Libsofa may require the user to add to the environment variable PATH the **absolute** path of the folder containing the libsofa libs. For example, in a 64-bit Microsoft Windows, you can find that folder in `3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win\x64`
 
 
 
