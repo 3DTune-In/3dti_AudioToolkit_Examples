@@ -22,7 +22,9 @@
 */
 
 #include "BasicSpatialisationRTAudio.h"
-
+#if defined(__linux__) || defined(linux)
+    #include <bits/stdc++.h>
+#endif
 #define SAMPLERATE 44100
 int iBufferSize;
 bool bEnableReverb;

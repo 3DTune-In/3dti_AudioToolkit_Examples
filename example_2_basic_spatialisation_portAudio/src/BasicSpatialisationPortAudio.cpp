@@ -22,7 +22,9 @@
 */
 
 #include "BasicSpatialisationPortAudio.h"
-
+#if defined(__linux__) || defined(linux)
+    #include <bits/stdc++.h>
+#endif
 static double iSampleRate;
 int iBufferSize;
 bool bEnableReverb;
