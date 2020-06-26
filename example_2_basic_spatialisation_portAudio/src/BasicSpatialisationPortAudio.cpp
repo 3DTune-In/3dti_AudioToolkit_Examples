@@ -105,10 +105,9 @@ int main()
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	//	HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
 	//	These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF 
-	//	Comment the following line and uncomment next two lines to load the default HRTF in SOFA format instead of in 3dti-hrtf format
-	HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);							
-	//bool bSpecifiedDelays;
-	//HRTF::CreateFromSofa("hrtf.sofa", listener, bSpecifiedDelays);
+	//	Comment the following line and uncomment next two lines to load the default HRTF in 3dti-hrtf format instead of in SOFA format
+	//HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);								
+	HRTF::CreateFromSofa("hrtf.sofa", listener);
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	// Environment setup
 	environment = myCore.CreateEnvironment();											// Creating environment to have reverberated sound
