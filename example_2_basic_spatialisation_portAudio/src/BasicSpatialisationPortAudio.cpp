@@ -107,7 +107,8 @@ int main()
 	//	These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF 
 	//	Comment the following line and uncomment next two lines to load the default HRTF in 3dti-hrtf format instead of in SOFA format
 	//HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);								
-	HRTF::CreateFromSofa("hrtf.sofa", listener);
+	bool specifiedDelays;
+	HRTF::CreateFromSofa("hrtf.sofa", listener, specifiedDelays);	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	// Environment setup
 	environment = myCore.CreateEnvironment();											// Creating environment to have reverberated sound
@@ -139,6 +140,7 @@ int main()
 	outputBufferStereo.right.resize(iBufferSize);
 	// Opening of audio stream
 	unsigned int frameSize = iBufferSize;       // Declaring and initializing frame size variable because next statement needs it
+	outputParameters.hostApiSpecificStreamInfo = NULL;
 	err = Pa_OpenStream(
 		&stream,						// stream to be open
 		NULL,							// Unspecified input parameters because there will not be input stream

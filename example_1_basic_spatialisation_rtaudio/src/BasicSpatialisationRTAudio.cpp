@@ -62,7 +62,8 @@ int main()
 
 	   /* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
 	      These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
-		HRTF::CreateFromSofa("hrtf.sofa", listener);			// Comment this line and uncomment next lines to load the default HRTF in 3dti-hrtf format instead of in SOFA format
+		bool specifiedDelays;
+		HRTF::CreateFromSofa("hrtf.sofa", listener, specifiedDelays);			// Comment this line and uncomment next lines to load the default HRTF in 3dti-hrtf format instead of in SOFA format
 		//HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);			       
     
     
