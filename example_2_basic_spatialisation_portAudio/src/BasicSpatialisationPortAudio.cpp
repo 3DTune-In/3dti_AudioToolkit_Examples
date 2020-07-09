@@ -25,6 +25,7 @@
 #if defined(__linux__) || defined(linux)
     #include <bits/stdc++.h>
 #endif
+
 static double iSampleRate;
 int iBufferSize;
 bool bEnableReverb;
@@ -53,6 +54,7 @@ int main()
 	outputParameters.channelCount = 2;											// Setting output as stereo 
 	outputParameters.sampleFormat = paFloat32;
 	outputParameters.suggestedLatency = 0.050;									// Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
+	
 	// Choose output device
 	char cInput;
 	int iDeviceIndex;
@@ -124,16 +126,20 @@ int main()
 	sourceSpeech->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
 	sourceSpeech->EnableAnechoicProcess();												 // Setting anechoic and reverb processing for this source
 	sourceSpeech->EnableDistanceAttenuationAnechoic();
+	sourceSpeech->EnableDistanceAttenuationReverb();
 	// Steps source setup
 	sourceSteps = myCore.CreateSingleSourceDSP();										 // Creating audio source
 	LoadWav(samplesVectorSteps, "steps.wav");											   // Loading .wav file
 	Common::CTransform sourceStepsPosition = Common::CTransform();
-	sourceStepsPosition.SetPosition(Common::CVector3(-3, 10, -10));						 // Setting source in position
+	t = 0;
+	//sourceStepsPosition.SetPosition(Common::CVector3(-3, 10, -10));						 // Setting source in position
+	sourceStepsPosition.SetPosition(Common::CVector3(10, 0, -10));						 // Setting source in position
 	sourceSteps->SetSourceTransform(sourceStepsPosition);
 	sourceSteps->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);		 // Choosing high quality mode for anechoic processing
 	sourceSteps->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
 	sourceSteps->EnableAnechoicProcess();												   // Setting anechoic and reverb processing for this source
 	sourceSteps->EnableDistanceAttenuationAnechoic();
+	sourceSteps->EnableDistanceAttenuationReverb();
 	sourcePosition = sourceStepsPosition;												 // Saving initial position into source position to move the steps audio source later on
 	// Declaration and initialization of stereo buffer
 	outputBufferStereo.left.resize(iBufferSize);
@@ -233,20 +239,26 @@ int SelectAudioDevice() {
 void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
 {
 	// Declaration, initialization and filling mono buffers
-	CMonoBuffer<float> speechInput(uiBufferSize);	FillBuffer(speechInput, wavSamplePositionSpeech, positionEndFrameSpeech, samplesVectorSpeech);
-	CMonoBuffer<float> stepsInput(uiBufferSize);	FillBuffer(stepsInput, wavSamplePositionSteps, positionEndFrameSteps, samplesVectorSteps);
+	CMonoBuffer<float> speechInput(uiBufferSize);	
+	FillBuffer(speechInput, wavSamplePositionSpeech, positionEndFrameSpeech, samplesVectorSpeech);
+	CMonoBuffer<float> stepsInput(uiBufferSize);	
+	FillBuffer(stepsInput, wavSamplePositionSteps, positionEndFrameSteps, samplesVectorSteps);
 
+	//Process "speech" audio source 
 	Common::CEarPair<CMonoBuffer<float>> bufferProcessed;		// Declaration of stereo buffer
 	sourceSpeech->SetBuffer(speechInput);						// Anechoic process of speech source
 	sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
 	bufferOutput.left += bufferProcessed.left;					// Adding anechoic processed speech source to the output mix
 	bufferOutput.right += bufferProcessed.right;
+	
+	//Process "steps" audio source wav
 	sourceSteps->SetBuffer(stepsInput);							// Anechoic process of steps source
 	sourceSteps->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
 	bufferOutput.left += bufferProcessed.left;					// Adding anechoic processed steps source to the output mix
 	bufferOutput.right += bufferProcessed.right;
-	Common::CEarPair<CMonoBuffer<float>> bufferReverb;			// Declaration and initialization of separate buffer needed for the reverb
+
 	// Reverberation processing of all sources
+	Common::CEarPair<CMonoBuffer<float>> bufferReverb;			// Declaration and initialization of separate buffer needed for the reverb
 	if (bEnableReverb) {
 		environment->ProcessVirtualAmbisonicReverb(bufferReverb.left, bufferReverb.right);
 		bufferOutput.left += bufferReverb.left;					// Adding reverberated sound to the output mix
@@ -320,10 +332,12 @@ int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 		*out++ = *it;										// Setting of value in actual buffer position
 	}
 	// Moving the steps source
-	float tiempo = float((*timeInfo).currentTime);
-	sourcePosition.SetPosition(Common::CVector3(sourcePosition.GetPosition().x,
-	sourcePosition.GetPosition().y - tiempo / 110.0f,
-	sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + tiempo / 110.0f));
+	//float tiempo = float((*timeInfo).currentTime);		
+	/*sourcePosition.SetPosition(Common::CVector3(sourcePosition.GetPosition().x,
+			sourcePosition.GetPosition().y - tiempo / 110.0f,
+			sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + tiempo / 110.0f));*/
+	t += 0.005;
+	sourcePosition.SetPosition(Common::CVector3(10 * cos(t), 10 * sin(t), sourcePosition.GetPosition().z));
 	sourceSteps->SetSourceTransform(sourcePosition);
 	return paContinue;
 }//paCallbackMethod() ends

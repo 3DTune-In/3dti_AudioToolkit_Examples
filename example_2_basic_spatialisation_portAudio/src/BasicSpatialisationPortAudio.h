@@ -38,7 +38,7 @@ shared_ptr<Binaural::CSingleSourceDSP>	sourceSpeech, sourceSteps;							 // Poin
 shared_ptr<Binaural::CEnvironment>		environment;										 // Pointer to environment interface
 
 Common::CTransform						sourcePosition;										 // Storages the position of the steps source
-
+		float							t;													 // Storages the angle of the steps source
 Common::CEarPair<CMonoBuffer<float>>	outputBufferStereo;									 // Stereo buffer containing processed audio
 
 vector<float>							samplesVectorSpeech, samplesVectorSteps;			 // Storages the audio from the wav files
@@ -71,6 +71,7 @@ void FillBuffer(CMonoBuffer<float>& output, unsigned int & position, unsigned in
 *	\param [in] stringIn name of the ".wav" file to open
 */
 void LoadWav(std::vector<float>& samplesVector, const char* stringIn);
+
 
 /** \brief This function is called each time RtAudio needs a buffer to output
 *	\param [out] outputBuffer output buffer to be filled
