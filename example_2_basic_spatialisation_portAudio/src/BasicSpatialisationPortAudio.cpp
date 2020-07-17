@@ -28,9 +28,37 @@
 
 #define MAX_SOURCES 6
 
+
+
+// TEST PROFILER CLASS
+//#define CHRONO_PROFILER
+#define TOOLKIT_PROFILER
+#ifdef TOOLKIT_PROFILER
+//#include <Windows.h>
+#include "Common/Profiler.h"
+//CProfilerDataSet dsAudioLoop;
+Common::CProfilerDataSet dsProcessAnechoic;
+Common::CProfilerDataSet dsProcessReverb;
+Common::CTimeMeasure startOfflineRecord;
+
+#endif
+
+
 int main()
 {
+
 	times.reserve(2000);
+	
+	// SETUP PROFILER
+#ifdef TOOLKIT_PROFILER
+	Common::PROFILER3DTI.InitProfiler();	
+	Common::PROFILER3DTI.SetAutomaticWrite(dsProcessAnechoic, "PROF_APP_PROCESSANECHOIC.txt");
+	Common::PROFILER3DTI.StartRelativeSampling(dsProcessAnechoic);
+	Common::PROFILER3DTI.SetAutomaticWrite(dsProcessReverb, "PROF_APP_PROCESSREVERB.txt");
+	Common::PROFILER3DTI.StartRelativeSampling(dsProcessReverb);
+#endif
+
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	//	Audio output configuration, using PortAudio (more info in http://www.portaudio.com/docs.html)
 	//	It requires the PortAudio .dll and .lib to be generated compiling "portaudio" proyect. 
@@ -69,7 +97,7 @@ int main()
 	cout << "Selected audio device :\t" << Pa_GetDeviceInfo(iDeviceIndex)->name << endl;
 	do
 	{
-		cout << "\nHow many fonts do you want to reproduce?";
+		cout << "\nHow many sources do you want to reproduce? ";
 		cin >> iNumberOfSources;
 	} while (iNumberOfSources<1);
 	cin.ignore();
@@ -130,55 +158,16 @@ int main()
 	bool specifiedDelays;
 	HRTF::CreateFromSofa("hrtf.sofa", listener, specifiedDelays);	
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 	// Environment setup
 	environment = myCore.CreateEnvironment();											// Creating environment to have reverberated sound
 	environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);				// Setting number of ambisonic channels to use in reverberation processing
 	BRIR::CreateFromSofa("brir.sofa", environment);										// Loading SOFAcoustics BRIR file and applying it to the environment
-	// sources setup
-	t = 0;
-	AudioSamplesVector.reserve(iNumberOfSources);
-	wavSamplePosition.reserve(iNumberOfSources);//initiate variables for audio process function
-	positionEndFrame.reserve(iNumberOfSources);
-	for (int iCountOfSources = 0; iCountOfSources < iNumberOfSources; iCountOfSources++)
-	{
-		sources.push_back(myCore.CreateSingleSourceDSP());								// Creating audio source
-		AudioSamplesVector.push_back(vector<float>());
-		wavSamplePosition.push_back(*(new unsigned int));
-		positionEndFrame.push_back(*(new unsigned int));
-		switch (iCountOfSources % 6)
-		{
-		case 0:
-			LoadWav(AudioSamplesVector.at(iCountOfSources), "speech.wav"); // Loading .wav file
-			break;
-		case 1:
-			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzPiano.wav");
-			break;
-		case 2:
-			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav");
-			break;
-		case 3:
-			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav");
-			break;
-		case 4:
-			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav"); // Loading .wav files
-			break;
-		case 5:
-			LoadWav(AudioSamplesVector.at(iCountOfSources), "steps.wav"); // Loading .wav file
-			break;
-		default:
-			LoadWav(AudioSamplesVector.at(iCountOfSources), "steps.wav"); // Loading .wav file
-			break;
-		}
-		sourcePosition.push_back(Common::CTransform());
-		sourcePosition.at(iCountOfSources).SetPosition(Common::CVector3(((int)(rand() % 7)) + 1, ((int)(rand() % 7)) + 1, ((int)(rand() % 7))+1)); // Setting source position XYZ
-		sources.at(iCountOfSources)->SetSourceTransform(sourcePosition.at(iCountOfSources));
-		sources.at(iCountOfSources)->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality); //HighPerformance vs HighQuality // Choosing high quality mode for anechoic processing
-		sources.at(iCountOfSources)->DisableNearFieldEffect();											// Audio source will not be close to listener, so we don't need near field effect
-		sources.at(iCountOfSources)->EnableAnechoicProcess();											// Setting anechoic and reverb processing for this source
-		sources.at(iCountOfSources)->EnableDistanceAttenuationAnechoic();
-		sources.at(iCountOfSources)->EnableDistanceAttenuationReverb();
-	}
 	
+    // Sources setup
+	SourcesSetup(iNumberOfSources);
+				
 	// Declaration and initialization of stereo buffer
 	outputBufferStereo.left.resize(iBufferSize);
 	outputBufferStereo.right.resize(iBufferSize);
@@ -210,24 +199,100 @@ int main()
 	// Stopping and closing the stream;
 	Pa_StopStream(stream);
 	Pa_CloseStream(stream);
+	
+#ifdef CHRONO_PROFILER
+	//SaveTimeProfilingSamples();
+#endif
+	
+	return 0;
+}// main() code ends
+
+void SaveTimeProfilingSamples()  {
 	string name;
-	cout << "introduzca el nombre del fichero (sin el .csv) :";
-	cin >> name;
+	//cout << "introduzca el nombre del fichero (sin el .csv) :";
+	//cin >> name;
+	name = "";
 	string sBufferSize;
-	sBufferSize=to_string(iBufferSize);
+	sBufferSize = to_string(iBufferSize);
 	string sNumberOfSources = to_string(iNumberOfSources);
-	ofstream myFile("./"+name+"_"+sNumberOfSources+"_Fuentes_"+"_"+sBufferSize+".csv");
-	cout << "Archivo guardado en :" << "./"+name+"_"+sNumberOfSources+"_Fuentes_"+"_"+sBufferSize+".csv";
-	double sum = std::accumulate(times.begin(), times.end(), 0.0);
-	double mean = sum / times.size();
+	ofstream myFile("./" + name + "_" + sNumberOfSources + "_Fuentes_" + "_" + sBufferSize + ".csv");
+	cout << "Archivo guardado en :" << "./" + name + "_" + sNumberOfSources + "_Fuentes_" + "_" + sBufferSize + ".csv";
+	long double sum = std::accumulate(times.begin(), times.end(), 0.0);
+	long double mean = sum / times.size();
 	myFile << "La media es : " << mean << endl;
-	for(int muestra = 0; muestra < countMeasures; muestra++){
-		myFile << times.at(muestra) << "\tns" << endl;
+	for (int muestra = 0; muestra < countMeasures; muestra++) {
+		//myFile << times.at(muestra) << "\tns" << endl;
+		myFile << times.at(muestra) << endl;
 	}
 	cout << endl << "La media de tiempos es de : " << mean << " ns";
 	myFile.close();
-	return 0;
-}// main() code ends
+}
+
+void SourcesSetup(int iNumberOfSources) {
+
+	// sources setup
+	t = 0;
+	//audioSource.reserve(iNumberOfSources);
+	//wavSamplePosition.reserve(iNumberOfSources);//initiate variables for audio process function
+	//positionEndFrame.reserve(iNumberOfSources);
+	for (int iCountOfSources = 0; iCountOfSources < iNumberOfSources; iCountOfSources++)
+	{		
+		//sources.push_back(myCore.CreateSingleSourceDSP());								// Creating audio source		
+		//AudioSamplesVector.push_back(vector<float>());
+		//wavSamplePosition.push_back(*(new unsigned int));
+		//positionEndFrame.push_back(*(new unsigned int));
+		
+		AudioSource _audioSource;
+		_audioSource.singleSourceDSP = myCore.CreateSingleSourceDSP();
+		_audioSource.volume = 0.5f;
+		
+		switch (iCountOfSources % 6)
+		{
+		case 0:
+			LoadWav(_audioSource.samplesVector, "speech.wav"); // Loading .wav file			
+			break;
+		case 1:
+			LoadWav(_audioSource.samplesVector, "steps.wav"); // Loading .wav file			
+			break;
+		case 2:
+			LoadWav(_audioSource.samplesVector, "3DTI_Sample_44.1kHz_MusicJazzPiano.wav");
+			break;
+		case 3:
+			LoadWav(_audioSource.samplesVector, "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav");
+			break;
+		case 4:
+			LoadWav(_audioSource.samplesVector, "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav"); // Loading .wav files
+			break;
+		case 5:
+			LoadWav(_audioSource.samplesVector, "steps.wav"); // Loading .wav file
+			break;
+		default:
+			LoadWav(_audioSource.samplesVector, "steps.wav"); // Loading .wav file
+			break;
+		}
+		//sourcePosition.push_back(Common::CTransform());
+		//sourcePosition.at(iCountOfSources).SetPosition(Common::CVector3(((int)(rand() % 7)) + 1, ((int)(rand() % 7)) + 1, ((int)(rand() % 7)) + 1)); // Setting source position XYZ
+		
+		_audioSource.sourcePosition.SetPosition(Common::CVector3(((int)(rand() % 7)) + 1, ((int)(rand() % 7)) + 1, ((int)(rand() % 7)) + 1)); // Setting source position XYZ
+		// Init 3DTI Anechoid DSP
+		
+		//sources.at(iCountOfSources)->SetSourceTransform(sourcePosition.at(iCountOfSources));
+		//sources.at(iCountOfSources)->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality); //HighPerformance vs HighQuality // Choosing high quality mode for anechoic processing
+		//sources.at(iCountOfSources)->DisableNearFieldEffect();											// Audio source will not be close to listener, so we don't need near field effect
+		//sources.at(iCountOfSources)->EnableAnechoicProcess();											// Setting anechoic and reverb processing for this source
+		//sources.at(iCountOfSources)->EnableDistanceAttenuationAnechoic();
+		//sources.at(iCountOfSources)->EnableDistanceAttenuationReverb();
+		_audioSource.singleSourceDSP->SetSourceTransform(_audioSource.sourcePosition);
+		_audioSource.singleSourceDSP->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality); //HighPerformance vs HighQuality // Choosing high quality mode for anechoic processing
+		_audioSource.singleSourceDSP->DisableNearFieldEffect();											// Audio source will not be close to listener, so we don't need near field effect
+		_audioSource.singleSourceDSP->EnableAnechoicProcess();											// Setting anechoic and reverb processing for this source
+		_audioSource.singleSourceDSP->EnableDistanceAttenuationAnechoic();
+		_audioSource.singleSourceDSP->EnableDistanceAttenuationReverb();
+
+		audioSourceVector.push_back(_audioSource);
+	}
+}
+
 
 int SelectAudioDevice() {
 	PaStreamParameters inputParameters, outputParameters;
@@ -295,20 +360,39 @@ int SelectAudioDevice() {
 
 
 void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
-{
-	if(countMeasures<2000)
-		start=chrono::high_resolution_clock::now();
+{	
+#ifdef CHRONO_PROFILER	
+	//auto start = chrono::high_resolution_clock::now();
+	auto start = chrono::steady_clock::now();	
+	/*if (countMeasures < 2000)
+		auto start = chrono::high_resolution_clock::now();*/
+#endif
+	
+#ifdef TOOLKIT_PROFILER
+	Common::PROFILER3DTI.RelativeSampleStart(dsProcessAnechoic);
+#endif
+
 	// Declaration, initialization and filling mono buffers
 	for (int iCountOfSources = 0; iCountOfSources < iNumberOfSources; iCountOfSources++)
 	{
 		CMonoBuffer<float> audioInput(uiBufferSize);
-		FillBuffer(audioInput, wavSamplePosition.at(iCountOfSources), positionEndFrame.at(iCountOfSources), AudioSamplesVector.at(iCountOfSources));
+		//FillBuffer(audioInput, wavSamplePosition.at(iCountOfSources), positionEndFrame.at(iCountOfSources), AudioSamplesVector.at(iCountOfSources));
+		FillBuffer(audioInput, audioSourceVector.at(iCountOfSources).wavSamplePosition, audioSourceVector.at(iCountOfSources).positionEndFrame, audioSourceVector.at(iCountOfSources).samplesVector);
+		// Apply volume
+		audioInput.ApplyGain(0.1f);
+		// Anechoid procces
 		Common::CEarPair<CMonoBuffer<float>> bufferProcessed; // Declaration of stereo buffer
-		sources.at(iCountOfSources)->SetBuffer(audioInput);				  // Anechoic process of speech source
-		sources.at(iCountOfSources)->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
+		
+		audioSourceVector.at(iCountOfSources).singleSourceDSP->SetBuffer(audioInput);				  // Anechoic process of speech source	
+		audioSourceVector.at(iCountOfSources).singleSourceDSP->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
+
+		// Save buffers
 		bufferOutput.left += bufferProcessed.left; // Adding anechoic processed speech source to the output mix
 		bufferOutput.right += bufferProcessed.right;
 	}
+#ifdef TOOLKIT_PROFILER
+	Common::PROFILER3DTI.RelativeSampleEnd(dsProcessAnechoic);
+#endif
 	if (bEnableReverb)
 	{
 		// Reverberation processing of all sources
@@ -317,13 +401,20 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 		bufferOutput.left += bufferReverb.left;					// Adding reverberated sound to the output mix
 		bufferOutput.right += bufferReverb.right;
 	}
+
+#ifdef CHRONO_PROFILER
 	if(countMeasures<2000)
 	{
-		final = chrono::high_resolution_clock::now();
-		elapsedtime = chrono::duration_cast<chrono::nanoseconds>(final - start).count();
+		auto final = chrono::steady_clock::now();
+		auto elapsedtime = chrono::duration_cast<chrono::nanoseconds>(final - start).count();
 		times.push_back(elapsedtime);
 		countMeasures++;
+	} else if (countMeasures == 2000)  {		
+		cout << "All the time samples have already been collected. " << endl;
+		SaveTimeProfilingSamples();
+		countMeasures++;
 	}
+#endif
 }//audioProcess() ends
 
 void FillBuffer(CMonoBuffer<float> &output, unsigned int& position, unsigned int& endFrame, std::vector<float>& samplesVector)

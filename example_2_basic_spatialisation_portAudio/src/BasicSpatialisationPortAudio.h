@@ -28,6 +28,7 @@
 #include <numeric> //accumulate
 #include <fstream> //ofstream
 
+#include <AudioSource.h>
 #include <HRTF/HRTFFactory.h>
 #include <HRTF/HRTFCereal.h>
 #include <BRIR/BRIRFactory.h>
@@ -40,26 +41,28 @@ static double iSampleRate;
 int iBufferSize;
 bool bEnableReverb;
 bool bOneSource;
-vector<double> times;
+vector<long double> times;
 int countMeasures = 0;
 
-chrono::high_resolution_clock::time_point final = chrono::high_resolution_clock::now();
-auto start=chrono::high_resolution_clock::now();
-auto elapsedtime = chrono::duration_cast<chrono::nanoseconds>(final - start).count();
+//chrono::high_resolution_clock::time_point final = chrono::high_resolution_clock::now();
+//auto start=chrono::high_resolution_clock::now();
+//auto elapsedtime = chrono::duration_cast<chrono::nanoseconds>(final - start).count();
 
 PaStream *										stream;					
 Binaural::CCore									myCore;										// Core interface
 shared_ptr<Binaural::CListener>					listener;									// Pointer to listener interface
-vector<shared_ptr<Binaural::CSingleSourceDSP>>	sources;									// Pointers to each audio source interface
+//vector<shared_ptr<Binaural::CSingleSourceDSP>>	sources;									// Pointers to each audio source interface
 shared_ptr<Binaural::CEnvironment>				environment;								// Pointer to environment interface
-vector<Common::CTransform>						sourcePosition;								// Storages the position of the steps source
+//vector<Common::CTransform>						sourcePosition;								// Storages the position of the steps source
 float											t;											// Storages the angle of the steps source
 Common::CEarPair<CMonoBuffer<float>>			outputBufferStereo;							// Stereo buffer containing processed audio
-vector<vector<float>> 							AudioSamplesVector;	 							// Storages the audio from the wav files
+
+vector<AudioSource>								audioSourceVector;
+//vector<vector<float>> 							AudioSamplesVector;	 							// Storages the audio from the wav files
 
 
-vector<unsigned int>				wavSamplePosition,
-										positionEndFrame;	 // Storages, respectively, the starting and ending position of the frame being rendered for each source
+//vector<unsigned int>				wavSamplePosition,
+										//positionEndFrame;	 // Storages, respectively, the starting and ending position of the frame being rendered for each source
 
 /** \brief This method gathers all audio processing (spatialization and reverberation)
 *	\param [out] bufferOutput output buffer processed
@@ -86,6 +89,9 @@ void FillBuffer(CMonoBuffer<float>& output, unsigned int & position, unsigned in
 */
 void LoadWav(std::vector<float>& samplesVector, const char* stringIn);
 
+void SourcesSetup(int iNumberOfSources);
+
+void SaveTimeProfilingSamples();
 
 /** \brief This function is called each time RtAudio needs a buffer to output
 *	\param [out] outputBuffer output buffer to be filled
@@ -127,5 +133,7 @@ public:
 private:
 	PaError _result;
 };
+
+
 
 #endif

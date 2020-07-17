@@ -23,5 +23,8 @@
     <ClInclude Include="..\..\src\BasicSpatialisationPortAudio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AudioSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
