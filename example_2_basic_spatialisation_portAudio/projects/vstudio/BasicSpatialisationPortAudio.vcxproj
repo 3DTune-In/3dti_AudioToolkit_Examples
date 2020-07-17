@@ -186,8 +186,8 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <ClCompile Include="..\..\src\BasicSpatialisationPortAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\AudioSource.h" />
     <ClInclude Include="..\..\src\BasicSpatialisationPortAudio.h" />
-    <ClInclude Include="AudioSource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
