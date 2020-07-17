@@ -31,8 +31,8 @@
 
 
 // TEST PROFILER CLASS
-//#define CHRONO_PROFILER
-#define TOOLKIT_PROFILER
+#define CHRONO_PROFILER
+//#define TOOLKIT_PROFILER
 #ifdef TOOLKIT_PROFILER
 //#include <Windows.h>
 #include "Common/Profiler.h"
@@ -47,7 +47,8 @@ Common::CTimeMeasure startOfflineRecord;
 int main()
 {
 
-	times.reserve(2000);
+	//times.reserve(2000);
+	elapseTimesVector.reserve(2000);
 	
 	// SETUP PROFILER
 #ifdef TOOLKIT_PROFILER
@@ -217,14 +218,15 @@ void SaveTimeProfilingSamples()  {
 	string sNumberOfSources = to_string(iNumberOfSources);
 	ofstream myFile("./" + name + "_" + sNumberOfSources + "_Fuentes_" + "_" + sBufferSize + ".csv");
 	cout << "Archivo guardado en :" << "./" + name + "_" + sNumberOfSources + "_Fuentes_" + "_" + sBufferSize + ".csv";
-	long double sum = std::accumulate(times.begin(), times.end(), 0.0);
-	long double mean = sum / times.size();
-	myFile << "La media es : " << mean << endl;
-	for (int muestra = 0; muestra < countMeasures; muestra++) {
+	//long long sum = std::accumulate(times.begin(), times.end(), 0.0);
+	//long long mean = sum / times.size();
+	//myFile << "La media es : " << mean << endl;
+	for (int muestra = 0; muestra < countMeasures-1; muestra++) {
 		//myFile << times.at(muestra) << "\tns" << endl;
-		myFile << times.at(muestra) << endl;
+		//myFile << times.at(muestra) << endl;
+		myFile << CountTime(elapseTimesVector.at(muestra).start, elapseTimesVector.at(muestra).final) << endl;
 	}
-	cout << endl << "La media de tiempos es de : " << mean << " ns";
+	//cout << endl << "La media de tiempos es de : " << mean << " ns";
 	myFile.close();
 }
 
@@ -363,9 +365,9 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 {	
 #ifdef CHRONO_PROFILER	
 	//auto start = chrono::high_resolution_clock::now();
-	auto start = chrono::steady_clock::now();	
-	/*if (countMeasures < 2000)
-		auto start = chrono::high_resolution_clock::now();*/
+	// start = chrono::steady_clock::now();	
+	if (countMeasures < 2000)
+		start = Time::now();
 #endif
 	
 #ifdef TOOLKIT_PROFILER
@@ -404,10 +406,11 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 
 #ifdef CHRONO_PROFILER
 	if(countMeasures<2000)
-	{
-		auto final = chrono::steady_clock::now();
-		auto elapsedtime = chrono::duration_cast<chrono::nanoseconds>(final - start).count();
-		times.push_back(elapsedtime);
+	{		
+		ElapseTimes _timeTemp;
+		_timeTemp.start = start;
+		_timeTemp.final = Time::now();
+		elapseTimesVector.push_back(_timeTemp);				
 		countMeasures++;
 	} else if (countMeasures == 2000)  {		
 		cout << "All the time samples have already been collected. " << endl;
@@ -416,6 +419,13 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 	}
 #endif
 }//audioProcess() ends
+
+long long CountTime(Time::time_point t_initial, Time::time_point t_fin)
+{
+	fsec fs = t_fin - t_initial;	
+	long long duration = std::chrono::duration_cast<ns>(fs).count();
+	return duration;
+}
 
 void FillBuffer(CMonoBuffer<float> &output, unsigned int& position, unsigned int& endFrame, std::vector<float>& samplesVector)
 {

@@ -36,12 +36,28 @@
 #include <BinauralSpatializer/3DTI_BinauralSpatializer.h>
 #include "../../third_party_libraries/portaudio/include/portaudio.h"
 
+typedef std::chrono::high_resolution_clock Time;
+typedef std::chrono::duration<float> fsec;
+typedef std::chrono::milliseconds ms;
+typedef std::chrono::seconds s;
+typedef std::chrono::nanoseconds ns;
+
+Time::time_point start;
+
+struct ElapseTimes {
+	Time::time_point start;
+	Time::time_point final;
+};
+vector<ElapseTimes> elapseTimesVector;
+
 int iNumberOfSources;
 static double iSampleRate;
 int iBufferSize;
 bool bEnableReverb;
 bool bOneSource;
-vector<long double> times;
+//vector<long long> times;
+
+
 int countMeasures = 0;
 
 //chrono::high_resolution_clock::time_point final = chrono::high_resolution_clock::now();
@@ -92,6 +108,8 @@ void LoadWav(std::vector<float>& samplesVector, const char* stringIn);
 void SourcesSetup(int iNumberOfSources);
 
 void SaveTimeProfilingSamples();
+
+long long CountTime(Time::time_point t_initial, Time::time_point t_fin);
 
 /** \brief This function is called each time RtAudio needs a buffer to output
 *	\param [out] outputBuffer output buffer to be filled
