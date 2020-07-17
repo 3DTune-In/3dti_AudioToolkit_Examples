@@ -26,11 +26,11 @@
     #include <bits/stdc++.h>
 #endif
 
-static double iSampleRate;
-int iBufferSize;
-bool bEnableReverb;
+#define MAX_SOURCES 6
+
 int main()
 {
+	times.reserve(2000);
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	//	Audio output configuration, using PortAudio (more info in http://www.portaudio.com/docs.html)
 	//	It requires the PortAudio .dll and .lib to be generated compiling "portaudio" proyect. 
@@ -45,7 +45,8 @@ int main()
 	PaError err;
 	ScopedPaHandler paInit;
 	err = paInit.result();
-	if (err != paNoError) {
+	if (err != paNoError)
+	{
 		cout << "\nERROR WITH PORTAUDIO INIT\t";
 		exit(1);
 	}
@@ -54,38 +55,55 @@ int main()
 	outputParameters.channelCount = 2;											// Setting output as stereo 
 	outputParameters.sampleFormat = paFloat32;
 	outputParameters.suggestedLatency = 0.050;									// Pa_GetDeviceInfo( outputParameters.device )->defaultLowOutputLatency;
-	
 	// Choose output device
 	char cInput;
 	int iDeviceIndex;
-	do {
+	do
+	{
 		cout << "Do you want to use the default (" << Pa_GetDeviceInfo(Pa_GetDefaultOutputDevice())->name;
 		cout << ") output device? (Y/n)\t"; fflush(stdin); cInput = getchar();
 	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
 	if (cInput == 'y' || cInput == '\n')  iDeviceIndex = Pa_GetDefaultOutputDevice();			// Give user no option for choose the output device, choose default	one
-	else                                  iDeviceIndex = (PaDeviceIndex)SelectAudioDevice();  // Give user the option to choose the output device					
+	else                                  iDeviceIndex = (PaDeviceIndex)SelectAudioDevice();	// Give user the option to choose the output device	
 	outputParameters.device = iDeviceIndex;
 	cout << "Selected audio device :\t" << Pa_GetDeviceInfo(iDeviceIndex)->name << endl;
+	do
+	{
+		cout << "\nHow many fonts do you want to reproduce?";
+		cin >> iNumberOfSources;
+	} while (iNumberOfSources<1);
+	cin.ignore();
+	if (cInput == 'y' || cInput == '\n')
+	{
+		bOneSource=true;
+	}else if(cInput == 'n')
+	{
+		bOneSource=false;
+	}
 	// Input sample rate
-	do {
+	do
+	{
 		cout << "\nDo you want to use the default sample rate (" << Pa_GetDeviceInfo(iDeviceIndex)->defaultSampleRate;
 		cout << ") for your device ? (Y/n) \t";
 		fflush(stdin); cInput = getchar();
 	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
-	if (cInput == 'y' || cInput == '\n') {
+	if (cInput == 'y' || cInput == '\n')
+	{
 		iSampleRate = (Pa_GetDeviceInfo(iDeviceIndex)->defaultSampleRate);
-	}else if(cInput == 'n'){
-		do {
+	}else if(cInput == 'n')
+	{
+		do
+		{
 			cout << endl << "Please, insert sample rate (44100, 48000, 88200...) :\t";
 			cin >> iSampleRate; cin.clear();
 		} while (iSampleRate < 0);//Add default sample rate conditions
 	}
 	cout << "Setting sample rate to value : " << iSampleRate << endl;
-	// Input buffer size and reverb enable
 	cout << "\nInsert wished buffer size (256, 512, 1024, 2048, 4096...):\t";
 	cin >> iBufferSize; cin.clear();
 	cin.ignore(INT_MAX, '\n');
-	do {
+	do
+	{
 		cout << "\nDo you want reverb? (Y/n) : "; cInput = getchar();
 	} while (cInput != 'y' && cInput != 'n' && cInput != '\n');
 	if (cInput == 'y' || cInput == '\n') bEnableReverb = true;
@@ -116,31 +134,51 @@ int main()
 	environment = myCore.CreateEnvironment();											// Creating environment to have reverberated sound
 	environment->SetReverberationOrder(TReverberationOrder::BIDIMENSIONAL);				// Setting number of ambisonic channels to use in reverberation processing
 	BRIR::CreateFromSofa("brir.sofa", environment);										// Loading SOFAcoustics BRIR file and applying it to the environment
-	// Speech source setup
-	sourceSpeech = myCore.CreateSingleSourceDSP();										 // Creating audio source
-	LoadWav(samplesVectorSpeech, "speech.wav");											 // Loading .wav file
-	Common::CTransform sourceSpeechPosition = Common::CTransform();
-	sourceSpeechPosition.SetPosition(Common::CVector3(0, 2, 0));						 // Setting source in x=0,y=2,z=0 (on the left)
-	sourceSpeech->SetSourceTransform(sourceSpeechPosition);
-	sourceSpeech->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);	 //HighPerformance vs HighQuality // Choosing high quality mode for anechoic processing
-	sourceSpeech->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
-	sourceSpeech->EnableAnechoicProcess();												 // Setting anechoic and reverb processing for this source
-	sourceSpeech->EnableDistanceAttenuationAnechoic();
-	sourceSpeech->EnableDistanceAttenuationReverb();
-	// Steps source setup
-	sourceSteps = myCore.CreateSingleSourceDSP();										 // Creating audio source
-	LoadWav(samplesVectorSteps, "steps.wav");											   // Loading .wav file
-	Common::CTransform sourceStepsPosition = Common::CTransform();
+	// sources setup
 	t = 0;
-	//sourceStepsPosition.SetPosition(Common::CVector3(-3, 10, -10));						 // Setting source in position
-	sourceStepsPosition.SetPosition(Common::CVector3(10, 0, -10));						 // Setting source in position
-	sourceSteps->SetSourceTransform(sourceStepsPosition);
-	sourceSteps->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);		 // Choosing high quality mode for anechoic processing
-	sourceSteps->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
-	sourceSteps->EnableAnechoicProcess();												   // Setting anechoic and reverb processing for this source
-	sourceSteps->EnableDistanceAttenuationAnechoic();
-	sourceSteps->EnableDistanceAttenuationReverb();
-	sourcePosition = sourceStepsPosition;												 // Saving initial position into source position to move the steps audio source later on
+	AudioSamplesVector.reserve(iNumberOfSources);
+	wavSamplePosition.reserve(iNumberOfSources);//initiate variables for audio process function
+	positionEndFrame.reserve(iNumberOfSources);
+	for (int iCountOfSources = 0; iCountOfSources < iNumberOfSources; iCountOfSources++)
+	{
+		sources.push_back(myCore.CreateSingleSourceDSP());								// Creating audio source
+		AudioSamplesVector.push_back(vector<float>());
+		wavSamplePosition.push_back(*(new unsigned int));
+		positionEndFrame.push_back(*(new unsigned int));
+		switch (iCountOfSources % 6)
+		{
+		case 0:
+			LoadWav(AudioSamplesVector.at(iCountOfSources), "speech.wav"); // Loading .wav file
+			break;
+		case 1:
+			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzPiano.wav");
+			break;
+		case 2:
+			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav");
+			break;
+		case 3:
+			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav");
+			break;
+		case 4:
+			LoadWav(AudioSamplesVector.at(iCountOfSources), "3DTI_Sample_44.1kHz_MusicJazzGuitar.wav"); // Loading .wav files
+			break;
+		case 5:
+			LoadWav(AudioSamplesVector.at(iCountOfSources), "steps.wav"); // Loading .wav file
+			break;
+		default:
+			LoadWav(AudioSamplesVector.at(iCountOfSources), "steps.wav"); // Loading .wav file
+			break;
+		}
+		sourcePosition.push_back(Common::CTransform());
+		sourcePosition.at(iCountOfSources).SetPosition(Common::CVector3(((int)(rand() % 7)) + 1, ((int)(rand() % 7)) + 1, ((int)(rand() % 7))+1)); // Setting source position XYZ
+		sources.at(iCountOfSources)->SetSourceTransform(sourcePosition.at(iCountOfSources));
+		sources.at(iCountOfSources)->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality); //HighPerformance vs HighQuality // Choosing high quality mode for anechoic processing
+		sources.at(iCountOfSources)->DisableNearFieldEffect();											// Audio source will not be close to listener, so we don't need near field effect
+		sources.at(iCountOfSources)->EnableAnechoicProcess();											// Setting anechoic and reverb processing for this source
+		sources.at(iCountOfSources)->EnableDistanceAttenuationAnechoic();
+		sources.at(iCountOfSources)->EnableDistanceAttenuationReverb();
+	}
+	
 	// Declaration and initialization of stereo buffer
 	outputBufferStereo.left.resize(iBufferSize);
 	outputBufferStereo.right.resize(iBufferSize);
@@ -157,7 +195,8 @@ int main()
 		&paCallback,					// Pointer to the function that will be called every time RtAudio needs the buffer to be filled
 		nullptr		                    // Unused pointer to get feedback
 		);
-	if (err != paNoError) {
+	if (err != paNoError)
+	{
 		cout << "\nERROR WITH PORTAUDIO WHILE STREAM IS BEING OPENED\t" << endl;
 		exit(1);
 	}
@@ -171,6 +210,22 @@ int main()
 	// Stopping and closing the stream;
 	Pa_StopStream(stream);
 	Pa_CloseStream(stream);
+	string name;
+	cout << "introduzca el nombre del fichero (sin el .csv) :";
+	cin >> name;
+	string sBufferSize;
+	sBufferSize=to_string(iBufferSize);
+	string sNumberOfSources = to_string(iNumberOfSources);
+	ofstream myFile("./"+name+"_"+sNumberOfSources+"_Fuentes_"+"_"+sBufferSize+".csv");
+	cout << "Archivo guardado en :" << "./"+name+"_"+sNumberOfSources+"_Fuentes_"+"_"+sBufferSize+".csv";
+	double sum = std::accumulate(times.begin(), times.end(), 0.0);
+	double mean = sum / times.size();
+	myFile << "La media es : " << mean << endl;
+	for(int muestra = 0; muestra < countMeasures; muestra++){
+		myFile << times.at(muestra) << "\tns" << endl;
+	}
+	cout << endl << "La media de tiempos es de : " << mean << " ns";
+	myFile.close();
 	return 0;
 }// main() code ends
 
@@ -202,7 +257,8 @@ int SelectAudioDevice() {
 	{
 		deviceInfo = Pa_GetDeviceInfo(i);
 		// Mark global and API specific default devices
-		if ((deviceInfo->maxOutputChannels) > 0 && (audioApiSelected == deviceInfo->hostApi)){
+		if ((deviceInfo->maxOutputChannels) > 0 && (audioApiSelected == deviceInfo->hostApi))
+		{
 			printf("----------------------------------------\n");
 			printf(" INFORMATION OF AUDIO DEVICE NUMBER #%d\n", i);
 			printf("----------------------------------------\n");
@@ -227,7 +283,8 @@ int SelectAudioDevice() {
 	}//for ends
 	//Select the desired audio device
 	int selectAudioDevice;
-	do {
+	do
+	{
 		cout << "\nPlease choose which audio output device you wish to use:";
 		cin >> selectAudioDevice;cin.clear();
 		cin.ignore(INT_MAX, '\n');
@@ -236,44 +293,48 @@ int SelectAudioDevice() {
 	return selectAudioDevice;
 }//SelectAudioDevice() ends
 
+
 void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
 {
+	if(countMeasures<2000)
+		start=chrono::high_resolution_clock::now();
 	// Declaration, initialization and filling mono buffers
-	CMonoBuffer<float> speechInput(uiBufferSize);	
-	FillBuffer(speechInput, wavSamplePositionSpeech, positionEndFrameSpeech, samplesVectorSpeech);
-	CMonoBuffer<float> stepsInput(uiBufferSize);	
-	FillBuffer(stepsInput, wavSamplePositionSteps, positionEndFrameSteps, samplesVectorSteps);
-
-	//Process "speech" audio source 
-	Common::CEarPair<CMonoBuffer<float>> bufferProcessed;		// Declaration of stereo buffer
-	sourceSpeech->SetBuffer(speechInput);						// Anechoic process of speech source
-	sourceSpeech->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
-	bufferOutput.left += bufferProcessed.left;					// Adding anechoic processed speech source to the output mix
-	bufferOutput.right += bufferProcessed.right;
-	
-	//Process "steps" audio source wav
-	sourceSteps->SetBuffer(stepsInput);							// Anechoic process of steps source
-	sourceSteps->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
-	bufferOutput.left += bufferProcessed.left;					// Adding anechoic processed steps source to the output mix
-	bufferOutput.right += bufferProcessed.right;
-
-	// Reverberation processing of all sources
-	Common::CEarPair<CMonoBuffer<float>> bufferReverb;			// Declaration and initialization of separate buffer needed for the reverb
-	if (bEnableReverb) {
+	for (int iCountOfSources = 0; iCountOfSources < iNumberOfSources; iCountOfSources++)
+	{
+		CMonoBuffer<float> audioInput(uiBufferSize);
+		FillBuffer(audioInput, wavSamplePosition.at(iCountOfSources), positionEndFrame.at(iCountOfSources), AudioSamplesVector.at(iCountOfSources));
+		Common::CEarPair<CMonoBuffer<float>> bufferProcessed; // Declaration of stereo buffer
+		sources.at(iCountOfSources)->SetBuffer(audioInput);				  // Anechoic process of speech source
+		sources.at(iCountOfSources)->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
+		bufferOutput.left += bufferProcessed.left; // Adding anechoic processed speech source to the output mix
+		bufferOutput.right += bufferProcessed.right;
+	}
+	if (bEnableReverb)
+	{
+		// Reverberation processing of all sources
+		Common::CEarPair<CMonoBuffer<float>> bufferReverb;			// Declaration and initialization of separate buffer needed for the reverb
 		environment->ProcessVirtualAmbisonicReverb(bufferReverb.left, bufferReverb.right);
 		bufferOutput.left += bufferReverb.left;					// Adding reverberated sound to the output mix
 		bufferOutput.right += bufferReverb.right;
+	}
+	if(countMeasures<2000)
+	{
+		final = chrono::high_resolution_clock::now();
+		elapsedtime = chrono::duration_cast<chrono::nanoseconds>(final - start).count();
+		times.push_back(elapsedtime);
+		countMeasures++;
 	}
 }//audioProcess() ends
 
 void FillBuffer(CMonoBuffer<float> &output, unsigned int& position, unsigned int& endFrame, std::vector<float>& samplesVector)
 {
-	position = endFrame + 1;							 // Set starting point as next sample of the end of last frame
-	if (position >= samplesVector.size())				 // If the end of the audio is met, the position variable must return to the beginning
+	position = endFrame + 1;											// Set starting point as next sample of the end of last frame
+	if (position >= samplesVector.size())					// If the end of the audio is met, the position variable must return to the beginning
 		position = 0;
 
 	endFrame = position + output.size() - 1;			 // Set ending point as starting point plus frame size
-	for (int i = 0; i < output.size(); i++) {
+	for (int i = 0; i < output.size(); i++)
+	{
 		if ((position + i) < samplesVector.size())
 			output[i] = (samplesVector[position + i]);	 // Fill with audio
 		else
@@ -304,7 +365,6 @@ void LoadWav(std::vector<float>& samplesVector, const char* stringIn)
 
 	for (int i = 0; i < samplesCount; i++)
 		sample[i] = int16_t(byteSample[2 * i] | byteSample[2 * i + 1] << 8);		 // Conversion from two 8-bit unsigned integer to a 16-bit signed integer
-
 	samplesVector.reserve(samplesCount);											 // Reserving memory for samples vector
 
 	for (int i = 0; i < samplesCount; i++)
@@ -334,11 +394,11 @@ int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 	// Moving the steps source
 	//float tiempo = float((*timeInfo).currentTime);		
 	/*sourcePosition.SetPosition(Common::CVector3(sourcePosition.GetPosition().x,
-			sourcePosition.GetPosition().y - tiempo / 110.0f,
-			sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + tiempo / 110.0f));*/
-	t += 0.005;
-	sourcePosition.SetPosition(Common::CVector3(10 * cos(t), 10 * sin(t), sourcePosition.GetPosition().z));
-	sourceSteps->SetSourceTransform(sourcePosition);
+	sourcePosition.GetPosition().y - tiempo / 110.0f,
+	sourcePosition.GetPosition().z > 10 ? sourcePosition.GetPosition().z : sourcePosition.GetPosition().z + tiempo / 110.0f));*/
+	//t += 0.005;
+	//sourcePosition.SetPosition(Common::CVector3(10 * cos(t), 10 * sin(t), sourcePosition.GetPosition().z));
+	//sourceSteps->SetSourceTransform(sourcePosition);
 	return paContinue;
 }//paCallbackMethod() ends
 

@@ -3,7 +3,7 @@
 * \brief This is the header file of the example project 1 using 3D Tune-In Toolkit
 * \date	April 2018
 *
-* \authors A. Rodríguez-Rivero, as part of the 3DI-DIANA Research Group (University of Malaga)
+* \authors A. Rodrï¿½guez-Rivero, as part of the 3DI-DIANA Research Group (University of Malaga)
 * \b Contact: A. Reyes-Lecuona as head of 3DI-DIANA Research Group (University of Malaga): areyes@uma.es
 *
 * \b Contributions: (additional authors/contributors can be added here)
@@ -21,9 +21,13 @@
 
 #ifndef _BASICSPATIALISATIONPORTAUDIO_H_
 #define _BASICSPATIALISATIONPORTAUDIO_H_
-
+#include <stdlib.h> /* srand, rand */
 #include <cstdio>
 #include <cstring>
+#include <chrono> //high_resolution_clock
+#include <numeric> //accumulate
+#include <fstream> //ofstream
+
 #include <HRTF/HRTFFactory.h>
 #include <HRTF/HRTFCereal.h>
 #include <BRIR/BRIRFactory.h>
@@ -31,21 +35,31 @@
 #include <BinauralSpatializer/3DTI_BinauralSpatializer.h>
 #include "../../third_party_libraries/portaudio/include/portaudio.h"
 
-PaStream *								stream;					
-Binaural::CCore							myCore;												 // Core interface
-shared_ptr<Binaural::CListener>			listener;											 // Pointer to listener interface
-shared_ptr<Binaural::CSingleSourceDSP>	sourceSpeech, sourceSteps;							 // Pointers to each audio source interface
-shared_ptr<Binaural::CEnvironment>		environment;										 // Pointer to environment interface
+int iNumberOfSources;
+static double iSampleRate;
+int iBufferSize;
+bool bEnableReverb;
+bool bOneSource;
+vector<double> times;
+int countMeasures = 0;
 
-Common::CTransform						sourcePosition;										 // Storages the position of the steps source
-		float							t;													 // Storages the angle of the steps source
-Common::CEarPair<CMonoBuffer<float>>	outputBufferStereo;									 // Stereo buffer containing processed audio
+chrono::high_resolution_clock::time_point final = chrono::high_resolution_clock::now();
+auto start=chrono::high_resolution_clock::now();
+auto elapsedtime = chrono::duration_cast<chrono::nanoseconds>(final - start).count();
 
-vector<float>							samplesVectorSpeech, samplesVectorSteps;			 // Storages the audio from the wav files
+PaStream *										stream;					
+Binaural::CCore									myCore;										// Core interface
+shared_ptr<Binaural::CListener>					listener;									// Pointer to listener interface
+vector<shared_ptr<Binaural::CSingleSourceDSP>>	sources;									// Pointers to each audio source interface
+shared_ptr<Binaural::CEnvironment>				environment;								// Pointer to environment interface
+vector<Common::CTransform>						sourcePosition;								// Storages the position of the steps source
+float											t;											// Storages the angle of the steps source
+Common::CEarPair<CMonoBuffer<float>>			outputBufferStereo;							// Stereo buffer containing processed audio
+vector<vector<float>> 							AudioSamplesVector;	 							// Storages the audio from the wav files
 
-unsigned int							wavSamplePositionSpeech, positionEndFrameSpeech,	 // Storages, respectively, the starting and ending position of the frame being rendered for each source
-                                        wavSamplePositionSteps,  positionEndFrameSteps ;
 
+vector<unsigned int>				wavSamplePosition,
+										positionEndFrame;	 // Storages, respectively, the starting and ending position of the frame being rendered for each source
 
 /** \brief This method gathers all audio processing (spatialization and reverberation)
 *	\param [out] bufferOutput output buffer processed
