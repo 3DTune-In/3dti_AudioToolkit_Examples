@@ -57,8 +57,8 @@ bool bEnableReverb;
 bool bOneSource;
 //vector<long long> times;
 
-
 int countMeasures = 0;
+ElapseTimes _timeTemp;
 
 //chrono::high_resolution_clock::time_point final = chrono::high_resolution_clock::now();
 //auto start=chrono::high_resolution_clock::now();
@@ -75,7 +75,6 @@ Common::CEarPair<CMonoBuffer<float>>			outputBufferStereo;							// Stereo buffe
 
 vector<AudioSource>								audioSourceVector;
 //vector<vector<float>> 							AudioSamplesVector;	 							// Storages the audio from the wav files
-
 
 //vector<unsigned int>				wavSamplePosition,
 										//positionEndFrame;	 // Storages, respectively, the starting and ending position of the frame being rendered for each source

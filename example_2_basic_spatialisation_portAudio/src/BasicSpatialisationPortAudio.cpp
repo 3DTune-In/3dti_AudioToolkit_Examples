@@ -363,13 +363,14 @@ int SelectAudioDevice() {
 
 void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
 {	
+/*
 #ifdef CHRONO_PROFILER	
 	//auto start = chrono::high_resolution_clock::now();
 	// start = chrono::steady_clock::now();	
 	if (countMeasures < 2000)
 		start = Time::now();
 #endif
-	
+*/	
 #ifdef TOOLKIT_PROFILER
 	Common::PROFILER3DTI.RelativeSampleStart(dsProcessAnechoic);
 #endif
@@ -403,7 +404,7 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 		bufferOutput.left += bufferReverb.left;					// Adding reverberated sound to the output mix
 		bufferOutput.right += bufferReverb.right;
 	}
-
+/*
 #ifdef CHRONO_PROFILER
 	if(countMeasures<2000)
 	{		
@@ -418,6 +419,7 @@ void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBuf
 		countMeasures++;
 	}
 #endif
+*/
 }//audioProcess() ends
 
 long long CountTime(Time::time_point t_initial, Time::time_point t_fin)
@@ -477,6 +479,28 @@ int paCallbackMethod(const void *inputBuffer, void *outputBuffer,
 	const PaStreamCallbackTimeInfo* timeInfo,
 	PaStreamCallbackFlags statusFlags)
 {
+	#ifdef CHRONO_PROFILER
+		if (countMeasures==0)
+		{
+			_timeTemp.start = Time::now();
+			_timeTemp.final = Time::now();
+			elapseTimesVector.push_back(_timeTemp);
+			countMeasures++;
+		}
+		else if (countMeasures < 2000)
+		{
+			_timeTemp.start = _timeTemp.final;
+			_timeTemp.final = Time::now();
+			elapseTimesVector.push_back(_timeTemp);
+			countMeasures++;
+		}
+		else if (countMeasures == 2000)
+		{
+			cout << "All the time samples have already been collected. " << endl;
+			SaveTimeProfilingSamples();
+			countMeasures++;
+		}
+	#endif
 	outputBufferStereo.left.Fill(framesPerBuffer, 0.0f);	// Initializes buffer with zeros
 	outputBufferStereo.right.Fill(framesPerBuffer, 0.0f);
 	// Prevent unused variable warnings.
