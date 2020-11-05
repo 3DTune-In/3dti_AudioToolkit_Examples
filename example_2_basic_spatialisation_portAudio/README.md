@@ -7,11 +7,9 @@ Folder Content
 
 How to Build and Run in Windows
 -
-1. Download the repository
+1. Clone the repository and its submodules ("3dti_AudioToolkit" and "third_party_libraries/portaudio").
 
-2. Download the portaudio submodule
-
-3. Download the AUDIO SDK from its creator web page. The text below is copied from the file portaudio ASIO-README.txt
+2. Download the AUDIO SDK from its creator web page. The text below is copied from the file portaudio ASIO-README.txt
 
 >----------------------
 >Obtaining the ASIO SDK
@@ -29,17 +27,17 @@ How to Build and Run in Windows
 >
 >----------------------
 
-4. Create the folder ASIOSDK as it is shown in the following path 
+3. Create the folder ASIOSDK as it is shown in the following path 
 `localPath\3dti_AudioToolkit_Examples\third_party_libraries\portaudio\src\hostapi\asio\ASIOSDK`
 and copy those files and folders which are inside the main folder of the zip (asiosdk_2.3.3_2019-06-14) into the ASIOSDK folder
 
-5. Open the solution `BasicSpatialisationPortAudio.sln` located at 
+4. Open the solution `BasicSpatialisationPortAudio.sln` located at 
 `localPath\3dti_AudioToolkit_Examples\example_2_basic_spatialisation_portAudio\projects\vstudio` 
 This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0. 
 
-6. Compile the project for the first time. 
+5. Compile the project for the first time. 
 
-7. Run the project
+6. Run the project
 
 **Note 1**: To run the project from VisualStudio, copy all the files from the folder 
 `localPath\3dti_AudioToolkit_Examples\example_2_portAudio\resources`
