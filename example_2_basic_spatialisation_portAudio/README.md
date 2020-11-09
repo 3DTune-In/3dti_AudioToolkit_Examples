@@ -33,7 +33,7 @@ and copy those files and folders which are inside the main folder of the zip (as
 
 4. Open the solution `BasicSpatialisationPortAudio.sln` located at 
 `localPath\3dti_AudioToolkit_Examples\example_2_basic_spatialisation_portAudio\projects\vstudio` 
-This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0. 
+This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0. To be able to build the 'libsofa' project, add (using VS Installer) the Visual C++ build tool called "VC++ 2015.3 v140 toolset".
 
 5. Compile the project for the first time. 
 
