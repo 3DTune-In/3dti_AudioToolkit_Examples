@@ -15,7 +15,7 @@ The developer needs to specify by the use of preprocessor definitions which APIs
 
 3. Open the solution `BasicSpatializationRTAudio.sln` located at 
 `localPath\3dti_AudioToolkit_Examples\example_1_basic_spatialisation_rtaudio\projects\vstudio` 
-This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0. 
+This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0. To be able to build the 'libsofa' project, add (using VS Installer) the Visual C++ build tool called "VC++ 2015.3 v140 toolset".
 
 4. Compile the project. 
 
