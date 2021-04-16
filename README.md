@@ -43,7 +43,7 @@ The current members of the development team are (in alphabetical order):
 Former members of the development team are (in alphabetical order):
 - [Carlos Garre](https://github.com/carlosgarre) (Left the team Jan 2018)
 - [Ernesto de la Rubia](https://github.com/ernestodelarubia) (Left the team Apr 2018)
-- [Angel Rodriguez-Rivero](https://github.com/ardgzrivero) 
+- [Angel Rodriguez-Rivero](https://github.com/ardgzrivero) (Joined the team Feb 2018 to Jul 2019)
 - [Gonzalo Bueno Santana](https://github.com/gonzupi) 
 
 ## Acknowledgements 
