@@ -1,6 +1,10 @@
 # 3dti_AudioToolkit_Examples
 This is a repository containing examples to show how to use the 3D Tune-In Toolkit library, which is located here: https://github.com/3DTune-In/3dti_AudioToolkit. This examples include as a submodule the 3D Tune-In Toolkit as well as some 3rd party libraries which are listed below.
 
+Technical details about the 3D Tune-In Toolkit spatialiser are described in:
+
+Cuevas-Rodríguez M, Picinali L, González-Toledo D, Garre C, de la Rubia-Cuestas E, Molina-Tanco L and Reyes-Lecuona A. (2019) 3D Tune-In Toolkit: An open-source library for real-time binaural spatialisation. PLOS ONE 14(3): e0211899. https://doi.org/10.1371/journal.pone.0211899
+
 **The structure of the repository is as follows:**
 ```
 3dti_AudioToolkit_Examples
@@ -32,15 +36,15 @@ This software is being developed by a team coordinated by
 -	[Arcadio Reyes-Lecuona](https://github.com/areyesl) ([University of Malaga](https://www.uma.es/)). Contact: areyes@uma.es  
 
 The current members of the development team are (in alphabetical order):
-- [Gonzalo Bueno Santana](https://github.com/gonzupi)
 - [Maria Cuevas-Rodriguez](https://github.com/mariacuevas)
 - [Daniel Gonzalez-Toledo](https://github.com/dgonzalezt) 
 - [Luis Molina-Tanco](https://github.com/lmtanco) 
 
 Former members of the development team are (in alphabetical order):
-- [Carlos Garre](https://github.com/carlosgarre) 
-- [Ernesto de la Rubia](https://github.com/ernestodelarubia) 
-- [Angel Rodriguez-Rivero](https://github.com/ardgzrivero)
+- [Carlos Garre](https://github.com/carlosgarre) (Left the team Jan 2018)
+- [Ernesto de la Rubia](https://github.com/ernestodelarubia) (Left the team Apr 2018)
+- [Angel Rodriguez-Rivero](https://github.com/ardgzrivero) 
+- [Gonzalo Bueno Santana](https://github.com/gonzupi) 
 
 ## Acknowledgements 
 
