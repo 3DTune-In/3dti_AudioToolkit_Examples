@@ -41,7 +41,7 @@ The current members of the development team are (in alphabetical order):
 - [Luis Molina-Tanco](https://github.com/lmtanco) 
 
 Former members of the development team are (in alphabetical order):
-- [Gonzalo Bueno Santana](https://github.com/gonzupi) (Joinined the team Sep 2019, to Jul 2020)
+- [Gonzalo Bueno Santana](https://github.com/gonzupi) (Joinined the team Feb 2020, to Jul 2020)
 - [Carlos Garre](https://github.com/carlosgarre) (Left the team Jan 2018)
 - [Angel Rodriguez-Rivero](https://github.com/ardgzrivero) (Joined the team Feb 2018 to Jul 2019)
 - [Ernesto de la Rubia](https://github.com/ernestodelarubia) (Left the team Apr 2018)
