@@ -1,8 +1,21 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+VisualStudioVersion = 15.0.28307.1209
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example_3_basic_spatialisation_OF", "example_3_basic_spatialisation_OF.vcxproj", "{7FD42DF7-442E-479A-BA76-D0022F99702A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9} = {8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866} = {5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1} = {BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "openframeworksLib", "..\..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj", "{5837595D-ACA9-485C-8E76-729040CE4B0B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3DTI_Toolkit_ResourceManager", "3DTI_Toolkit_ResourceManager\3DTI_Toolkit_ResourceManager.vcxproj", "{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsofa", "..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\build\win\libsofa.vcxproj", "{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3DTI_Toolkit", "3DTI_Toolkit\3DTI_Toolkit.vcxproj", "{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,8 +41,35 @@ Global
 		{5837595D-ACA9-485C-8E76-729040CE4B0B}.Release|Win32.Build.0 = Release|Win32
 		{5837595D-ACA9-485C-8E76-729040CE4B0B}.Release|x64.ActiveCfg = Release|x64
 		{5837595D-ACA9-485C-8E76-729040CE4B0B}.Release|x64.Build.0 = Release|x64
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Debug|Win32.Build.0 = Debug|Win32
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Debug|x64.ActiveCfg = Debug|x64
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Debug|x64.Build.0 = Debug|x64
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Release|Win32.ActiveCfg = Release|Win32
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Release|Win32.Build.0 = Release|Win32
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Release|x64.ActiveCfg = Release|x64
+		{8F7B07C5-D434-49D7-A084-4F0EF95E1FA9}.Release|x64.Build.0 = Release|x64
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Debug|Win32.Build.0 = Debug|Win32
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Debug|x64.ActiveCfg = Debug|x64
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Debug|x64.Build.0 = Debug|x64
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Release|Win32.ActiveCfg = Release|Win32
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Release|Win32.Build.0 = Release|Win32
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Release|x64.ActiveCfg = Release|x64
+		{BD65F1EB-AF1B-483F-8BF2-08C5AD7E9BC1}.Release|x64.Build.0 = Release|x64
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Debug|Win32.Build.0 = Debug|Win32
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Debug|x64.ActiveCfg = Debug|x64
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Debug|x64.Build.0 = Debug|x64
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Release|Win32.ActiveCfg = Release|Win32
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Release|Win32.Build.0 = Release|Win32
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Release|x64.ActiveCfg = Release|x64
+		{5E9C07D2-4BDF-440A-9ABE-C5EC056A3866}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDEA8A9C-2492-48BB-BC6A-5BA94F82797E}
 	EndGlobalSection
 EndGlobal
