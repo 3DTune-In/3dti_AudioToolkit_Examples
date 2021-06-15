@@ -211,7 +211,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;SWITCH_ON_3DTI_ERRORHANDLER;_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP;_3DTI_ANGLE_CONVENTION_LISTEN;_MBCS;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\..\..\..\3dti_AudioToolkit\3dti_Toolkit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
