@@ -3,11 +3,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\ofApp.cpp" />
+    <ClCompile Include="..\..\src\SoundSourcer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\icon.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ofApp.h" />
+    <ClInclude Include="..\..\src\SoundSource.h" />
   </ItemGroup>
 </Project>

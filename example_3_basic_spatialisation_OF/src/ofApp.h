@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include <BinauralSpatializer/3DTI_BinauralSpatializer.h>
+#include "SoundSource.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -21,6 +23,9 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		void LoadWavFile(SoundSource & source, const char* filePath);
+
+	private:	
 
 		Binaural::CCore							myCore;												 // Core interface
 		shared_ptr<Binaural::CListener>			listener;											 // Pointer to listener interface
@@ -30,5 +35,6 @@ class ofApp : public ofBaseApp{
 
 		int GetAudioDeviceIndex(std::vector<ofSoundDevice> list);
 		void SetAudioDevice(Common::TAudioStateStruct audioState);
-		
+
+		SoundSource source1;		
 };

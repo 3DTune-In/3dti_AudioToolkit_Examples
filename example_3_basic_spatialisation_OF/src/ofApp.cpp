@@ -20,11 +20,21 @@ void ofApp::setup(){
 	systemSoundStream.close();
 
 	SetAudioDevice(audioState);
+
+
+	LoadWavFile(source1,"speech.wav");											 // Loading .wav file
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	CMonoBuffer<float> speechInput(BUFFERSIZE);
+	source1.FillBuffer(speechInput);
 
+	/*cout << endl;
+	for (int i = 0; i < speechInput.size(); i++) {
+		cout << speechInput[i] << " ,";
+	}
+	cout << endl;*/
 }
 
 //--------------------------------------------------------------
@@ -183,7 +193,11 @@ void ofApp::SetAudioDevice(Common::TAudioStateStruct audioState) {
 		//dialog.Launch_OkMessage(DIALOGS_TITLE, "Could not find any usable sound Device.\n\nPlease select the appropiate one in the settings section.");
 		//systemSoundStream_Started = false;
 	}
-
 }
 
-
+void ofApp::LoadWavFile(SoundSource & source, const char* filePath)
+{	
+	if (!source.LoadWav(filePath)) {
+		cout << "File " << filePath << " doesn't exist." << endl;
+	}
+}
