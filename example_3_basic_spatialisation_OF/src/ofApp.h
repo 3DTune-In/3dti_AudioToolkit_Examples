@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include <BinauralSpatializer/3DTI_BinauralSpatializer.h>
+#include <HRTF/HRTFFactory.h>
+#include <HRTF/HRTFCereal.h>
 #include "SoundSource.h"
 
 
@@ -36,8 +38,10 @@ class ofApp : public ofBaseApp{
 		int GetAudioDeviceIndex(std::vector<ofSoundDevice> list);
 		void SetAudioDevice(Common::TAudioStateStruct audioState);
 		void audioOut(float * output, int bufferSize, int nChannels);
+		void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize);
 
-
-
-		SoundSource source1;		
+		SoundSource source1Wav;
+		SoundSource source2Wav;
+		shared_ptr<Binaural::CSingleSourceDSP>	source1DSP;							 // Pointers to each audio source interface
+		shared_ptr<Binaural::CSingleSourceDSP>	source2DSP;							 // Pointers to each audio source interface
 };

@@ -15,14 +15,48 @@ void ofApp::setup(){
 	myCore.SetAudioState(audioState);		    // Applying configuration to core
 	myCore.SetHRTFResamplingStep(15);		    // Setting 15-degree resampling step for HRTF
 
+
+	// Listener setup
+	listener = myCore.CreateListener();								 // First step is creating listener
+	Common::CTransform listenerPosition = Common::CTransform();		 // Setting listener in (0,0,0)
+	listenerPosition.SetPosition(Common::CVector3(0, 0, 0));
+	listener->SetListenerTransform(listenerPosition);
+	listener->DisableCustomizedITD();								 // Disabling custom head radius
+
+	/* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
+	These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
+	bool specifiedDelays;
+	HRTF::CreateFromSofa("hrtf.sofa", listener, specifiedDelays);			// Comment this line and uncomment next lines to load the default HRTF in 3dti-hrtf format instead of in SOFA format
+	//HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);		
+
+	// Source 1 setup
+	source1DSP = myCore.CreateSingleSourceDSP();	// Creating audio source
+	LoadWavFile(source1Wav, "speech.wav");			// Loading .wav file										   // Loading .wav file
+	Common::CTransform source1Position = Common::CTransform();
+	source1Position.SetPosition(Common::CVector3(0, 2, 0));						 
+	source1DSP->SetSourceTransform(source1Position);
+	source1DSP->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);		 // Choosing high quality mode for anechoic processing
+	source1DSP->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
+	source1DSP->EnableAnechoicProcess();												   // Setting anechoic and reverb processing for this source
+	source1DSP->EnableDistanceAttenuationAnechoic();
+
+	// Source 2 setup
+	source2DSP = myCore.CreateSingleSourceDSP();	// Creating audio source
+	LoadWavFile(source2Wav, "steps.wav");			// Loading .wav file										   // Loading .wav file
+	Common::CTransform source2Position = Common::CTransform();
+	source2Position.SetPosition(Common::CVector3(0, -2, 0));						
+	source2DSP->SetSourceTransform(source2Position);
+	source2DSP->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);		 // Choosing high quality mode for anechoic processing
+	source2DSP->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
+	source2DSP->EnableAnechoicProcess();												   // Setting anechoic and reverb processing for this source
+	source2DSP->EnableDistanceAttenuationAnechoic();
+
+	//AudioDevice Setup
 	//// Before getting the devices list for the second time, the strean must be closed. Otherwise,
 	//// the app crashes when systemSoundStream.start(); or stop() are called.
 	systemSoundStream.close();
-
 	SetAudioDevice(audioState);
 
-
-	LoadWavFile(source1,"speech.wav");											 // Loading .wav file
 }
 
 //--------------------------------------------------------------
@@ -196,35 +230,60 @@ void ofApp::SetAudioDevice(Common::TAudioStateStruct audioState) {
 }
 
 void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
-		
+
 	// The requested frame size is not allways supported by the audio driver:
 	if (myCore.GetAudioState().bufferSize != bufferSize)
 		return;
-
 	// Prepare output chunk
 	Common::CEarPair<CMonoBuffer<float>> bOutput;
 	bOutput.left.resize(bufferSize);
 	bOutput.right.resize(bufferSize);
-
 	// Process audio!
 	CMonoBuffer<float> wavSamples(BUFFERSIZE);
-	source1.FillBuffer(wavSamples);
+	source1Wav.FillBuffer(wavSamples);
 
-	bOutput.left = wavSamples;
-	bOutput.right = wavSamples;
-
-
+	audioProcess(bOutput, bufferSize);
 	// Build float array from output buffer
 	int i = 0;
 	CStereoBuffer<float> iOutput;
 	iOutput.Interlace(bOutput.left, bOutput.right);
 	for (auto it = iOutput.begin(); it != iOutput.end(); it++)
 	{
-		float s = *it;		
+		float s = *it;
 		output[i++] = s;
 	}
+}
+void ofApp::audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize)
+{
+	// Declaration, initialization and filling mono buffers
+	CMonoBuffer<float> source1(uiBufferSize);
+	source1Wav.FillBuffer(source1);
+	CMonoBuffer<float> source2(uiBufferSize);
+	source2Wav.FillBuffer(source2);
 
-
+	// Declaration of stereo buffer
+	Common::CEarPair<CMonoBuffer<float>> bufferProcessed;
+	// Anechoic process of first source
+	source1DSP->SetBuffer(source1);
+	source1DSP->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
+	// Adding anechoic processed speech source to the output mix
+	bufferOutput.left += bufferProcessed.left;
+	bufferOutput.right += bufferProcessed.right;
+	// Anechoic process of second source
+	source2DSP->SetBuffer(source2);
+	source2DSP->ProcessAnechoic(bufferProcessed.left, bufferProcessed.right);
+	// Adding anechoic processed steps source to the output mix
+	bufferOutput.left += bufferProcessed.left;
+	bufferOutput.right += bufferProcessed.right;
+	//// Declaration and initialization of separate buffer needed for the reverb
+	//Common::CEarPair<CMonoBuffer<float>> bufferReverb;
+	//// Reverberation processing of all sources
+	//if (bEnableReverb) {
+	//	environment->ProcessVirtualAmbisonicReverb(bufferReverb.left, bufferReverb.right);
+	//	// Adding reverberated sound to the output mix
+	//	bufferOutput.left += bufferReverb.left;
+	//	bufferOutput.right += bufferReverb.right;
+	//}
 }
 
 
