@@ -30,11 +30,11 @@ void ofApp::update(){
 	CMonoBuffer<float> speechInput(BUFFERSIZE);
 	source1.FillBuffer(speechInput);
 
-	/*cout << endl;
+	cout << endl;
 	for (int i = 0; i < speechInput.size(); i++) {
 		cout << speechInput[i] << " ,";
 	}
-	cout << endl;*/
+	cout << endl;
 }
 
 //--------------------------------------------------------------
