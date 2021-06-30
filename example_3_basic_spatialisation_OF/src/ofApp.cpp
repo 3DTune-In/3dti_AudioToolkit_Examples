@@ -27,8 +27,8 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	CMonoBuffer<float> speechInput(BUFFERSIZE);
-	source1.FillBuffer(speechInput);
+	//CMonoBuffer<float> speechInput(BUFFERSIZE);
+	//source1.FillBuffer(speechInput);
 
 	/*cout << endl;
 	for (int i = 0; i < speechInput.size(); i++) {
@@ -194,6 +194,41 @@ void ofApp::SetAudioDevice(Common::TAudioStateStruct audioState) {
 		//systemSoundStream_Started = false;
 	}
 }
+
+void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
+		
+	// The requested frame size is not allways supported by the audio driver:
+	if (myCore.GetAudioState().bufferSize != bufferSize)
+		return;
+
+	// Prepare output chunk
+	Common::CEarPair<CMonoBuffer<float>> bOutput;
+	bOutput.left.resize(bufferSize);
+	bOutput.right.resize(bufferSize);
+
+	// Process audio!
+	CMonoBuffer<float> wavSamples(BUFFERSIZE);
+	source1.FillBuffer(wavSamples);
+
+	bOutput.left = wavSamples;
+	bOutput.right = wavSamples;
+
+
+	// Build float array from output buffer
+	int i = 0;
+	CStereoBuffer<float> iOutput;
+	iOutput.Interlace(bOutput.left, bOutput.right);
+	for (auto it = iOutput.begin(); it != iOutput.end(); it++)
+	{
+		float s = *it;		
+		output[i++] = s;
+	}
+
+
+}
+
+
+
 
 void ofApp::LoadWavFile(SoundSource & source, const char* filePath)
 {	

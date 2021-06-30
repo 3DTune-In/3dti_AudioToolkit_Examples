@@ -35,6 +35,9 @@ class ofApp : public ofBaseApp{
 
 		int GetAudioDeviceIndex(std::vector<ofSoundDevice> list);
 		void SetAudioDevice(Common::TAudioStateStruct audioState);
+		void audioOut(float * output, int bufferSize, int nChannels);
+
+
 
 		SoundSource source1;		
 };
