@@ -238,10 +238,8 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
 	Common::CEarPair<CMonoBuffer<float>> bOutput;
 	bOutput.left.resize(bufferSize);
 	bOutput.right.resize(bufferSize);
-	// Process audio!
-	CMonoBuffer<float> wavSamples(BUFFERSIZE);
-	source1Wav.FillBuffer(wavSamples);
-
+	
+	// Process audio
 	audioProcess(bOutput, bufferSize);
 	// Build float array from output buffer
 	int i = 0;
@@ -275,17 +273,7 @@ void ofApp::audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, in
 	// Adding anechoic processed steps source to the output mix
 	bufferOutput.left += bufferProcessed.left;
 	bufferOutput.right += bufferProcessed.right;
-	//// Declaration and initialization of separate buffer needed for the reverb
-	//Common::CEarPair<CMonoBuffer<float>> bufferReverb;
-	//// Reverberation processing of all sources
-	//if (bEnableReverb) {
-	//	environment->ProcessVirtualAmbisonicReverb(bufferReverb.left, bufferReverb.right);
-	//	// Adding reverberated sound to the output mix
-	//	bufferOutput.left += bufferReverb.left;
-	//	bufferOutput.right += bufferReverb.right;
-	//}
 }
-
 
 
 
