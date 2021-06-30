@@ -1,13 +1,11 @@
 #include "ofApp.h"
 
-
-
 #define SAMPLERATE 44100
 #define BUFFERSIZE 512
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+	
 	// Core setup
 	Common::TAudioStateStruct audioState;	    // Audio State struct declaration
 	audioState.bufferSize = BUFFERSIZE;			// Setting buffer size 
@@ -26,7 +24,11 @@ void ofApp::setup(){
 	/* HRTF can be loaded in either SOFA (more info in https://sofacoustics.org/) or 3dti-hrtf format.
 	These HRTF files are provided with 3DTI Audio Toolkit. They can be found in 3dti_AudioToolkit/resources/HRTF */
 	bool specifiedDelays;
-	HRTF::CreateFromSofa("hrtf.sofa", listener, specifiedDelays);			// Comment this line and uncomment next lines to load the default HRTF in 3dti-hrtf format instead of in SOFA format
+	bool sofaLoadResult = HRTF::CreateFromSofa("hrtf.sofa", listener, specifiedDelays);			// Comment this line and uncomment next lines to load the default HRTF in 3dti-hrtf format instead of in SOFA format
+	
+	if (!sofaLoadResult) { 
+		cout << "ERROR: Error trying to load the SOFA file" << endl<<endl;
+	}																			
 	//HRTF::CreateFrom3dti("hrtf.3dti-hrtf", listener);		
 
 	// Source 1 setup
@@ -280,6 +282,7 @@ void ofApp::audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, in
 void ofApp::LoadWavFile(SoundSource & source, const char* filePath)
 {	
 	if (!source.LoadWav(filePath)) {
-		cout << "File " << filePath << " doesn't exist." << endl;
+		cout << "ERROR: file " << filePath << " doesn't exist." << endl<<endl;
 	}
 }
+

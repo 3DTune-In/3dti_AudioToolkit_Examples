@@ -25,8 +25,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		void LoadWavFile(SoundSource & source, const char* filePath);
-
+		
 	private:	
 
 		Binaural::CCore							myCore;												 // Core interface
@@ -39,6 +38,7 @@ class ofApp : public ofBaseApp{
 		void SetAudioDevice(Common::TAudioStateStruct audioState);
 		void audioOut(float * output, int bufferSize, int nChannels);
 		void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize);
+		void LoadWavFile(SoundSource & source, const char* filePath);
 
 		SoundSource source1Wav;
 		SoundSource source2Wav;
