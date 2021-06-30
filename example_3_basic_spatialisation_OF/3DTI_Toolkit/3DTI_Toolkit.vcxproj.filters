@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="BinauralSpatializer">
+      <UniqueIdentifier>{718bd2d9-e715-42f6-b00a-36485f63fd1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{b4adb658-f179-45d8-be4b-9280880ed87d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\3DTI_BinauralSpatializer.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\BRIR.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Core.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Environment.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\HRTF.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\ILD.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Listener.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\SingleSourceDSP.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\UPCAnechoic.h">
+      <Filter>BinauralSpatializer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\AIR.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\AudioState.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\BiquadFilter.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Buffer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\CommonDefinitions.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Conventions.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Delay.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DistanceAttenuator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorMono.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorStereo.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicExpanderMono.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicProcessor.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\EnvelopeDetector.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\ErrorHandler.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FarDistanceEffects.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\fftsg.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersBank.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersChain.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Fprocessor.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilter.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilterBank.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Magnitudes.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\NoiseGenerator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Profiler.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Quaternion.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Transform.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\UPCEnvironment.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Vector3.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\BRIR.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Core.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Environment.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\HRTF.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\ILD.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Listener.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\SingleSourceDSP.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\UPCAnechoic.cpp">
+      <Filter>BinauralSpatializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\BiquadFilter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Delay.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DistanceAttenuator.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorMono.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorStereo.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicExpanderMono.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\EnvelopeDetector.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\ErrorHandler.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FarDistanceEffects.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\fftsg.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersBank.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersChain.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Fprocessor.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilterBank.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Magnitudes.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\NoiseGenerator.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Profiler.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Quaternion.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Transform.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\UPCEnvironment.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Vector3.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
