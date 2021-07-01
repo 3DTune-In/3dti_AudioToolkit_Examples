@@ -34,14 +34,14 @@ class ofApp : public ofBaseApp{
 		std::vector<ofSoundDevice> deviceList;
 		ofSoundStream systemSoundStream;
 
-		int GetAudioDeviceIndex(std::vector<ofSoundDevice> list);
-		void SetAudioDevice(Common::TAudioStateStruct audioState);
-		void audioOut(float * output, int bufferSize, int nChannels);
-		void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize);
-		void LoadWavFile(SoundSource & source, const char* filePath);
-
 		SoundSource source1Wav;
 		SoundSource source2Wav;
 		shared_ptr<Binaural::CSingleSourceDSP>	source1DSP;							 // Pointers to each audio source interface
 		shared_ptr<Binaural::CSingleSourceDSP>	source2DSP;							 // Pointers to each audio source interface
+
+		int GetAudioDeviceIndex(std::vector<ofSoundDevice> list);
+		void SetDeviceAndAudio(Common::TAudioStateStruct audioState);
+		void audioOut(float * output, int bufferSize, int nChannels);
+		void audioProcess(Common::CEarPair<CMonoBuffer<float>> & bufferOutput, int uiBufferSize);
+		void LoadWavFile(SoundSource & source, const char* filePath);
 };
