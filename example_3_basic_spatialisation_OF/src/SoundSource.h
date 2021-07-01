@@ -15,14 +15,14 @@ public :
 
 	
 	/** \brief Loads a mono, 16-bit, 44.1kHz ".wav" file
-*	\param [out] bool to be true if the wav files is successfully loaded
+*	\param [out] bool to be true if the wav file is successfully loaded
 *	\param [in] stringIn name of the ".wav" file to open
 */
 	bool LoadWav(const char* stringIn);
 
 
-	/** \brief Fills a buffer with the correct audio frame from the input float vector
-*	\param [in,out] CMonoBuffer vector that contatins the new N samples of the wav file. Where N is the size of the buffer when the method is called.
+	/** \brief Fills a buffer with the next N samples from the wav file
+*	\param [in,out] CMonoBuffer vector that contains the next N samples of the wav file. Where N is the size of the buffer when the method is called.
 */
 	void FillBuffer(CMonoBuffer<float> &output);
 
