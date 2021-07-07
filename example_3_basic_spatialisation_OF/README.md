@@ -19,7 +19,7 @@ How to Build and Run in Windows
 `localPath\of_v0.11.2_vs2017_release\3DTI_AudioToolkit_Example3\example_3_basic_spatialisation_OF` 
 This has been tested with Visual Studio 2017 (v141) and Windows SDK 10.0.17763.0. To be able to build the 'libsofa' project, add (using VS Installer) the Visual C++ build tool called "VC++ 2015.3 v140 toolset".
 
-5. Compile the project for the first time. 
+5. Compile the project for the first time. The project is configured to be built in Debug and Release configuration for Windows x64 platform.
 
 6. Run the project
 
