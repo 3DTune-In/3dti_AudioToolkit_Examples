@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\3DTI_BinauralSpatializer.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\BRIR.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Core.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Environment.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\HRTF.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\ILD.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Listener.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\SingleSourceDSP.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\UPCAnechoic.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\AIR.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\AudioState.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\BiquadFilter.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Buffer.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\CommonDefinitions.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Conventions.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Delay.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DistanceAttenuator.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorMono.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorStereo.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicExpanderMono.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicProcessor.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\EnvelopeDetector.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\ErrorHandler.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FarDistanceEffects.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\fftsg.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersBank.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersChain.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Fprocessor.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilter.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilterBank.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Magnitudes.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\NoiseGenerator.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Profiler.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Quaternion.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Transform.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\UPCEnvironment.h" />
+    <ClInclude Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Vector3.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\BRIR.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Core.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Environment.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\HRTF.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\ILD.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\Listener.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\SingleSourceDSP.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\UPCAnechoic.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\BiquadFilter.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Delay.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DistanceAttenuator.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorMono.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicCompressorStereo.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\DynamicExpanderMono.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\EnvelopeDetector.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\ErrorHandler.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FarDistanceEffects.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\fftsg.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersBank.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\FiltersChain.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Fprocessor.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilter.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\GammatoneFilterBank.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Magnitudes.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\NoiseGenerator.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Profiler.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Quaternion.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Transform.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\UPCEnvironment.cpp" />
+    <ClCompile Include="..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Vector3.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{9B195338-5AD8-446A-B59D-4171039F086F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>My3DTIToolkit</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)_debug</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SWITCH_ON_3DTI_ERRORHANDLER;_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP;_3DTI_ANGLE_CONVENTION_LISTEN;_USE_MATH_DEFINES;_MBCS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\..\3dti_AudioToolkit\3dti_Toolkit</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SWITCH_ON_3DTI_ERRORHANDLER;_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP;_3DTI_ANGLE_CONVENTION_LISTEN;_USE_MATH_DEFINES;_MBCS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\..\3dti_AudioToolkit\3dti_Toolkit</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
