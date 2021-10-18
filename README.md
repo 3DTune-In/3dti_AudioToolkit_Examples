@@ -14,7 +14,8 @@ Cuevas-Rodríguez M, Picinali L, González-Toledo D, Garre C, de la Rubia-Cuesta
 |   └── rtaudio
 ├── example_1_basic_spatialisation_rtaudio
 ├── example_2_basic_spatialisation_portAudio
-└── example_3_basic_spatialisation_OF
+├── example_3_basic_spatialisation_OF
+└── example_4_interactive_basic_spatialisation_OF
 ```
 
 ## List of included examples
