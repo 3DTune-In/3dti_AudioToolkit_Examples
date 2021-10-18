@@ -26,6 +26,8 @@ This example spatialize two static sources using RTAudio as the audio library. H
 This example spatialize two static sources using PortAudio as the audio library. HRTF and BRIR for the spatialisation as well as sample clips are provided in the resource folder.
 ### Example 3. Basic spatialisation using openFramework
 This example spatialize two anechoic static sources using openFramework to manage the audio. HRTF for the spatialisation as well as sample clips are provided in the resource folder.
+### Example 4. Interactive basic spatialisation using openFramework
+This example spatialize two anechoic static sources using openFramework to manage the audio. HRTF for the spatialisation as well as sample clips are provided in the resource folder. In this example we add the option of moving the listener and we add a graphic interface.
 
 ## External content distributed together with this software 
 
