@@ -13,7 +13,7 @@ How to Build and Run in Windows
 
 2. Clone the repository in a folder (you can call it "3DTI_AudioToolkit_Examples") inside the openFramework folder.
 
-3. Clone the submodules ("3dti_AudioToolkit" and third_party_libraries/portaudio) inside the openFramework folder .
+3. Clone the submodules ("3dti_AudioToolkit" and third_party_libraries/portaudio).
 
 4. Open the solution `example_4_interactive_basic_spatialisation_OF.sln` located at 
 `localPath\of_v0.11.2_vs2017_release\3DTI_AudioToolkit_Example3\example_4_interactive_basic_spatialisation_OF` 
