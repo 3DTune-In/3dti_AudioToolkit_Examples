@@ -25,12 +25,12 @@
 
 #include <cstdio>
 #include <cstring>
-#include <HRTF/HRTFFactory.h>
-#include <HRTF/HRTFCereal.h>
-#include <BRIR/BRIRFactory.h>
-#include <BRIR/BRIRCereal.h>
-#include <BinauralSpatializer/3DTI_BinauralSpatializer.h>
-#include <RtAudio.h>
+#include "HRTF/HRTFFactory.h"
+#include "HRTF/HRTFCereal.h"
+#include "BRIR/BRIRFactory.h"
+#include "BRIR/BRIRCereal.h"
+#include "BinauralSpatializer/3DTI_BinauralSpatializer.h"
+#include "RtAudio.h"
 
 
 shared_ptr<RtAudio>						audio;												 // Pointer to RtAudio API
