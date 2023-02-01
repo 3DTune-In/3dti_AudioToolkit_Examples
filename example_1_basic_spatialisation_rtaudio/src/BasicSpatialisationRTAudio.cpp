@@ -84,12 +84,13 @@ int main()
     sourceSpeech->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
     sourceSpeech->EnableAnechoicProcess();												 // Setting anechoic and reverb processing for this source
     sourceSpeech->EnableDistanceAttenuationAnechoic();
+    //sourceSpeech->EnablePropagationDelay();                                           //Activate delay simulation due to the distance of the source
 
     // Steps source setup
     sourceSteps = myCore.CreateSingleSourceDSP();										 // Creating audio source
     LoadWav(samplesVectorSteps, "steps.wav");											   // Loading .wav file
     Common::CTransform sourceStepsPosition = Common::CTransform();
-    sourceStepsPosition.SetPosition(Common::CVector3(-3, 10, -10));						 // Setting source in (-3,-10,-10)
+    sourceStepsPosition.SetPosition(Common::CVector3(-3, 10, -10));						 // Setting source in (-3,10,-10)
     sourceSteps->SetSourceTransform(sourceStepsPosition);
     sourceSteps->SetSpatializationMode(Binaural::TSpatializationMode::HighQuality);		 // Choosing high quality mode for anechoic processing
     sourceSteps->DisableNearFieldEffect();												 // Audio source will not be close to listener, so we don't need near field effect
