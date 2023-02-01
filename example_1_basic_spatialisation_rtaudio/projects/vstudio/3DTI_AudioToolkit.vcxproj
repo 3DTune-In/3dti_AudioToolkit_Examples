@@ -56,6 +56,7 @@
     <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Transform.h" />
     <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\UPCEnvironment.h" />
     <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Vector3.h" />
+    <ClInclude Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Waveguide.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\BinauralSpatializer\BRIR.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Transform.cpp" />
     <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\UPCEnvironment.cpp" />
     <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Vector3.cpp" />
+    <ClCompile Include="..\..\..\3dti_AudioToolkit\3dti_Toolkit\Common\Waveguide.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB7A1175-0116-4666-9AA1-EDD0F40A1064}</ProjectGuid>
@@ -166,7 +168,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\boost_circular_buffer</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP;_3DTI_ANGLE_CONVENTION_LISTEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -198,7 +200,7 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\boost_circular_buffer</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SWITCH_ON_3DTI_ERRORHANDLER;_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP;_3DTI_ANGLE_CONVENTION_LISTEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
