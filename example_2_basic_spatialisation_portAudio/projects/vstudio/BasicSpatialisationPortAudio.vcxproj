@@ -169,7 +169,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\third_party_libraries\portaudio\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager;.\;..\..\..\third_party_libraries\portaudio\build\msvc\x64\Release;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\third_party_libraries\portaudio\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\cereal\include;..\..\..\3dti_AudioToolkit\3dti_ResourceManager;.\;..\..\..\third_party_libraries\portaudio\build\msvc\x64\Release;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\boost_circular_buffer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
@@ -177,7 +177,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>portaudio_x64.lib;3DTI_AudioToolkit.lib;3DTI_ResourceManager.lib;libsofa_x64.lib;libcurl_imp_x64.lib;libhdf5_hl_x64.lib;libhdf5_x64.lib;netcdf_x64.lib;zlib_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\lib;$(ProjectDir)\build\$(PlatformTarget)\$(Configuration);$(ProjectDir)\build\portaudio\$(PlatformTarget)\$(Configuration);..\..\..\third_party_libraries\portaudio\include;.\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\dependencies\lib\win;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\sofacoustics\libsofa\lib;$(ProjectDir)\build\$(PlatformTarget)\$(Configuration);$(ProjectDir)\build\portaudio\$(PlatformTarget)\$(Configuration);..\..\..\third_party_libraries\portaudio\include;.\;$(ProjectDir)build\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
