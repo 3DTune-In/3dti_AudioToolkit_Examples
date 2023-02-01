@@ -127,6 +127,7 @@ int main()
 	sourceSpeech->EnableAnechoicProcess();												 // Setting anechoic and reverb processing for this source
 	sourceSpeech->EnableDistanceAttenuationAnechoic();
 	sourceSpeech->EnableDistanceAttenuationReverb();
+	//sourceSpeech->EnablePropagationDelay();											// Enable the simulation of the delay due to the distance of the sound
 	// Steps source setup
 	sourceSteps = myCore.CreateSingleSourceDSP();										 // Creating audio source
 	LoadWav(samplesVectorSteps, "steps.wav");											   // Loading .wav file
