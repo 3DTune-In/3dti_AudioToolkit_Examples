@@ -168,7 +168,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\3dti_AudioToolkit\3dti_Toolkit;..\..\..\3dti_AudioToolkit\3dti_ResourceManager\third_party_libraries\boost_circular_buffer</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_3DTI_AXIS_CONVENTION_BINAURAL_TEST_APP;_3DTI_ANGLE_CONVENTION_LISTEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
